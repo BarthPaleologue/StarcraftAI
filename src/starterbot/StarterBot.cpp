@@ -1,14 +1,14 @@
 #include "StarterBot.h"
 #include "Tools.h"
 #include "MapTools.h"
-#include <Data.h>
+#include <Blackboard.h>
 #include <format>
 
 #include "BT.h"
 
 StarterBot::StarterBot()
 {
-    pData = new Data();
+    pData = new Blackboard();
     pData->currMinerals = 0;
     pData->thresholdMinerals = THRESHOLD1_MINERALS;
     pData->currSupply = 0;
@@ -145,6 +145,7 @@ void StarterBot::trainAdditionalWorkers()
     const BWAPI::UnitType workerType = BWAPI::Broodwar->self()->getRace().getWorker();
     const int workersWanted = 20;
     const int workersOwned = Tools::CountUnitsOfType(workerType, BWAPI::Broodwar->self()->getUnits());
+
     if (workersOwned < workersWanted)
     {
         // get the unit pointer to my depot

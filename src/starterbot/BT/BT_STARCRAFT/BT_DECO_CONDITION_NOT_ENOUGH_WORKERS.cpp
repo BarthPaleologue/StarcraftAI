@@ -1,5 +1,5 @@
 #include "BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.h"
-#include "Data.h"
+#include "Blackboard.h"
 #include <BWAPI.h>
 #include "Tools.h"
 
@@ -14,7 +14,7 @@ std::string BT_DECO_CONDITION_NOT_ENOUGH_WORKERS::GetDescription()
 
 bool BT_DECO_CONDITION_NOT_ENOUGH_WORKERS::IsThereNotEnoughWorkers(void *data)
 {
-    Data* pData = (Data*)data;
+    Blackboard* pData = (Blackboard*)data;
     
     const BWAPI::UnitType workerType = BWAPI::Broodwar->self()->getRace().getWorker();
     const int workersOwned = Tools::CountUnitsOfType(workerType, BWAPI::Broodwar->self()->getUnits());

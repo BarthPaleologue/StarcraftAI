@@ -1,6 +1,6 @@
 #include "BT_ACTION_BUILD_SUPPLY_PROVIDER.h"
 #include "Tools.h"
-#include "Data.h"
+#include "Blackboard.h"
 
 BT_ACTION_BUILD_SUPPLY_PROVIDER::BT_ACTION_BUILD_SUPPLY_PROVIDER(std::string name,BT_NODE* parent)
     :  BT_ACTION(name,parent) {}
@@ -18,7 +18,7 @@ std::string BT_ACTION_BUILD_SUPPLY_PROVIDER::GetDescription()
 
 BT_NODE::State BT_ACTION_BUILD_SUPPLY_PROVIDER::BuildSupplyProvider(void* data)
 {
-    Data* pData = (Data*)data;
+    Blackboard* pData = (Blackboard*)data;
 
     // let's build a supply provider
     const BWAPI::UnitType supplyProviderType = BWAPI::Broodwar->self()->getRace().getSupplyProvider();

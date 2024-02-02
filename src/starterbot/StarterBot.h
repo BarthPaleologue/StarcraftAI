@@ -3,7 +3,7 @@
 #include "MapTools.h"
 #include "BT.h"
 #include <BWAPI.h>
-#include "Data.h"
+#include "Blackboard.h"
 //#include "map.h"
 
 class StarterBot
@@ -12,7 +12,7 @@ private:
     MapTools m_mapTools;
 	BT_NODE* pBT;
 	BT_NODE* pBtTest;
-	Data *pData;
+	Blackboard *pData;
 
 public:
 

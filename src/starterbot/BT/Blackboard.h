@@ -8,7 +8,7 @@
 #define NWANTED_WORKERS_TOTAL 20
 #define NWANTED_WORKERS_FARMING_MINERALS 10
 
-class Data {
+class Blackboard {
 public:
 	int currMinerals;
 	int thresholdMinerals;

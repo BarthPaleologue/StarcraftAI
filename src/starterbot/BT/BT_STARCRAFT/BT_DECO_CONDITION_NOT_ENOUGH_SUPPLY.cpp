@@ -1,5 +1,5 @@
 #include "BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY.h"
-#include "Data.h"
+#include "Blackboard.h"
 #include <BWAPI.h>
 #include "Tools.h"
 
@@ -14,7 +14,7 @@ std::string BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY::GetDescription()
 
 bool BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY::IsThereNotEnoughSupply(void *data)
 {
-    Data* pData = (Data*)data;
+    Blackboard* pData = (Blackboard*)data;
     
     // Get the amount of supply supply we currently have unused
     const int unusedSupply = Tools::GetTotalSupply(true) - BWAPI::Broodwar->self()->supplyUsed();

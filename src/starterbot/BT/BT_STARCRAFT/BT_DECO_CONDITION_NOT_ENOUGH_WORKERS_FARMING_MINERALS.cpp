@@ -1,5 +1,5 @@
 #include "BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.h"
-#include "Data.h"
+#include "Blackboard.h"
 #include <BWAPI.h>
 #include "Tools.h"
 
@@ -14,7 +14,7 @@ std::string BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS::GetDescriptio
 
 bool BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS::IsThereNotEnoughWorkersFarmingMinerals(void *data)
 {
-    Data* pData = (Data*)data;
+    Blackboard* pData = (Blackboard*)data;
     
     return (int)pData->unitsFarmingMinerals.size() <pData->nWantedWorkersFarmingMinerals;
 }

@@ -1,6 +1,6 @@
 #include "BT_ACTION_TRAIN_WORKER.h"
 #include "Tools.h"
-#include "Data.h"
+#include "Blackboard.h"
 
 BT_ACTION_TRAIN_WORKER::BT_ACTION_TRAIN_WORKER(std::string name,BT_NODE* parent)
     :  BT_ACTION(name,parent) {}
@@ -18,7 +18,7 @@ std::string BT_ACTION_TRAIN_WORKER::GetDescription()
 
 BT_NODE::State BT_ACTION_TRAIN_WORKER::TrainWorker(void* data)
 {
-    Data* pData = (Data*)data;
+    Blackboard* pData = (Blackboard*)data;
 
     const BWAPI::UnitType workerType = BWAPI::Broodwar->self()->getRace().getWorker();
     const BWAPI::Unit myDepot = Tools::GetDepot();
