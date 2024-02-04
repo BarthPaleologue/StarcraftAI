@@ -11,7 +11,7 @@
 
 class Blackboard {
 public:
-	BuildOrder buildOrder{};
+	BuildOrder buildOrder;
 
 	int currMinerals;
 	int thresholdMinerals;
