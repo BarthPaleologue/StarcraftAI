@@ -1,7 +1,6 @@
 #pragma once
 #include <unordered_set>
 #include <BWAPI.h>
-#include "BuildOrder.h"
 
 #define THRESHOLD1_MINERALS 200
 #define THRESHOLD1_UNUSED_SUPPLY 2
@@ -9,10 +8,8 @@
 #define NWANTED_WORKERS_TOTAL 20
 #define NWANTED_WORKERS_FARMING_MINERALS 10
 
-class Blackboard {
+class Data {
 public:
-	BuildOrder buildOrder{};
-
 	int currMinerals;
 	int thresholdMinerals;
 	int currSupply;
