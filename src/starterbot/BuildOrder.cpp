@@ -1,14 +1,5 @@
 #include "BuildOrder.h"
-
-std::function<bool()> isSupplyTimingReached(int supplyTiming) {
-	return [supplyTiming]() {
-		// Returns supply times 2, take divide 2 to get in game supply
-		const int supply = BWAPI::Broodwar->self()->supplyUsed();
-		//std::cout << "Supply: " << (supply / 2) << "\n";
-		const int inGameSupply = supply / 2;
-		return inGameSupply >= supplyTiming;
-	};
-}
+#include "BuildOrderTools.h"
 
 BuildOrder::BuildOrder() {
 	// see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)

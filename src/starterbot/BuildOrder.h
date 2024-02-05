@@ -4,7 +4,7 @@
 #include "Tools.h"
 #include <functional> // to have function as attribute
 
-enum OrderItemAction {
+enum e_orderItemAction {
 	Build,
 	Cancel
 };
@@ -13,7 +13,7 @@ struct OrderItem {
 	std::function<bool()> conditionForStep; // this int is for humans a readable thing (supply count, building HP, etc)
 	// #TODO: replace this with a job (could be scouting, cancelling, building somewhere, anything)
 	BWAPI::UnitType unitType;
-	OrderItemAction action;
+	e_orderItemAction action;
 
 	// #rewrite
 	/*std::string toString() const{

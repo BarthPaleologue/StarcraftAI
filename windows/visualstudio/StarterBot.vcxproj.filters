@@ -94,6 +94,7 @@
       <Filter>BT</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BuildOrder.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BuildOrderTools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
@@ -195,6 +196,7 @@
       <Filter>BT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BuildOrder.h" />
+    <ClInclude Include="..\..\src\starterbot\BuildOrderTools.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BT">
