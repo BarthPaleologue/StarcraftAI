@@ -225,7 +225,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:/StarcraftAI/StarcraftAI/src/starterbot/BT/BT_STARCRAFT;C:/StarcraftAI/StarcraftAI/src/starterbot/BT;C:/StarcraftAI/StarcraftAI/src/bwem/include;C:/StarcraftAI/StarcraftAI/src/starterbot/;C:/StarcraftAI/StarcraftAI/src/bwapi/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\src\bwem\include;..\..\src\starterbot\BT\BT_STARCRAFT;..\..\src\starterbot;..\..\src\starterbot\BT;../../src/bwapi/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEAIMODULE_EXPORTS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -288,7 +288,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>C:/StarcraftAI/StarcraftAI/src/starterbot/BT/BT_STARCRAFT;C:/StarcraftAI/StarcraftAI/src/starterbot/BT;C:/StarcraftAI/StarcraftAI/src/bwem/include;C:/StarcraftAI/StarcraftAI/src/starterbot/;C:/StarcraftAI/StarcraftAI/src/bwapi/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\src\bwem\include;..\..\src\starterbot\BT\BT_STARCRAFT;..\..\src\starterbot;..\..\src\starterbot\BT;../../src/bwapi/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLEAIMODULE_EXPORTS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
