@@ -20,7 +20,11 @@ BuildOrder::BuildOrder() {
 /// Checks the current supply against the next stage of the build order. If the supply is enough, the next stage of the build order is executed (return true)
 /// In the eventuality that the supply is not enough, nothing is done (return false)
 /// </summary>
-bool BuildOrder::evaluate(){
+bool BuildOrder::evaluate() {
+	// avoid segfault if the build order is finished
+	if (isFinished()) {
+		return false;
+	}
 	const OrderItem& currentItem = m_order[m_currentOrderIndex];
 
 	// timing not reached, exit the function
@@ -54,4 +58,8 @@ bool BuildOrder::evaluate(){
 		m_currentOrderIndex++;
 	}
 	return true;
+}
+
+bool BuildOrder::isFinished() {
+	return m_currentOrderIndex >= m_order.size();
 }

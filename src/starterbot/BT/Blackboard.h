@@ -2,6 +2,8 @@
 #include <unordered_set>
 #include <BWAPI.h>
 #include "BuildOrder.h"
+#include <queue>
+#include <Job.h>
 
 #define THRESHOLD1_MINERALS 200
 #define THRESHOLD1_UNUSED_SUPPLY 2
@@ -22,4 +24,6 @@ public:
 	int nWantedWorkersFarmingMinerals;
 
 	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals;
+
+	std::queue<Job> jobQueue;
 };
