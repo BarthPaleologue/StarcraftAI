@@ -54,6 +54,7 @@
     <ClInclude Include="..\..\src\starterbot\BuildOrder.h" />
     <ClInclude Include="..\..\src\starterbot\BuildOrderTools.h" />
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
+    <ClInclude Include="..\..\src\starterbot\Job.h" />
     <ClInclude Include="..\..\src\starterbot\MapTools.h" />
     <ClInclude Include="..\..\src\starterbot\ReplayParser.h" />
     <ClInclude Include="..\..\src\starterbot\StarterBot.h" />
@@ -92,6 +93,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.cpp" />
     <ClCompile Include="..\..\src\starterbot\BuildOrder.cpp" />
     <ClCompile Include="..\..\src\starterbot\BuildOrderTools.cpp" />
+    <ClCompile Include="..\..\src\starterbot\Job.cpp" />
     <ClCompile Include="..\..\src\starterbot\main.cpp" />
     <ClCompile Include="..\..\src\starterbot\MapTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\ReplayParser.cpp" />
