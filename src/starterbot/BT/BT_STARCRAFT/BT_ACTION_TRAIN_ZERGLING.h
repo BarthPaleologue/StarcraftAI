@@ -4,14 +4,14 @@
 #include <vector>
 #include <BWAPI.h>
 
-class BT_ACTION_TRAIN_UNIT: public BT_ACTION
+class BT_ACTION_TRAIN_ZERGLING: public BT_ACTION
 {
 public:
-    BT_ACTION_TRAIN_UNIT(std::string name, BT_NODE* parent);
+    BT_ACTION_TRAIN_ZERGLING(std::string name, BT_NODE* parent);
 
 private:
     State Evaluate(void* data) override;
     std::string GetDescription() override;
-    static BT_NODE::State TrainUnit(void* data);
+    static BT_NODE::State TrainZergling(void* data);
 };
 
