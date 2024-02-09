@@ -4,9 +4,10 @@
 #include "Tools.h"
 #include <functional> // to have function as attribute
 
-enum e_orderItemAction {
+enum class e_orderItemAction {
 	Build,
-	Cancel
+	Cancel,
+	Train
 };
 
 struct OrderItem {
