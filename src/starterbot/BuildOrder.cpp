@@ -1,15 +1,18 @@
 #include "BuildOrder.h"
 #include "BuildOrderTools.h"
+#include <iostream>
+
+using namespace BuildOrderTools;
 
 BuildOrder::BuildOrder() {
 	// see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
 	m_order = {
-		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, Build},
-		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, Build},
-		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, Build},
-		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, Build},
-		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, Cancel},
-		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, Build}
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
+		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Build},
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
+		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Build},
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, e_orderItemAction::Build}
 	};
 }
 
@@ -27,16 +30,33 @@ bool BuildOrder::evaluate() {
 	// timing not reached, exit the function
 	if (!currentItem.conditionForStep()) return false;
 
+	bool actionSuccess = false;
 	switch (currentItem.action) {
-	case Build:
+	case e_orderItemAction::Build:
+		if (isBuildingStarted(currentItem.unitType)) { // building has started
+			actionSuccess = true;
+			break;
+		}
 		Tools::BuildBuilding(currentItem.unitType);
 		break;
-	case Cancel:
+	case e_orderItemAction::Cancel:
 		// how do we cancel the current build of the given item?
+		if (cancelConstruction(currentItem.unitType)) {
+			actionSuccess = true;
+		}
+		break;
+	case e_orderItemAction::Train:
+		if (trainUnit(currentItem.unitType))
+			actionSuccess = true;
+		break;
+	default:
+		std::cout << "Error: unexpected orderItemAction" << std::endl;
 		break;
 	}
 
-	m_currentOrderIndex++;
+	if (actionSuccess) {
+		m_currentOrderIndex++;
+	}
 	return true;
 }
 

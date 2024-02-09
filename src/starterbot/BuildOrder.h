@@ -4,11 +4,10 @@
 #include "Tools.h"
 #include <functional> // to have function as attribute
 
-enum e_orderItemAction {
-	// Build the unit type
-	Build,
-	// Cancel the build process of the unit type
-	Cancel
+enum class e_orderItemAction {
+	Build, // Build the unit type
+	Cancel, // Cancel the build process of the unit type
+	Train
 };
 
 struct OrderItem {
