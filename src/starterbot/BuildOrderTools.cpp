@@ -30,7 +30,6 @@ std::function<bool()> BuildOrderTools::isTimingReached(e_buildOrderTimingType _t
 }
 
 bool BuildOrderTools::trainUnit(BWAPI::UnitType unitType) {
-	// FIX / ADAPT
 
 	const BWAPI::Unit myDepot = Tools::GetDepot();
 

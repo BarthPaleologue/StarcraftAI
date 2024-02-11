@@ -3,6 +3,7 @@
 #include "BWAPI.h"
 #include "Tools.h"
 #include <functional> // to have function as attribute
+#include <queue>
 
 enum class e_orderItemAction {
 	Build, // Build the unit type
@@ -35,7 +36,7 @@ class BuildOrder
 public:
 	BuildOrder();
 
-	bool evaluate();
+	bool evaluate(std::queue<BWAPI::UnitType>& _unitsRequested);
 
 	bool isFinished();
 

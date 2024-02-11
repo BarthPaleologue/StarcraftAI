@@ -1,5 +1,6 @@
 #pragma once
 #include <unordered_set>
+#include <queue>
 #include <BWAPI.h>
 #include "BuildOrder.h"
 #include <queue>
@@ -13,17 +14,24 @@
 
 class Blackboard {
 public:
+	Blackboard(): buildOrder() {}
+	
 	BuildOrder buildOrder;
 
 	int currMinerals;
 	int thresholdMinerals;
 	int currSupply;
-	int thresholdSupply;
+	int thresholdSupply = 0; // modifiable with the amount of HQ we have
 
 	int nWantedWorkersTotal;
 	int nWantedWorkersFarmingMinerals;
 
-	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals;
+	// for units / techs we want right now but we don't have ressources so we don't train anything to wait for them
+	std::queue<BWAPI::UnitType> unitsRequested; // for now by build order, maybe add struct for prio
+	std::queue<BWAPI::TechType> techsRequested; 
+
+
+	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals; //#TODO: associate them to bases (not to HQ btw)
 
 	std::queue<Job> jobQueue;
 };

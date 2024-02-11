@@ -28,6 +28,7 @@
 #include "BT_CONDITION.h"
 #include "BT_COND_GREATER_THAN.h"
 #include "BT_COND_LESSER_THAN.h"
+#include "BT_COND_NOTHING_REQUESTED.h"
 
 ///Decorator Conditions
 #include "BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.h"

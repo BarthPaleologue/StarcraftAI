@@ -27,6 +27,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_CONDITION.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_COND_GREATER_THAN.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_COND_LESSER_THAN.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_DECORATOR.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_DECO_CONDITION.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_DECO_COND_GREATER_THAN.h" />
@@ -59,6 +60,7 @@
     <ClInclude Include="..\..\src\starterbot\MapTools.h" />
     <ClInclude Include="..\..\src\starterbot\ReplayParser.h" />
     <ClInclude Include="..\..\src\starterbot\StarterBot.h" />
+    <ClInclude Include="..\..\src\starterbot\TargetingTools.h" />
     <ClInclude Include="..\..\src\starterbot\Tools.h" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +71,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_CONDITION.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_COND_GREATER_THAN.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_COND_LESSER_THAN.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_DECORATOR.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_DECO_CONDITION.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_DECO_COND_GREATER_THAN.cpp" />
@@ -99,6 +102,7 @@
     <ClCompile Include="..\..\src\starterbot\MapTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\ReplayParser.cpp" />
     <ClCompile Include="..\..\src\starterbot\StarterBot.cpp" />
+    <ClCompile Include="..\..\src\starterbot\TargetingTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\Tools.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.cpp" />
   </ItemGroup>

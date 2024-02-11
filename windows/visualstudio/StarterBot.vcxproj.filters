@@ -102,6 +102,10 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\TargetingTools.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.cpp">
+      <Filter>BT</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
@@ -210,6 +214,10 @@
     <ClInclude Include="..\..\src\starterbot\Job.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.h">
       <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\TargetingTools.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.h">
+      <Filter>BT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

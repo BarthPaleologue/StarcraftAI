@@ -1,5 +1,6 @@
 #include "BuildOrder.h"
 #include "BuildOrderTools.h"
+#include "Blackboard.h"
 #include <iostream>
 
 using namespace BuildOrderTools;
@@ -8,9 +9,9 @@ BuildOrder::BuildOrder() {
 	// see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
 	m_order = {
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
-		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+		//{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
-		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+		//{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, e_orderItemAction::Train}
 	};
@@ -33,7 +34,7 @@ BuildOrder::BuildOrder() {
 /// Checks the current supply against the next stage of the build order. If the supply is enough, the next stage of the build order is executed (return true)
 /// In the eventuality that the supply is not enough, nothing is done (return false)
 /// </summary>
-bool BuildOrder::evaluate() {
+bool BuildOrder::evaluate(std::queue<BWAPI::UnitType>& _unitsRequested) {
 	// avoid segfault if the build order is finished
 	if (isFinished()) {
 		return false;
@@ -46,10 +47,14 @@ bool BuildOrder::evaluate() {
 	bool actionSuccess = false;
 	switch (currentItem.action) {
 	case e_orderItemAction::Build:
+		_unitsRequested.push(currentItem.unitType); // with unordered_set, doesn't add duplicates
 		if (isBuildingStarted(currentItem.unitType)) { // building has started
+			_unitsRequested.pop();
 			actionSuccess = true;
 			break;
 		}
+		
+		//TODO: add a "if Hatchery"
 		Tools::BuildBuilding(currentItem.unitType);
 		break;
 	case e_orderItemAction::Cancel:
@@ -59,8 +64,11 @@ bool BuildOrder::evaluate() {
 		}
 		break;
 	case e_orderItemAction::Train:
-		if (trainUnit(currentItem.unitType))
+		_unitsRequested.push(currentItem.unitType);
+		if (trainUnit(currentItem.unitType)) {
+			_unitsRequested.pop();
 			actionSuccess = true;
+		}
 		break;
 	default:
 		std::cout << "Error: unexpected orderItemAction" << std::endl;
