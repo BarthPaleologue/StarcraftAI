@@ -30,6 +30,12 @@ BuildOrder::BuildOrder() {
 	};*/
 }
 
+void BuildOrder::nextTask()
+{
+	m_currentOrderIndex++;
+	m_isCurrTaskStarted = false;
+}
+
 /// <summary>
 /// Checks the current supply against the next stage of the build order. If the supply is enough, the next stage of the build order is executed (return true)
 /// In the eventuality that the supply is not enough, nothing is done (return false)
@@ -41,14 +47,20 @@ bool BuildOrder::evaluate(std::queue<BWAPI::UnitType>& _unitsRequested) {
 	}
 	const OrderItem& currentItem = m_order[m_currentOrderIndex];
 
-	// timing not reached, exit the function
-	if (!currentItem.conditionForStep()) return false;
+	// timing not reached, exit the function (if task is started, might decrease in supply bc of drone morphed)
+	if (!currentItem.conditionForStep() && !m_isCurrTaskStarted) return false;
 
+	//std::cout << "evaluation of build order: step " << m_currentOrderIndex << std::endl;
 	bool actionSuccess = false;
 	switch (currentItem.action) {
 	case e_orderItemAction::Build:
-		_unitsRequested.push(currentItem.unitType); // with unordered_set, doesn't add duplicates
+		if (!m_isCurrTaskStarted) {
+			m_isCurrTaskStarted = true;
+			_unitsRequested.push(currentItem.unitType);
+		}
+		//std::cout << "check if build " << currentItem.unitType << std::endl;
 		if (isBuildingStarted(currentItem.unitType)) { // building has started
+			//std::cout << "building " << currentItem.unitType << "has started" << std::endl;
 			_unitsRequested.pop();
 			actionSuccess = true;
 			break;
@@ -58,13 +70,15 @@ bool BuildOrder::evaluate(std::queue<BWAPI::UnitType>& _unitsRequested) {
 		Tools::BuildBuilding(currentItem.unitType);
 		break;
 	case e_orderItemAction::Cancel:
-		// how do we cancel the current build of the given item?
 		if (cancelConstruction(currentItem.unitType)) {
 			actionSuccess = true;
 		}
 		break;
 	case e_orderItemAction::Train:
-		_unitsRequested.push(currentItem.unitType);
+		if (!m_isCurrTaskStarted) {
+			m_isCurrTaskStarted = true;
+			_unitsRequested.push(currentItem.unitType);
+		}
 		if (trainUnit(currentItem.unitType)) {
 			_unitsRequested.pop();
 			actionSuccess = true;
@@ -76,7 +90,7 @@ bool BuildOrder::evaluate(std::queue<BWAPI::UnitType>& _unitsRequested) {
 	}
 
 	if (actionSuccess) {
-		m_currentOrderIndex++;
+		nextTask();
 	}
 	return true;
 }

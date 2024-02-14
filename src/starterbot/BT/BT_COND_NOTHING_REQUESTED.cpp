@@ -18,6 +18,6 @@ std::string BT_COND_NOTHING_REQUESTED::GetDescription()
 
 bool BT_COND_NOTHING_REQUESTED::isNothingRequested(void* data) {
     Blackboard* blackboard = (Blackboard*)data;
-    std::cout << blackboard->unitsRequested.size() << ' ' << blackboard->techsRequested.size() << std::endl;
+    //std::cout << "from BT_COND_NOTHING_REQUESTED::isNothingRequested: " << blackboard->unitsRequested.size() << ' ' << blackboard->techsRequested.size() << std::endl;
     return blackboard->techsRequested.empty() && blackboard->unitsRequested.empty();
 }

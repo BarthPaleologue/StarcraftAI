@@ -36,6 +36,7 @@ class BuildOrder
 public:
 	BuildOrder();
 
+	void nextTask();
 	bool evaluate(std::queue<BWAPI::UnitType>& _unitsRequested);
 
 	bool isFinished();
@@ -60,5 +61,6 @@ private:
 
 	// the current stage index of the build order
 	int m_currentOrderIndex = 0;
+	bool m_isCurrTaskStarted = false;
 };
 

@@ -50,9 +50,10 @@ BWAPI::Unit BuildOrderTools::findStartedBuilding(BWAPI::UnitType _unitType)
 	// For each unit that we own
 	for (auto& unit : BWAPI::Broodwar->self()->getUnits())
 	{
-		// if the unit is of the correct type, and it actually has been constructed, return it
+		// if the unit is of the correct type, return it
 		if (unit->getType() == _unitType) //&& unit->isCompleted())
 		{
+			//std::cout << "found a " << unit->getType() << std::endl;
 			return unit;
 		}
 	}
