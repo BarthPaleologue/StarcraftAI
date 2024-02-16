@@ -3,16 +3,20 @@
 #include "BWAPI.h"
 #include "Tools.h"
 #include <functional> // to have function as attribute
+#include <queue>
 
-enum e_orderItemAction {
-	Build,
-	Cancel
+enum class e_orderItemAction {
+	Build, // Build the unit type
+	Cancel, // Cancel the build process of the unit type
+	Train
 };
 
 struct OrderItem {
 	std::function<bool()> conditionForStep; // this int is for humans a readable thing (supply count, building HP, etc)
 	// #TODO: replace this with a job (could be scouting, cancelling, building somewhere, anything)
 	BWAPI::UnitType unitType;
+
+	// The action to perform with the given unitType in the OrderItem struct
 	e_orderItemAction action;
 
 	// #rewrite
@@ -32,7 +36,10 @@ class BuildOrder
 public:
 	BuildOrder();
 
-	bool evaluate();
+	void nextTask();
+	bool evaluate(std::queue<BWAPI::UnitType>& _unitsRequested);
+
+	bool isFinished();
 
 	// #rewrite
 	//void debug() const {
@@ -49,8 +56,11 @@ public:
 	//}
 
 private:
-	// this is the structure that holds the build order. In a sequence we have the required supply and unit of each stage of the build order
+	// This array holds the sequence of actions of the build order.
 	std::vector<OrderItem> m_order;
+
+	// the current stage index of the build order
 	int m_currentOrderIndex = 0;
+	bool m_isCurrTaskStarted = false;
 };
 

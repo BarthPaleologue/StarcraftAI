@@ -17,7 +17,7 @@ StarterBot::StarterBot()
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
     pData->nWantedWorkersFarmingMinerals = NWANTED_WORKERS_FARMING_MINERALS;
 
-    pBtTest = nullptr;
+    //pBtTest = nullptr;
     /*
     //Test BT nodes: BT_DECO_COND_GREATER_THAN, BT_DECO_COND_LESSER_THAN, BT_ACTION_LOG
     pBtTest = new BT_DECORATOR("EntryPoint", nullptr);
@@ -29,35 +29,55 @@ StarterBot::StarterBot()
     */
 
     //Test BT nodes: BT_DECO_REPEATER (resetOnRepeat = true), BT_COND_GREATER_THAN, BT_COND_LESSER_THAN, BT_ACTION_LOG
-    pBtTest = new BT_DECORATOR("EntryPoint", nullptr);
-    BT_DECO_REPEATER* pForeverRepeater = new BT_DECO_REPEATER("RepeatForever", pBtTest, 0, true, false, true);
-    BT_SEQUENCER* pSequencer = new BT_SEQUENCER("sequencer",pForeverRepeater, 2);
+    //pBtTest = new BT_DECORATOR("EntryPoint", nullptr);
+    //BT_DECO_REPEATER* pForeverRepeater = new BT_DECO_REPEATER("RepeatForever", pBtTest, 0, true, false, true);
+    //BT_SEQUENCER* pSequencer = new BT_SEQUENCER("sequencer",pForeverRepeater, 2);
     //BT_COND_GREATER_THAN<int> *pGreaterThan = new BT_COND_GREATER_THAN<int>("MineralsGreaterThanThreshold1",pSequencer,100, pData->currMinerals, false);
     //BT_ACTION_LOG* pLog = new BT_ACTION_LOG("LogMSG", pSequencer, std::format("current minerals greater than {}", 100));
-    BT_COND_LESSER_THAN<int>* pLesserThan = new BT_COND_LESSER_THAN<int>("MineralsLesserThanThreshold1", pSequencer, 100, pData->currMinerals, false);
-    BT_ACTION_LOG* pLog = new BT_ACTION_LOG("LogMSG", pSequencer, std::format("current minerals lesser than {}", 100));
+    //BT_COND_LESSER_THAN<int>* pLesserThan = new BT_COND_LESSER_THAN<int>("MineralsLesserThanThreshold1", pSequencer, 100, pData->currMinerals, false);
+    //BT_ACTION_LOG* pLog = new BT_ACTION_LOG("LogMSG", pSequencer, std::format("current minerals lesser than {}", 100));
 
 
 
     // Starcraft AI BT
     pBT = new BT_DECORATOR("EntryPoint", nullptr);
     
-    BT_PARALLEL_SEQUENCER* pParallelSeq = new BT_PARALLEL_SEQUENCER("MainParallelSequence", pBT, 10);
+    BT_PARALLEL_SEQUENCER* pMainParallelSeq = new BT_PARALLEL_SEQUENCER("MainParallelSequence", pBT, 10);
 
     //Farming Minerals forever
-    BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pParallelSeq, 0, true, false,false);
+    BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false,false);
     BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS* pNotEnoughWorkersFarmingMinerals = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS("NotEnoughWorkersFarmingMinerals", pFarmingMineralsForeverRepeater);
     BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pNotEnoughWorkersFarmingMinerals);
 
-    //Training Workers
-    BT_DECO_REPEATER* pTrainingWorkersForeverRepeater = new BT_DECO_REPEATER("RepeatForeverTrainingWorkers", pParallelSeq, 0, true, false,false);
-    BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", pTrainingWorkersForeverRepeater);
-    BT_ACTION_TRAIN_WORKER* pTrainWorker = new BT_ACTION_TRAIN_WORKER("TrainWorker", pNotEnoughWorkers);
+    // ---------------------- HQ (Hatchery, Lair, Hive) management ---------------------
+    // actually modifiable into a larva management
+    BT_DECO_REPEATER* pHQActionRepeater = new BT_DECO_REPEATER("RepeatForeverHQAction", pMainParallelSeq, 0, true, false, true);
+    BT_SELECTOR* selectHQAction = new BT_SELECTOR("SelectHQAction", pHQActionRepeater, 10);
+
+    // check if not sparing minerals for tasks already required from elsewhere
+    BT_DECO_INVERTER* pDecoMineralsRequiredElsewhere = new BT_DECO_INVERTER("DecoMineralsRequiredElsewhere", selectHQAction);
+    BT_COND_NOTHING_REQUESTED* pNothingElseRequested = new BT_COND_NOTHING_REQUESTED("CondNothingElseRequested", pDecoMineralsRequiredElsewhere);
 
     //Build Additional Supply Provider
-    BT_DECO_REPEATER* pBuildSupplyProviderForeverRepeater = new BT_DECO_REPEATER("RepeatForeverBuildSupplyProvider", pParallelSeq, 0, true, false,false);
-    BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", pBuildSupplyProviderForeverRepeater);
+    // TODO: change to "Train Unit (BWAPI::Zerg_Overlord)" bc more explicit
+    //BT_DECO_REPEATER* pBuildSupplyProviderForeverRepeater = new BT_DECO_REPEATER("RepeatForeverBuildSupplyProvider", selectHQAction, 0, true, false, false);
+    BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
     BT_ACTION_BUILD_SUPPLY_PROVIDER* pBuildSupplyProvider = new BT_ACTION_BUILD_SUPPLY_PROVIDER("BuildSupplyProvider", pNotEnoughSupply);
+
+    // example of templated BT Node !!!
+    //BT_ACTION_BUILD_UNIT<BWAPI::UnitTypes::Enum::Zerg_Zergling>* test = new BT_ACTION_BUILD_UNIT<BWAPI::UnitTypes::Enum::Zerg_Zergling>("build zergling", selectHQAction);
+
+    // Training Zergling forever
+    //BT_DECO_REPEATER* trainingZerglingAllIn = new BT_DECO_REPEATER("RepeatForeverTrainingZergling", selectHQAction, 0, true, false, false);
+    BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", selectHQAction);
+    BT_ACTION_TRAIN_ZERGLING* trainZergling = new BT_ACTION_TRAIN_ZERGLING("TrainZergling", buildOrderFinished);
+
+    //Training Workers
+    //BT_DECO_REPEATER* pTrainingWorkersForeverRepeater = new BT_DECO_REPEATER("RepeatForeverTrainingWorkers", selectHQAction, 0, true, false, false);
+    BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
+    BT_ACTION_TRAIN_WORKER* pTrainWorker = new BT_ACTION_TRAIN_WORKER("TrainWorker", pNotEnoughWorkers);
+
+    // ---------------------- End of HQ management ---------------------
 }
 
 //functions needed for initialisating : 
@@ -121,7 +141,7 @@ void StarterBot::onFrame()
     // Update our MapTools information
     m_mapTools.onFrame();
 
-    pData->buildOrder.evaluate();
+    pData->buildOrder.evaluate(pData->unitsRequested);
 
     pData->currMinerals = BWAPI::Broodwar->self()->minerals();
     pData->currSupply = Tools::GetUnusedSupply(true);
@@ -129,16 +149,17 @@ void StarterBot::onFrame()
     // AI BT
     if (pBT != nullptr && pBT->Evaluate(pData) != BT_NODE::RUNNING)
     {
+        std::cout << "end of BT execution" << std::endl;
         delete (BT_DECORATOR*)pBT;
         pBT = nullptr;
     }
 
     //Test BT
-    if (pBtTest != nullptr && pBtTest->Evaluate(pData) != BT_NODE::RUNNING)
+    /*if (pBtTest != nullptr && pBtTest->Evaluate(pData) != BT_NODE::RUNNING)
     {
         delete (BT_DECORATOR*)pBtTest;
         pBtTest = nullptr;
-    }
+    }*/
 
     /*
     // Send our idle workers to mine minerals so they don't just stand there

@@ -38,3 +38,5 @@ bin/StarterBot.exe
 windows/bin/ReplayData.txt
 windows/bin/ReplayParser.exe
 windows/bin/RunReplayParserAndStarcraft.bat
+
+.vs

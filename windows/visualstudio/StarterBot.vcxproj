@@ -27,6 +27,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_CONDITION.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_COND_GREATER_THAN.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_COND_LESSER_THAN.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_DECORATOR.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_DECO_CONDITION.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_DECO_COND_GREATER_THAN.h" />
@@ -44,18 +45,25 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_SELECTOR.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_SEQUENCER.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_SUPPLY_PROVIDER.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_UNIT.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENNEMY_BASE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_WORKER.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_ZERGLING.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.h" />
     <ClInclude Include="..\..\src\starterbot\BT\Blackboard.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_NODE.h" />
     <ClInclude Include="..\..\src\starterbot\BuildOrder.h" />
     <ClInclude Include="..\..\src\starterbot\BuildOrderTools.h" />
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
+    <ClInclude Include="..\..\src\starterbot\Job.h" />
     <ClInclude Include="..\..\src\starterbot\MapTools.h" />
     <ClInclude Include="..\..\src\starterbot\ReplayParser.h" />
     <ClInclude Include="..\..\src\starterbot\StarterBot.h" />
+    <ClInclude Include="..\..\src\starterbot\TargetingTools.h" />
     <ClInclude Include="..\..\src\starterbot\Tools.h" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +74,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_CONDITION.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_COND_GREATER_THAN.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_COND_LESSER_THAN.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_DECORATOR.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_DECO_CONDITION.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_DECO_COND_GREATER_THAN.cpp" />
@@ -83,18 +92,25 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_SELECTOR.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_SEQUENCER.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_SUPPLY_PROVIDER.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_UNIT.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENNEMY_BASE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_WORKER.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_ZERGLING.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_NODE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BuildOrder.cpp" />
     <ClCompile Include="..\..\src\starterbot\BuildOrderTools.cpp" />
+    <ClCompile Include="..\..\src\starterbot\Job.cpp" />
     <ClCompile Include="..\..\src\starterbot\main.cpp" />
     <ClCompile Include="..\..\src\starterbot\MapTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\ReplayParser.cpp" />
     <ClCompile Include="..\..\src\starterbot\StarterBot.cpp" />
+    <ClCompile Include="..\..\src\starterbot\TargetingTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\Tools.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>StarterBot</ProjectName>
