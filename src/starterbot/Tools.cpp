@@ -184,9 +184,16 @@ int Tools::GetTotalSupply(bool inProgress)
     {
         // ignore units that are fully completed
         if (unit->isCompleted()) { continue; }
+        if (unit->getType() == BWAPI::UnitTypes::Zerg_Hatchery) continue; //negletable
+
 
         // if they are not completed, then add their supply provided to the total supply
         totalSupply += unit->getType().supplyProvided();
+
+        //zerg specific
+        if (unit->getType() == BWAPI::UnitTypes::Zerg_Egg) {
+            totalSupply += unit->getBuildType().supplyProvided();
+        }
     }
 
     // one last tricky case: if a unit is currently on its way to build a supply provider, add it
