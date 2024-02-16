@@ -43,5 +43,6 @@ public:
 	std::queue<BWAPI::TechType> techsRequested; 
 
 	//std::unordered_set<BWAPI::Unit> unitsFarmingMinerals; //#TODO: associate them to bases (not to HQ btw)
+	Game::()
 	std::queue<Job> jobQueue;
 };

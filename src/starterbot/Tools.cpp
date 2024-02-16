@@ -59,6 +59,16 @@ BWAPI::Unit Tools::GetUnitOfType(BWAPI::UnitType type)
     // If we didn't find a valid unit to return, make sure we return nullptr
     return nullptr;
 }
+void Tools::GetAllUnitsOfType(BWAPI::UnitType type, std::vector<BWAPI::Unit>& units) {
+    for (auto& unit : BWAPI::Broodwar->self()->getUnits())
+    {
+        // if the unit is of the correct type, and it actually has been constructed, return it
+        if (unit->getType() == type && unit->isCompleted())
+        {
+            units.push_back(unit);
+        }
+    }
+}
 BWAPI::Unit Tools::GetUnitById(int ID,BWAPI::Unitset set) {
     //return unit which ID is corec. 
     //Carefull, we're speaking of the ID of the actual little dude, not the ID of the type.
@@ -180,16 +190,18 @@ int Tools::GetTotalSupply(bool inProgress)
     }
 
     // one last tricky case: if a unit is currently on its way to build a supply provider, add it
-    for (auto& unit : BWAPI::Broodwar->self()->getUnits())
-    {
-        // get the last command given to the unit
-        const BWAPI::UnitCommand& command = unit->getLastCommand();
+    if (BWAPI::Broodwar->self()->getRace() != BWAPI::Races::Zerg) {
+        for (auto& unit : BWAPI::Broodwar->self()->getUnits())
+        {
+            // get the last command given to the unit
+            const BWAPI::UnitCommand& command = unit->getLastCommand();
 
-        // if it's not a build command we can ignore it
-        if (command.getType() != BWAPI::UnitCommandTypes::Build) { continue; }
+            // if it's not a build command we can ignore it
+            if (command.getType() != BWAPI::UnitCommandTypes::Build) { continue; }
 
-        // add the supply amount of the unit that it's trying to build
-        totalSupply += command.getUnitType().supplyProvided();
+            // add the supply amount of the unit that it's trying to build
+            totalSupply += command.getUnitType().supplyProvided();
+        }
     }
 
     return totalSupply;
