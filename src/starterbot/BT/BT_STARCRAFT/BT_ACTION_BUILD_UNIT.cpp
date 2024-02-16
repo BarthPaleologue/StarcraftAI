@@ -5,36 +5,28 @@
 #include <typeinfo>
 
 
-template<BWAPI::UnitTypes::Enum::Enum T>
-BT_ACTION_BUILD_UNIT<T>::BT_ACTION_BUILD_UNIT(std::string name, BT_NODE* parent)
-	: BT_ACTION(name, parent) {
+BT_ACTION_BUILD_UNIT::BT_ACTION_BUILD_UNIT(std::string name, BWAPI::UnitType unitType, BT_NODE* parent)
+	: BT_ACTION(name, parent), m_unitType(unitType) {
 }
 
-template<BWAPI::UnitTypes::Enum::Enum T>
-BT_NODE::State BT_ACTION_BUILD_UNIT<T>::Evaluate(void* data)
+BT_NODE::State BT_ACTION_BUILD_UNIT::Evaluate(void* data)
 {
-	return ReturnState(BuildUnit(data));
+	return ReturnState(buildUnit(data));
 }
 
-template<BWAPI::UnitTypes::Enum::Enum T>
-std::string BT_ACTION_BUILD_UNIT<T>::GetDescription()
+std::string BT_ACTION_BUILD_UNIT::GetDescription()
 {
-	return "BUILD " + BT_ACTION_BUILD_UNIT::UnitTypeString;
+	return "BUILD " + m_unitType;
 }
 
-template<BWAPI::UnitTypes::Enum::Enum T>
-BT_NODE::State BT_ACTION_BUILD_UNIT<T>::BuildUnit(void* data)
+BT_NODE::State BT_ACTION_BUILD_UNIT::buildUnit(void* data)
 {
 	Blackboard* pData = (Blackboard*)data;
 
-	const bool startedBuilding = Tools::BuildBuilding(T);
+	const bool startedBuilding = Tools::BuildBuilding(m_unitType);
 
 	if (startedBuilding)
-		BWAPI::Broodwar->printf("Started Building %s", UnitTypeString);
+		BWAPI::Broodwar->printf("Started Building %s", m_unitType);
 
 	return startedBuilding ? BT_NODE::SUCCESS : BT_NODE::FAILURE;
 }
-
-
-template<BWAPI::UnitTypes::Enum::Enum T>
-const std::string BT_ACTION_BUILD_UNIT<T>::UnitTypeString = typeid(T).name();
