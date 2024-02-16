@@ -21,4 +21,5 @@ private:
 
 // This is necessary as this is a template class
 // see https://stackoverflow.com/questions/495021/why-can-templates-only-be-implemented-in-the-header-file for a detailled explanation
+// see also https://isocpp.org/wiki/faq/templates#templates-defn-vs-decl for more details
 #include "BT_ACTION_BUILD_UNIT.cpp"
