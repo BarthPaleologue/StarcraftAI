@@ -55,6 +55,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.h" />
     <ClInclude Include="..\..\src\starterbot\BuildOrder.h" />
     <ClInclude Include="..\..\src\starterbot\BuildOrderTools.h" />
+    <ClInclude Include="..\..\src\starterbot\ForceTools.h" />
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
     <ClInclude Include="..\..\src\starterbot\Job.h" />
     <ClInclude Include="..\..\src\starterbot\MapTools.h" />
@@ -97,10 +98,12 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.cpp" />
     <ClCompile Include="..\..\src\starterbot\BuildOrder.cpp" />
     <ClCompile Include="..\..\src\starterbot\BuildOrderTools.cpp" />
+    <ClCompile Include="..\..\src\starterbot\ForceTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\Job.cpp" />
     <ClCompile Include="..\..\src\starterbot\main.cpp" />
     <ClCompile Include="..\..\src\starterbot\MapTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\ReplayParser.cpp" />
+    <ClCompile Include="..\..\src\starterbot\Source.cpp" />
     <ClCompile Include="..\..\src\starterbot\StarterBot.cpp" />
     <ClCompile Include="..\..\src\starterbot\TargetingTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\Tools.cpp" />
