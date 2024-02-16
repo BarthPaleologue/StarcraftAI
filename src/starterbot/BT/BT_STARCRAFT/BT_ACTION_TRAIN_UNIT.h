@@ -7,7 +7,7 @@
 class BT_ACTION_TRAIN_UNIT : public BT_ACTION
 {
 public:
-	BT_ACTION_TRAIN_UNIT(std::string name, BWAPI::UnitType unitType, BT_NODE* parent);
+	BT_ACTION_TRAIN_UNIT(std::string name, BWAPI::UnitType unitType, bool trainAsMuchAsPossible, BT_NODE* parent);
 
 private:
 	State Evaluate(void* data) override;
@@ -16,4 +16,5 @@ private:
 	BT_NODE::State TrainUnit(void* data);
 
 	BWAPI::UnitType m_unitType;
+	bool m_trainAsMuchAsPossible;
 };

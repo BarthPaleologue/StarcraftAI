@@ -12,6 +12,7 @@ namespace Tools
 
     BWAPI::Unit GetUnitById(int ID,BWAPI::Unitset set);
     BWAPI::Unit GetUnitOfType(BWAPI::UnitType type);
+    void GetAllUnitsOfType(BWAPI::UnitType type, std::vector<BWAPI::Unit>& units);
     BWAPI::Unit GetDepot();
 
     bool BuildBuilding(BWAPI::UnitType type);

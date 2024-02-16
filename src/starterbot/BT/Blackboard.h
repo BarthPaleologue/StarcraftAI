@@ -26,7 +26,9 @@ public:
 	int nWantedWorkersTotal;
 	int nWantedWorkersFarmingMinerals;
 
-	//position of the starting base : 
+	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals;
+
+	//position of OUR starting base : 
 	BWAPI::Position basePosition;
 
 	//what we need for the minerals occupency table:
@@ -40,7 +42,7 @@ public:
 	std::queue<BWAPI::UnitType> unitsRequested; // for now by build order, maybe add struct for prio
 	std::queue<BWAPI::TechType> techsRequested; 
 
-	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals; //#TODO: associate them to bases (not to HQ btw)
+	//std::unordered_set<BWAPI::Unit> unitsFarmingMinerals; //#TODO: associate them to bases (not to HQ btw)
 
 	std::queue<Job> jobQueue;
 };

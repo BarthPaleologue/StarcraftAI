@@ -62,25 +62,26 @@ StarterBot::StarterBot()
     // TODO: change to "Train Unit (BWAPI::Zerg_Overlord)"
     //BT_DECO_REPEATER* pBuildSupplyProviderForeverRepeater = new BT_DECO_REPEATER("RepeatForeverBuildSupplyProvider", selectHQAction, 0, true, false, false);
     BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
-    BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, pNotEnoughSupply);
+    BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
 
     // Training Zergling forever
     //BT_DECO_REPEATER* trainingZerglingAllIn = new BT_DECO_REPEATER("RepeatForeverTrainingZergling", selectHQAction, 0, true, false, false);
     BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", selectHQAction);
-    BT_ACTION_TRAIN_ZERGLING* trainZergling = new BT_ACTION_TRAIN_ZERGLING("TrainZergling", buildOrderFinished);
+    BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, true, buildOrderFinished);
 
     //Training Workers
     //BT_DECO_REPEATER* pTrainingWorkersForeverRepeater = new BT_DECO_REPEATER("RepeatForeverTrainingWorkers", selectHQAction, 0, true, false, false);
     BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
-    BT_ACTION_TRAIN_WORKER* pTrainWorker = new BT_ACTION_TRAIN_WORKER("TrainWorker", pNotEnoughWorkers);
+    BT_ACTION_TRAIN_UNIT* pTrainWorker = new BT_ACTION_TRAIN_UNIT("TrainWorker", BWAPI::UnitTypes::Zerg_Drone, false, pNotEnoughWorkers);
 
     // ---------------------- End of HQ management ---------------------
 }
 
 //functions needed for initialisating : 
 void StarterBot::save_base_position() {
-    //We look for a Hive, and save its position. 
-    BWAPI::Unit base = Tools::GetUnitOfType(BWAPI::UnitType(133));
+    //We look for a hatchery, and save its position. 
+    BWAPI::Unit base = Tools::GetUnitOfType(BWAPI::UnitType(131));
+
     BWAPI::Position base_pos = base->getPosition();
     this->pData->basePosition = base_pos;
 }
@@ -101,7 +102,6 @@ void StarterBot::create_minerals_table() {
     int count = 0;
     for (auto& u : CANDIDATES) {
         
-        std::cout << "ID = " << u->getID() << std::endl;
         indx_to_ID.push_back(u->getID());
         ID_to_indx[count] = u->getID();
         mineralsOccupancyTable.push_back(0);

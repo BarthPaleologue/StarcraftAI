@@ -4,8 +4,8 @@
 #include <typeinfo>
 
 
-BT_ACTION_TRAIN_UNIT::BT_ACTION_TRAIN_UNIT(std::string name, BWAPI::UnitType unitType, BT_NODE* parent)
-	: BT_ACTION(name, parent), m_unitType(unitType) {
+BT_ACTION_TRAIN_UNIT::BT_ACTION_TRAIN_UNIT(std::string name, BWAPI::UnitType unitType, bool trainAsMuchAsPossible, BT_NODE* parent)
+	: BT_ACTION(name, parent), m_unitType(unitType), m_trainAsMuchAsPossible(trainAsMuchAsPossible) {
 }
 
 BT_NODE::State BT_ACTION_TRAIN_UNIT::Evaluate(void* data)
@@ -22,18 +22,42 @@ BT_NODE::State BT_ACTION_TRAIN_UNIT::TrainUnit(void* data)
 {
 	Blackboard* pData = (Blackboard*)data;
 
-    const BWAPI::Unit myDepot = Tools::GetDepot();
+	const BWAPI::Unit myDepot = Tools::GetDepot();
 
-    // if we have a valid depot unit and it's currently not training something, train a worker
-    // there is no reason for a bot to ever use the unit queueing system, it just wastes resources
-    if (myDepot && !myDepot->isTraining()) {
-        myDepot->train(m_unitType);
-        BWAPI::Error error = BWAPI::Broodwar->getLastError();
-        if (error != BWAPI::Errors::None) {
-            return BT_NODE::FAILURE;
-        }
-        else return BT_NODE::SUCCESS;
-    }
+	// finding all lavas
+	std::vector<BWAPI::Unit> larvas;
+	Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Larva, larvas);
 
-    return BT_NODE::FAILURE;
+	// filtering to only get larvas that are not morphing
+	std::vector<BWAPI::Unit> larvasNotMorphing;
+	for (auto larva : larvas) {
+		if (larva->isMorphing()) continue;
+		larvasNotMorphing.push_back(larva);
+	}
+
+	// if there are no available larvas, nothing happens
+	if (larvas.empty()) {
+		return BT_NODE::FAILURE;
+	}
+
+	// morph all larvas if as much as possible is true
+	if (m_trainAsMuchAsPossible) {
+		for (auto larva : larvas) {
+			larva->morph(m_unitType);
+			BWAPI::Error error = BWAPI::Broodwar->getLastError();
+			if (error != BWAPI::Errors::None) {
+				return BT_NODE::FAILURE;
+			}
+		}
+	}
+	// only train one larva in the other case
+	else {
+		larvas[0]->morph(m_unitType);
+		BWAPI::Error error = BWAPI::Broodwar->getLastError();
+		if (error != BWAPI::Errors::None) {
+			return BT_NODE::FAILURE;
+		}
+	}
+
+	return BT_NODE::FAILURE;
 }
