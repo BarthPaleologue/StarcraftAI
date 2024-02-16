@@ -26,8 +26,6 @@ public:
 	int nWantedWorkersTotal;
 	int nWantedWorkersFarmingMinerals;
 
-	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals;
-
 	//position of the starting base : 
 	BWAPI::Position basePosition;
 
