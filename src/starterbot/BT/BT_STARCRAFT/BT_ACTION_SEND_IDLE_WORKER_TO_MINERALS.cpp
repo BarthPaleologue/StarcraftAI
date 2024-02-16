@@ -37,7 +37,6 @@ BT_NODE::State BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS::SendIdleWorkerToMinerals(
                 }
             }
             int mineralID = pData->minerals_indx_to_ID.at(min_id);
-            std::cout << "min_id = " << min_id << std::endl;
      
             BWAPI::Unit mineralTarget = Tools::GetUnitById(mineralID,BWAPI::Broodwar->getMinerals());
             unit->rightClick(mineralTarget);
@@ -45,15 +44,6 @@ BT_NODE::State BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS::SendIdleWorkerToMinerals(
             pData->mineralsOccupancyTable.at(min_id)++;
             return BT_NODE::SUCCESS;
 
-            // // Get the closest mineral to this worker unit
-            // BWAPI::Unit closestMineral = Tools::GetClosestUnitTo(unit, BWAPI::Broodwar->getMinerals());
-
-            // // If a valid mineral was found, right click it with the unit in order to start harvesting
-            // if (closestMineral) {
-            //     unit->rightClick(closestMineral);
-            //     pData->unitsFarmingMinerals.insert(unit);
-            //     return BT_NODE::SUCCESS;
-            // }
         }
     }
 
