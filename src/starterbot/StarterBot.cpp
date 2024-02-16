@@ -70,7 +70,7 @@ StarterBot::StarterBot()
     BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, true, buildOrderFinished);
 
     // Sending all Zerglings to ennemy base
-    BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENNEMY_BASE* sendZerglings = new BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENNEMY_BASE("moveAllZerglingsToEnnemyBase", buildOrderFinished);
+    BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE* sendZerglings = new BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE("moveAllZerglingsToEnnemyBase", buildOrderFinished);
 
     //Training Workers
     //BT_DECO_REPEATER* pTrainingWorkersForeverRepeater = new BT_DECO_REPEATER("RepeatForeverTrainingWorkers", selectHQAction, 0, true, false, false);
