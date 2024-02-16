@@ -64,6 +64,9 @@ StarterBot::StarterBot()
     BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
     BT_ACTION_BUILD_SUPPLY_PROVIDER* pBuildSupplyProvider = new BT_ACTION_BUILD_SUPPLY_PROVIDER("BuildSupplyProvider", pNotEnoughSupply);
 
+    // example of templated BT Node !!!
+    //BT_ACTION_BUILD_UNIT<BWAPI::UnitTypes::Enum::Zerg_Zergling>* test = new BT_ACTION_BUILD_UNIT<BWAPI::UnitTypes::Enum::Zerg_Zergling>("build zergling", selectHQAction);
+
     // Training Zergling forever
     //BT_DECO_REPEATER* trainingZerglingAllIn = new BT_DECO_REPEATER("RepeatForeverTrainingZergling", selectHQAction, 0, true, false, false);
     BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", selectHQAction);
