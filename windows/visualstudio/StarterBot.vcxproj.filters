@@ -112,6 +112,8 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\Source.cpp" />
+    <ClCompile Include="..\..\src\starterbot\ForceTools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
@@ -231,6 +233,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\ForceTools.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BT">

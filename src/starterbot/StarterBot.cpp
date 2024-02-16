@@ -130,6 +130,7 @@ void StarterBot::onStart()
     //BWEM::Map::Instance().Initialize(BWAPI::BroodwarPtr);
     this->save_base_position();
     this->create_minerals_table();
+
 }
 
 // Called on each frame of the game
