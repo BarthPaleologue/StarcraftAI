@@ -41,6 +41,18 @@ public:
 
 	bool isFinished();
 
+	/// <summary>
+	/// Returns the current index of the build order
+	/// </summary>
+	/// <returns></returns>
+	int getCurrentIndex();
+
+	/// <summary>
+	/// Returns the number of items in the build order
+	/// </summary>
+	/// <returns></returns>
+	int getSize();
+
 	// #rewrite
 	//void debug() const {
 	//	for (int i = 0; i < m_order.size(); i++) {

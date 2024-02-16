@@ -36,6 +36,15 @@ void BuildOrder::nextTask()
 	m_isCurrTaskStarted = false;
 }
 
+int BuildOrder::getCurrentIndex() {
+	return m_currentOrderIndex;
+}
+
+
+int BuildOrder::getSize() {
+	return m_order.size();
+}
+
 /// <summary>
 /// Checks the current supply against the next stage of the build order. If the supply is enough, the next stage of the build order is executed (return true)
 /// In the eventuality that the supply is not enough, nothing is done (return false)
