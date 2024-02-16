@@ -59,6 +59,16 @@ BWAPI::Unit Tools::GetUnitOfType(BWAPI::UnitType type)
     // If we didn't find a valid unit to return, make sure we return nullptr
     return nullptr;
 }
+void Tools::GetAllUnitsOfType(BWAPI::UnitType type, std::vector<BWAPI::Unit>& units) {
+    for (auto& unit : BWAPI::Broodwar->self()->getUnits())
+    {
+        // if the unit is of the correct type, and it actually has been constructed, return it
+        if (unit->getType() == type && unit->isCompleted())
+        {
+            units.push_back(unit);
+        }
+    }
+}
 BWAPI::Unit Tools::GetUnitById(int ID,BWAPI::Unitset set) {
     //return unit which ID is corec. 
     //Carefull, we're speaking of the ID of the actual little dude, not the ID of the type.
