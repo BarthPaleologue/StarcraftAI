@@ -34,10 +34,11 @@ public:
 	std::map<int, int> minerals_ID_to_indx;
 	std::vector<int> mineralsOccupancyTable;
 
+	std::vector<BWAPI::Position> ennemyBasesPositions{};
+
 	// for units / techs we want right now but we don't have ressources so we don't train anything to wait for them
 	std::queue<BWAPI::UnitType> unitsRequested; // for now by build order, maybe add struct for prio
 	std::queue<BWAPI::TechType> techsRequested; 
-
 
 	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals; //#TODO: associate them to bases (not to HQ btw)
 
