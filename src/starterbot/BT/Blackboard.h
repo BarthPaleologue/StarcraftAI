@@ -10,6 +10,7 @@
 #define THRESHOLD1_UNUSED_SUPPLY 2
 
 #define NWANTED_WORKERS_TOTAL 20
+#define NWANTED_WORKERS_FARMING_MINERALS 10
 
 class Blackboard {
 public:
@@ -21,12 +22,9 @@ public:
 	int thresholdMinerals;
 	int currSupply;
 	int thresholdSupply = 0; // modifiable with the amount of HQ we have
-	
-	// TODO: replace these with something depending on the mineral count of bases
-	int nWantedWorkersTotal;
-	//int nWantedWorkersFarmingMinerals;
 
-	int nbOverlords = 0;
+	int nWantedWorkersTotal;
+	int nWantedWorkersFarmingMinerals;
 
 	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals;
 
@@ -45,6 +43,6 @@ public:
 	std::queue<BWAPI::TechType> techsRequested; 
 
 	//std::unordered_set<BWAPI::Unit> unitsFarmingMinerals; //#TODO: associate them to bases (not to HQ btw)
-
+	Game::()
 	std::queue<Job> jobQueue;
 };

@@ -64,8 +64,8 @@ StarterBot::StarterBot()
     BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", selectHQAction);
     BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, true, buildOrderFinished);
 
-    // Sending all Zerglings to enemy base
-    BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE* sendZerglings = new BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE("moveAllZerglingsToEnnemyBase", buildOrderFinished);
+    // Sending all Zerglings to ennemy base
+    //BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE* sendZerglings = new BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE("moveAllZerglingsToEnnemyBase", buildOrderFinished);
 
     //Training Workers
     BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
@@ -127,6 +127,7 @@ void StarterBot::onStart()
     //BWEM::Map::Instance().Initialize(BWAPI::BroodwarPtr);
     this->save_base_position();
     this->create_minerals_table();
+
 }
 
 // Called on each frame of the game
