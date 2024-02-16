@@ -82,8 +82,9 @@ StarterBot::StarterBot()
 
 //functions needed for initialisating : 
 void StarterBot::save_base_position() {
-    //We look for a Hive, and save its position. 
-    BWAPI::Unit base = Tools::GetUnitOfType(BWAPI::UnitType(133));
+    //We look for a hatchery, and save its position. 
+    BWAPI::Unit base = Tools::GetUnitOfType(BWAPI::UnitType(131));
+
     BWAPI::Position base_pos = base->getPosition();
     this->pData->basePosition = base_pos;
 }
@@ -104,7 +105,6 @@ void StarterBot::create_minerals_table() {
     int count = 0;
     for (auto& u : CANDIDATES) {
         
-        std::cout << "ID = " << u->getID() << std::endl;
         indx_to_ID.push_back(u->getID());
         ID_to_indx[count] = u->getID();
         mineralsOccupancyTable.push_back(0);
