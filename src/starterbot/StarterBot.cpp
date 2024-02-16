@@ -15,7 +15,6 @@ StarterBot::StarterBot()
     pData->thresholdSupply = THRESHOLD1_UNUSED_SUPPLY;
 
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
-    pData->nWantedWorkersFarmingMinerals = NWANTED_WORKERS_FARMING_MINERALS;
 
     //pBtTest = nullptr;
     /*
@@ -45,9 +44,8 @@ StarterBot::StarterBot()
     BT_PARALLEL_SEQUENCER* pMainParallelSeq = new BT_PARALLEL_SEQUENCER("MainParallelSequence", pBT, 10);
 
     //Farming Minerals forever
-    BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false,false);
-    BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS* pNotEnoughWorkersFarmingMinerals = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS("NotEnoughWorkersFarmingMinerals", pFarmingMineralsForeverRepeater);
-    BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pNotEnoughWorkersFarmingMinerals);
+    BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false, true);
+    BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pFarmingMineralsForeverRepeater);
 
     // ---------------------- HQ (Hatchery, Lair, Hive) management ---------------------
     // actually modifiable into a larva management

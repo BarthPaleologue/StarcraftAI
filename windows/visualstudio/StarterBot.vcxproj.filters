@@ -60,9 +60,6 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.cpp">
-      <Filter>BT\BT_STARCRAFT</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
@@ -171,9 +168,6 @@
       <Filter>BT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.h">
-      <Filter>BT\BT_STARCRAFT</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.h">
