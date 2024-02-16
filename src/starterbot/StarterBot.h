@@ -36,4 +36,9 @@ public:
 	void onUnitShow(BWAPI::Unit unit);
 	void onUnitHide(BWAPI::Unit unit);
 	void onUnitRenegade(BWAPI::Unit unit);
+	
+	//functions for initialisation :
+	void save_base_position();
+	void create_minerals_table();
+
 };

@@ -7,7 +7,7 @@ BT_ACTION_LOG::BT_ACTION_LOG(std::string name, BT_NODE* parent, std::string msg)
 
 BT_NODE::State BT_ACTION_LOG::Evaluate(void* data)
 {
-    std::cout<<Msg << "\n"; 
+    // std::cout<<Msg << "\n"; 
     return Success();
 }
 

@@ -28,8 +28,9 @@ BT_NODE::State BT_ACTION_TRAIN_WORKER::TrainWorker(void* data)
     if (myDepot && !myDepot->isTraining()) { 
         myDepot->train(workerType); 
         BWAPI::Error error = BWAPI::Broodwar->getLastError();
-        if(error!=BWAPI::Errors::None)
+        if(error!=BWAPI::Errors::None){
             return BT_NODE::FAILURE;
+            }
         else return BT_NODE::SUCCESS;
     }
 

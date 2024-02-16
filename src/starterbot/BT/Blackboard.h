@@ -22,4 +22,13 @@ public:
 	int nWantedWorkersFarmingMinerals;
 
 	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals;
+
+	//position of the starting base : 
+	BWAPI::Position basePosition;
+
+	//what we need for the minerals occupency table:
+	std::vector<int> minerals_indx_to_ID;
+	std::map<int, int> minerals_ID_to_indx;
+	std::vector<int> mineralsOccupancyTable;
+
 };

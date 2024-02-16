@@ -1,4 +1,5 @@
 #include "Tools.h"
+#include "Blackboard.h"
 
 BWAPI::Unit Tools::GetClosestUnitTo(BWAPI::Position p, const BWAPI::Unitset& units)
 {
@@ -34,7 +35,15 @@ int Tools::CountUnitsOfType(BWAPI::UnitType type, const BWAPI::Unitset& units)
 
     return sum;
 }
-
+BWAPI::Unitset Tools::GetUnitsInRadius(BWAPI::Position p, float r, const BWAPI::Unitset& units) {
+    BWAPI::Unitset Result;
+    for (auto& u : units) {
+        if (u->getPosition().getDistance(p)<r) {
+            Result.insert(u);
+        }
+    }
+    return Result;
+}
 BWAPI::Unit Tools::GetUnitOfType(BWAPI::UnitType type)
 {
     // For each unit that we own
@@ -50,6 +59,19 @@ BWAPI::Unit Tools::GetUnitOfType(BWAPI::UnitType type)
     // If we didn't find a valid unit to return, make sure we return nullptr
     return nullptr;
 }
+BWAPI::Unit Tools::GetUnitById(int ID,BWAPI::Unitset set) {
+    //return unit which ID is corec. 
+    //Carefull, we're speaking of the ID of the actual little dude, not the ID of the type.
+    for (auto& unit : set)
+    {
+        if (unit->getID() == ID)
+        {
+            return unit;
+        }
+    }
+        return nullptr;
+
+    };
 
 BWAPI::Unit Tools::GetDepot()
 {
@@ -238,3 +260,4 @@ void Tools::DrawHealthBar(BWAPI::Unit unit, double ratio, BWAPI::Color color, in
         BWAPI::Broodwar->drawLineMap(BWAPI::Position(i, hpTop), BWAPI::Position(i, hpBottom), BWAPI::Colors::Black);
     }
 }
+
