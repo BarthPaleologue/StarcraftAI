@@ -28,6 +28,8 @@ public:
 
 	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals;
 
+	int nbOverlords = 0;
+
 	//position of OUR starting base : 
 	BWAPI::Position basePosition;
 
@@ -43,6 +45,6 @@ public:
 	std::queue<BWAPI::TechType> techsRequested; 
 
 	//std::unordered_set<BWAPI::Unit> unitsFarmingMinerals; //#TODO: associate them to bases (not to HQ btw)
-	Game::()
+	//Game::()
 	std::queue<Job> jobQueue;
 };
