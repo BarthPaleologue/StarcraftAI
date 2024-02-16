@@ -6,6 +6,7 @@ template <class T> BT_COND_LESSER_THAN<T>::BT_COND_LESSER_THAN(std::string name,
 {}
 
 template <class T> BT_NODE::State BT_COND_LESSER_THAN<T>::Evaluate(void* data) {
+    
     bool result = StrictComparison ? ValueRef < Threshold:ValueRef <= Threshold;
     if (result)  return Success();
     else return Failure();
@@ -13,6 +14,7 @@ template <class T> BT_NODE::State BT_COND_LESSER_THAN<T>::Evaluate(void* data) {
 
 template <class T> std::string BT_COND_LESSER_THAN<T>::GetDescription()
 {
+
     return  std::format("BT_COND_LESSER_THAN {}", Threshold); 
 }
 

@@ -62,7 +62,10 @@ StarterBot::StarterBot()
     // TODO: change to "Train Unit (BWAPI::Zerg_Overlord)"
     //BT_DECO_REPEATER* pBuildSupplyProviderForeverRepeater = new BT_DECO_REPEATER("RepeatForeverBuildSupplyProvider", selectHQAction, 0, true, false, false);
     BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
-    BT_ACTION_BUILD_SUPPLY_PROVIDER* pBuildSupplyProvider = new BT_ACTION_BUILD_SUPPLY_PROVIDER("BuildSupplyProvider", pNotEnoughSupply);
+    BT_ACTION_BUILD_UNIT* pBuildSupplyProvider = new BT_ACTION_BUILD_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, pNotEnoughSupply);
+
+    // example of templated BT Node !!!
+    //BT_ACTION_BUILD_UNIT<BWAPI::UnitTypes::Enum::Zerg_Zergling>* test = new BT_ACTION_BUILD_UNIT<BWAPI::UnitTypes::Enum::Zerg_Zergling>("build zergling", selectHQAction);
 
     // Training Zergling forever
     //BT_DECO_REPEATER* trainingZerglingAllIn = new BT_DECO_REPEATER("RepeatForeverTrainingZergling", selectHQAction, 0, true, false, false);
@@ -75,6 +78,42 @@ StarterBot::StarterBot()
     BT_ACTION_TRAIN_WORKER* pTrainWorker = new BT_ACTION_TRAIN_WORKER("TrainWorker", pNotEnoughWorkers);
 
     // ---------------------- End of HQ management ---------------------
+}
+
+//functions needed for initialisating : 
+void StarterBot::save_base_position() {
+    //We look for a Hive, and save its position. 
+    BWAPI::Unit base = Tools::GetUnitOfType(BWAPI::UnitType(133));
+    BWAPI::Position base_pos = base->getPosition();
+    this->pData->basePosition = base_pos;
+}
+void StarterBot::create_minerals_table() {
+    //function done by Matt, ask me i you have quesions.
+
+    Blackboard* b = this->pData;
+    std::vector<int> indx_to_ID;
+    std::map<int, int> ID_to_indx;
+    std::vector<int>mineralsOccupancyTable;
+
+    BWAPI::Unitset myMinerals = BWAPI::Broodwar->getMinerals();
+    BWAPI::Position base_pos = this->pData->basePosition;
+    float r = 400;
+    BWAPI::Unitset CANDIDATES;
+    CANDIDATES = Tools::GetUnitsInRadius(base_pos, r, myMinerals);
+    
+    int count = 0;
+    for (auto& u : CANDIDATES) {
+        
+        std::cout << "ID = " << u->getID() << std::endl;
+        indx_to_ID.push_back(u->getID());
+        ID_to_indx[count] = u->getID();
+        mineralsOccupancyTable.push_back(0);
+        count++;
+
+    }
+    this->pData->mineralsOccupancyTable = mineralsOccupancyTable;
+    this->pData->minerals_ID_to_indx = ID_to_indx;
+    this->pData->minerals_indx_to_ID = indx_to_ID;
 }
 
 // Called when the bot starts!
@@ -92,7 +131,8 @@ void StarterBot::onStart()
 
     //Bwem
     //BWEM::Map::Instance().Initialize(BWAPI::BroodwarPtr);
-    
+    this->save_base_position();
+    this->create_minerals_table();
 }
 
 // Called on each frame of the game

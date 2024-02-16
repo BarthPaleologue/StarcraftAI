@@ -26,6 +26,14 @@ public:
 	int nWantedWorkersTotal;
 	int nWantedWorkersFarmingMinerals;
 
+	//position of the starting base : 
+	BWAPI::Position basePosition;
+
+	//what we need for the minerals occupency table:
+	std::vector<int> minerals_indx_to_ID;
+	std::map<int, int> minerals_ID_to_indx;
+	std::vector<int> mineralsOccupancyTable;
+
 	// for units / techs we want right now but we don't have ressources so we don't train anything to wait for them
 	std::queue<BWAPI::UnitType> unitsRequested; // for now by build order, maybe add struct for prio
 	std::queue<BWAPI::TechType> techsRequested; 
