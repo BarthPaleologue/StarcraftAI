@@ -7,32 +7,32 @@
 
 template<BWAPI::UnitTypes::Enum::Enum T>
 BT_ACTION_BUILD_UNIT<T>::BT_ACTION_BUILD_UNIT(std::string name, BT_NODE* parent)
-    : BT_ACTION(name, parent) {
+	: BT_ACTION(name, parent) {
 }
 
 template<BWAPI::UnitTypes::Enum::Enum T>
 BT_NODE::State BT_ACTION_BUILD_UNIT<T>::Evaluate(void* data)
 {
-    return ReturnState(BuildUnit(data));
+	return ReturnState(BuildUnit(data));
 }
 
 template<BWAPI::UnitTypes::Enum::Enum T>
 std::string BT_ACTION_BUILD_UNIT<T>::GetDescription()
 {
-    return "BUILD " + BT_ACTION_BUILD_UNIT::UnitTypeString;
+	return "BUILD " + BT_ACTION_BUILD_UNIT::UnitTypeString;
 }
 
 template<BWAPI::UnitTypes::Enum::Enum T>
 BT_NODE::State BT_ACTION_BUILD_UNIT<T>::BuildUnit(void* data)
 {
-    Blackboard* pData = (Blackboard*)data;
+	Blackboard* pData = (Blackboard*)data;
 
-    const bool startedBuilding = Tools::BuildBuilding(T);
+	const bool startedBuilding = Tools::BuildBuilding(T);
 
-    if (startedBuilding)
-        BWAPI::Broodwar->printf("Started Building %s", UnitTypeString);
+	if (startedBuilding)
+		BWAPI::Broodwar->printf("Started Building %s", UnitTypeString);
 
-    return startedBuilding ? BT_NODE::SUCCESS : BT_NODE::FAILURE;
+	return startedBuilding ? BT_NODE::SUCCESS : BT_NODE::FAILURE;
 }
 
 

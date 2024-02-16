@@ -4,14 +4,14 @@
 #include <vector>
 #include <BWAPI.h>
 
-class BT_ACTION_GO_TO_ENNEMY_BASE: public BT_ACTION
+class BT_ACTION_GO_TO_ENNEMY_BASE : public BT_ACTION
 {
 public:
-    BT_ACTION_GO_TO_ENNEMY_BASE(std::string name, BT_NODE* parent);
+	BT_ACTION_GO_TO_ENNEMY_BASE(std::string name, BT_NODE* parent);
 
 private:
-    State Evaluate(void* data) override;
-    std::string GetDescription() override;
-    static BT_NODE::State GoToEnnemyBase(void* data);
+	State Evaluate(void* data) override;
+	std::string GetDescription() override;
+	static BT_NODE::State GoToEnnemyBase(void* data);
 };
 

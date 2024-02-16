@@ -9,14 +9,14 @@ template<BWAPI::UnitTypes::Enum::Enum T>
 class BT_ACTION_BUILD_UNIT : public BT_ACTION
 {
 public:
-    BT_ACTION_BUILD_UNIT(std::string name, BT_NODE* parent);
+	BT_ACTION_BUILD_UNIT(std::string name, BT_NODE* parent);
 
 private:
-    State Evaluate(void* data) override;
-    std::string GetDescription() override;
-    static BT_NODE::State BuildUnit(void* data);
+	State Evaluate(void* data) override;
+	std::string GetDescription() override;
+	static BT_NODE::State BuildUnit(void* data);
 
-    static const std::string UnitTypeString;
+	static const std::string UnitTypeString;
 };
 
 // This is necessary as this is a template class
