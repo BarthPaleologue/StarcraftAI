@@ -12,7 +12,7 @@ StarterBot::StarterBot()
     pData->currMinerals = 0;
     pData->thresholdMinerals = THRESHOLD1_MINERALS;
     pData->currSupply = 0;
-    pData->thresholdSupply = THRESHOLD1_UNUSED_SUPPLY;
+    pData->thresholdSupply = 0;
 
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
 
@@ -241,7 +241,8 @@ void StarterBot::buildAdditionalSupply()
 // Draw some relevent information to the screen to help us debug the bot
 void StarterBot::drawDebugInformation()
 {
-    BWAPI::Broodwar->drawTextScreen(BWAPI::Position(10, 10), "Hello, World!\n");
+    std::string buildOrderStr = "Buildorder: " + std::to_string(pData->buildOrder.getCurrentIndex()) + "/" + std::to_string(pData->buildOrder.getSize());
+    BWAPI::Broodwar->drawTextScreen(BWAPI::Position(10, 10), buildOrderStr.c_str());
     Tools::DrawUnitCommands();
     Tools::DrawUnitBoundingBoxes();
 }
