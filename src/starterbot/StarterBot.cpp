@@ -69,6 +69,9 @@ StarterBot::StarterBot()
     BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", selectHQAction);
     BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, true, buildOrderFinished);
 
+    // Sending all Zerglings to ennemy base
+    BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENNEMY_BASE* sendZerglings = new BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENNEMY_BASE("moveAllZerglingsToEnnemyBase", buildOrderFinished);
+
     //Training Workers
     //BT_DECO_REPEATER* pTrainingWorkersForeverRepeater = new BT_DECO_REPEATER("RepeatForeverTrainingWorkers", selectHQAction, 0, true, false, false);
     BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);

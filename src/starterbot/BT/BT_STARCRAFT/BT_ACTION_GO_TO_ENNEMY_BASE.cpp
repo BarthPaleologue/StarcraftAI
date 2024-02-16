@@ -21,7 +21,6 @@ BT_NODE::State BT_ACTION_GO_TO_ENNEMY_BASE::GoToEnnemyBase(void* data)
 
 	if (!blackboard->ennemyBasesPositions.empty()) {
 		// we found at least one ennemy base
-
 		BWAPI::Position tilePosition = blackboard->ennemyBasesPositions[0];
 
 		m_unit->move(tilePosition);
@@ -29,6 +28,5 @@ BT_NODE::State BT_ACTION_GO_TO_ENNEMY_BASE::GoToEnnemyBase(void* data)
 		return BT_NODE::SUCCESS;
 	}
 
-	// this should only happen if the depot is already training another kind of unit
 	return BT_NODE::FAILURE;
 }
