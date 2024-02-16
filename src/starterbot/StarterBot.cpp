@@ -145,6 +145,10 @@ void StarterBot::onFrame()
 
     pData->currMinerals = BWAPI::Broodwar->self()->minerals();
     pData->currSupply = Tools::GetUnusedSupply(true);
+
+    std::vector<BWAPI::Unit> overlords;
+    Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Overlord, overlords);
+    pData->nbOverlords = overlords.size();
     
     // AI BT
     if (pBT != nullptr && pBT->Evaluate(pData) != BT_NODE::RUNNING)
