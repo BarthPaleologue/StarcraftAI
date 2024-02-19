@@ -60,9 +60,6 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.cpp">
-      <Filter>BT\BT_STARCRAFT</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
@@ -100,7 +97,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.cpp">
       <Filter>BT</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENNEMY_BASE.cpp">
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.cpp">
@@ -113,6 +110,11 @@
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\Source.cpp" />
+    <ClCompile Include="..\..\src\starterbot\ForceTools.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
   </ItemGroup>
@@ -182,9 +184,6 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.h">
-      <Filter>BT\BT_STARCRAFT</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
@@ -222,7 +221,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.h">
       <Filter>BT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENNEMY_BASE.h">
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.h">

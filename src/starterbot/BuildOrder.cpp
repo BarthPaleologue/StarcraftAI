@@ -9,9 +9,9 @@ BuildOrder::BuildOrder() {
 	// see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
 	m_order = {
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
-		//{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
-		//{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, e_orderItemAction::Train}
 	};
@@ -34,6 +34,15 @@ void BuildOrder::nextTask()
 {
 	m_currentOrderIndex++;
 	m_isCurrTaskStarted = false;
+}
+
+int BuildOrder::getCurrentIndex() {
+	return m_currentOrderIndex;
+}
+
+
+int BuildOrder::getSize() {
+	return m_order.size();
 }
 
 /// <summary>

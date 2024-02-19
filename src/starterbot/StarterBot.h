@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MapTools.h"
+#include "ForceTools.h"
 #include "BT.h"
 #include <BWAPI.h>
 #include "Blackboard.h"

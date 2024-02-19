@@ -42,10 +42,13 @@ BT_NODE::State BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS::SendIdleWorkerToMinerals(
             unit->rightClick(mineralTarget);
             pData->unitsFarmingMinerals.insert(unit);
             pData->mineralsOccupancyTable.at(min_id)++;
+            /*std::cout << "====================" << std::endl;
+            std::cout << "Send workers success" << std::endl;
+            std::cout << "====================" << std::endl;*/
             return BT_NODE::SUCCESS;
 
         }
     }
-
+    /*std::cout << "Send workers failed" << std::endl;*/
     return BT_NODE::FAILURE;
 }

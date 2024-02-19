@@ -268,22 +268,31 @@ int Tools::GetTotalSupply(bool inProgress)
     {
         // ignore units that are fully completed
         if (unit->isCompleted()) { continue; }
+        if (unit->getType() == BWAPI::UnitTypes::Zerg_Hatchery) continue; //negletable
+
 
         // if they are not completed, then add their supply provided to the total supply
         totalSupply += unit->getType().supplyProvided();
+
+        //zerg specific
+        if (unit->getType() == BWAPI::UnitTypes::Zerg_Egg) {
+            totalSupply += unit->getBuildType().supplyProvided();
+        }
     }
 
     // one last tricky case: if a unit is currently on its way to build a supply provider, add it
-    for (auto& unit : BWAPI::Broodwar->self()->getUnits())
-    {
-        // get the last command given to the unit
-        const BWAPI::UnitCommand& command = unit->getLastCommand();
+    if (BWAPI::Broodwar->self()->getRace() != BWAPI::Races::Zerg) {
+        for (auto& unit : BWAPI::Broodwar->self()->getUnits())
+        {
+            // get the last command given to the unit
+            const BWAPI::UnitCommand& command = unit->getLastCommand();
 
-        // if it's not a build command we can ignore it
-        if (command.getType() != BWAPI::UnitCommandTypes::Build) { continue; }
+            // if it's not a build command we can ignore it
+            if (command.getType() != BWAPI::UnitCommandTypes::Build) { continue; }
 
-        // add the supply amount of the unit that it's trying to build
-        totalSupply += command.getUnitType().supplyProvided();
+            // add the supply amount of the unit that it's trying to build
+            totalSupply += command.getUnitType().supplyProvided();
+        }
     }
 
     return totalSupply;

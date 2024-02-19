@@ -12,10 +12,9 @@ StarterBot::StarterBot()
     pData->currMinerals = 0;
     pData->thresholdMinerals = THRESHOLD1_MINERALS;
     pData->currSupply = 0;
-    pData->thresholdSupply = THRESHOLD1_UNUSED_SUPPLY;
+    pData->thresholdSupply = 0;
 
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
-    pData->nWantedWorkersFarmingMinerals = NWANTED_WORKERS_FARMING_MINERALS;
 
     //pBtTest = nullptr;
     /*
@@ -45,9 +44,8 @@ StarterBot::StarterBot()
     BT_PARALLEL_SEQUENCER* pMainParallelSeq = new BT_PARALLEL_SEQUENCER("MainParallelSequence", pBT, 10);
 
     //Farming Minerals forever
-    BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false,false);
-    BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS* pNotEnoughWorkersFarmingMinerals = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS("NotEnoughWorkersFarmingMinerals", pFarmingMineralsForeverRepeater);
-    BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pNotEnoughWorkersFarmingMinerals);
+    BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false, true);
+    BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pFarmingMineralsForeverRepeater);
 
     // ---------------------- HQ (Hatchery, Lair, Hive) management ---------------------
     // 
@@ -71,15 +69,20 @@ StarterBot::StarterBot()
     BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
     BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
 
-    // Training Zergling forever
-    //BT_DECO_REPEATER* trainingZerglingAllIn = new BT_DECO_REPEATER("RepeatForeverTrainingZergling", selectHQAction, 0, true, false, false);
-    BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", selectHQAction);
-    BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, true, buildOrderFinished);
-
     //Training Workers
-    //BT_DECO_REPEATER* pTrainingWorkersForeverRepeater = new BT_DECO_REPEATER("RepeatForeverTrainingWorkers", selectHQAction, 0, true, false, false);
     BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
     BT_ACTION_TRAIN_UNIT* pTrainWorker = new BT_ACTION_TRAIN_UNIT("TrainWorker", BWAPI::UnitTypes::Zerg_Drone, false, pNotEnoughWorkers);
+
+    // Handling build order finished
+    BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", selectHQAction);
+    BT_PARALLEL_SEQUENCER* buildOrderFinishedSequencer = new BT_PARALLEL_SEQUENCER("BuildOrderFinishedSequencer", buildOrderFinished, 10);
+
+    BT_DECO_RETURN_SUCCESS* sucessTrainingZergling = new BT_DECO_RETURN_SUCCESS("SucessTrainingZergling", buildOrderFinishedSequencer);
+    BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, true, sucessTrainingZergling);
+
+    BT_DECO_RETURN_SUCCESS* successMoveAllZergling = new BT_DECO_RETURN_SUCCESS("successMoveAllZergling", buildOrderFinishedSequencer);
+    BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE* sendZerglings = new BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE("moveAllZerglingsToEnnemyBase", successMoveAllZergling);
+
 
     // ---------------------- End of HQ management ---------------------
 }
@@ -150,6 +153,7 @@ void StarterBot::onStart()
     //BWEM::Map::Instance().Initialize(BWAPI::BroodwarPtr);
     this->save_base_position();
     this->create_minerals_table();
+
 }
 
 // Called on each frame of the game
@@ -162,6 +166,10 @@ void StarterBot::onFrame()
 
     pData->currMinerals = BWAPI::Broodwar->self()->minerals();
     pData->currSupply = Tools::GetUnusedSupply(true);
+
+    std::vector<BWAPI::Unit> overlords;
+    Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Overlord, overlords);
+    pData->nbOverlords = overlords.size();
     
     // AI BT
     if (pBT != nullptr && pBT->Evaluate(pData) != BT_NODE::RUNNING)
@@ -256,7 +264,10 @@ void StarterBot::buildAdditionalSupply()
 // Draw some relevent information to the screen to help us debug the bot
 void StarterBot::drawDebugInformation()
 {
-    BWAPI::Broodwar->drawTextScreen(BWAPI::Position(10, 10), "Hello, World!\n");
+    //std::string buildOrderStr = "Buildorder: " + std::to_string(pData->buildOrder.getCurrentIndex()) + "/" + std::to_string(pData->buildOrder.getSize());
+    //BWAPI::Broodwar->drawTextScreen(BWAPI::Position(10, 10), buildOrderStr.c_str());
+    std::string supplyUsedStr = "Supply: " + std::to_string(BWAPI::Broodwar->self()->supplyUsed()) + "/" + std::to_string(Tools::GetTotalSupply(true));
+    BWAPI::Broodwar->drawTextScreen(BWAPI::Position(20, 10), supplyUsedStr.c_str());
     Tools::DrawUnitCommands();
     Tools::DrawUnitBoundingBoxes();
 }
