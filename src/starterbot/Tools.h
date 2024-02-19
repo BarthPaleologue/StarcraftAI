@@ -14,8 +14,11 @@ namespace Tools
     BWAPI::Unit GetUnitOfType(BWAPI::UnitType type);
     void GetAllUnitsOfType(BWAPI::UnitType type, std::vector<BWAPI::Unit>& units);
     BWAPI::Unit GetDepot();
+    BWAPI::Unit GetClosestUnitOfType(BWAPI::UnitType type, BWAPI::Position pos, float distance = 100000);
+    BWAPI::Unit GetClosestUnitOfTypeBeingBuilt(BWAPI::UnitType type, BWAPI::Position position, float distance = 100000);
 
     bool BuildBuilding(BWAPI::UnitType type);
+    bool BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition position, bool duplicate=false);
 
     void DrawUnitBoundingBoxes();
     void DrawUnitCommands();
@@ -27,5 +30,5 @@ namespace Tools
 
     void DrawUnitHealthBars();
     void DrawHealthBar(BWAPI::Unit unit, double ratio, BWAPI::Color color, int yOffset);
-    
+ 
 }

@@ -7,6 +7,7 @@
 #include <chrono>
 
 #include "BT.h"
+#include "Tools.h"
 
 void PlayGame();
 void ParseReplay();

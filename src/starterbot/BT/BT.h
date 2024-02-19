@@ -29,6 +29,8 @@
 #include "BT_COND_GREATER_THAN.h"
 #include "BT_COND_LESSER_THAN.h"
 #include "BT_COND_NOTHING_REQUESTED.h"
+#include "BT_COND_VISIBLE.h"
+#include "BT_COND_EXPLORED.h"
 
 ///Decorator Conditions
 #include "BT_DECO_CONDITION_NOT_ENOUGH_WORKERS_FARMING_MINERALS.h"
@@ -40,6 +42,7 @@
 #include "BT_ACTION_IDLE.h"
 #include "BT_ACTION_WAIT.h"
 #include "BT_ACTION_LOG.h"
+#include "BT_ACTION_BUILD.h"
 
 #include "BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.h"
 #include "BT_ACTION_BUILD_SUPPLY_PROVIDER.h"
