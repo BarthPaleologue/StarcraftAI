@@ -132,6 +132,13 @@ void StarterBot::onStart()
     this->save_base_position();
     this->create_minerals_table();
 
+    BWAPI::UnitType typeA = BWAPI::UnitTypes::Terran_Marine;
+    BWAPI::UnitType typeB = BWAPI::UnitTypes::Zerg_Zergling;
+    float n;
+
+
+
+
 }
 
 // Called on each frame of the game
