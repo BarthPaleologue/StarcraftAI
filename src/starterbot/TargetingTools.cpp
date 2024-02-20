@@ -8,7 +8,7 @@
 * UnitType::mineralPrice() / gasPrice()
 * Game::getDamageFrom / getDamageTo
 * 
-* depends on what we want to target, give different factors depending on what we want to target (see “harassing”)
+* depends on what we want to target, give different factors depending on what we want to target (see “harassing?
 depending on cost : MINERAL_COST + GAS_COST * GAS_FACTOR(BASE_COUNT)
 
 */
@@ -29,7 +29,7 @@ double TargetingTools::gasFactor(int _baseCount) {
 depending on how hard to kill :
 	calculate / simulate damage
 	enables finishing off targets
-	use nearbyFriendlyUnitDamage = damage that can be dealt by the friendly units nearby (check “damage calculation”)
+	use nearbyFriendlyUnitDamage = damage that can be dealt by the friendly units nearby (check “damage calculation?
 	remainingHP / nearbyFriendlyUnitDamage
 depending on how much damage it can deal potentially to us
 	nerf for useless enemy units and for workers or buff for good counter units (notably splash damage)

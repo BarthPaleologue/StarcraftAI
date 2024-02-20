@@ -89,6 +89,58 @@ BWAPI::Unit Tools::GetDepot()
     return GetUnitOfType(depot);
 }
 
+
+BWAPI::Unit Tools::GetClosestUnitOfType(BWAPI::UnitType type, BWAPI::Position position, float distance)
+{
+    // For each unit that we own
+    BWAPI::Unit closestUnit = nullptr;
+
+    //BWAPI::TilePosition desiredPos = BWAPI::Broodwar->self()->getStartLocation();
+    //BWAPI::Position pos(desiredPos);
+
+    for (auto& unit : BWAPI::Broodwar->self()->getUnits())
+    {
+        // if the unit is of the correct type, and it actually has been constructed, return it
+        if (unit->getType() == type && unit->isCompleted())
+        {
+            if (unit->getDistance(position) < distance)
+            {
+                distance = unit->getDistance(position);
+                closestUnit = unit;
+            }
+        }
+    }
+
+    // If we didn't find a valid unit to return, make sure we return nullptr
+    return closestUnit;
+}
+
+BWAPI::Unit Tools::GetClosestUnitOfTypeBeingBuilt(BWAPI::UnitType type, BWAPI::Position position, float distance)
+{
+    // For each unit that we own
+    BWAPI::Unit closestUnit = nullptr;
+
+    //BWAPI::TilePosition desiredPos = BWAPI::Broodwar->self()->getStartLocation();
+    //BWAPI::Position pos(desiredPos);
+
+    for (auto& unit : BWAPI::Broodwar->self()->getUnits())
+    {
+        // if the unit is of the correct type, and it actually has been constructed, return it
+        if (unit->getType() == type)
+        {
+            if (unit->getDistance(position) < distance)
+            {
+                distance = unit->getDistance(position);
+                closestUnit = unit;
+            }
+        }
+    }
+
+    // If we didn't find a valid unit to return, make sure we return nullptr
+    return closestUnit;
+}
+
+
 // Attempt tp construct a building of a given type 
 bool Tools::BuildBuilding(BWAPI::UnitType type)
 {
@@ -109,6 +161,38 @@ bool Tools::BuildBuilding(BWAPI::UnitType type)
     BWAPI::TilePosition buildPos = BWAPI::Broodwar->getBuildLocation(type, desiredPos, maxBuildRange, buildingOnCreep);
     return builder->build(type, buildPos);
 }
+
+
+bool Tools::BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition buildPos, bool duplicate)
+{
+    // Get the type of unit that is required to build the desired building
+    BWAPI::UnitType builderType = type.whatBuilds().first;
+
+    // Get a unit that we own that is of the given type so it can build
+    // If we can't find a valid builder unit, then we have to cancel the building
+    //BWAPI::Position buildingPos(buildPos);
+    //BWAPI::Unit builder = Tools::GetClosestUnitOfType(builderType, buildingPos);
+    BWAPI::Unit builder = Tools::GetUnitOfType(builderType);
+    if (!builder) { 
+        return false; }
+    if (!duplicate) {
+        for (auto& unit: BWAPI::Broodwar->getUnitsOnTile(buildPos))
+        {
+            if (unit->getType() == type)
+            {
+				return false;
+			}
+		}
+        
+    }
+    std::cout <<"try to build " << type << "at " << buildPos << std::endl;
+    // Ask BWAPI for a building location near the desired position for the type
+    int maxBuildRange = 64;
+    bool buildingOnCreep = type.requiresCreep();
+    BWAPI::TilePosition buildPosHere = BWAPI::Broodwar->getBuildLocation(type, buildPos, maxBuildRange, buildingOnCreep);
+    return builder->build(type, buildPosHere);
+}
+
 
 void Tools::DrawUnitCommands()
 {

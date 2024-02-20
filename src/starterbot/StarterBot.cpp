@@ -10,7 +10,6 @@ StarterBot::StarterBot()
 {
     pData = new Blackboard();
     pData->currMinerals = 0;
-    pData->thresholdMinerals = THRESHOLD1_MINERALS;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
 
@@ -48,15 +47,24 @@ StarterBot::StarterBot()
     BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pFarmingMineralsForeverRepeater);
 
     // ---------------------- HQ (Hatchery, Lair, Hive) management ---------------------
+    // 
+
     // actually modifiable into a larva management
     BT_DECO_REPEATER* pHQActionRepeater = new BT_DECO_REPEATER("RepeatForeverHQAction", pMainParallelSeq, 0, true, false, true);
     BT_SELECTOR* selectHQAction = new BT_SELECTOR("SelectHQAction", pHQActionRepeater, 10);
+
 
     // check if not sparing minerals for tasks already required from elsewhere
     BT_DECO_INVERTER* pDecoMineralsRequiredElsewhere = new BT_DECO_INVERTER("DecoMineralsRequiredElsewhere", selectHQAction);
     BT_COND_NOTHING_REQUESTED* pNothingElseRequested = new BT_COND_NOTHING_REQUESTED("CondNothingElseRequested", pDecoMineralsRequiredElsewhere);
 
-    //Build Additional Supply Provider (overlord)
+    // Build Natural Base
+    // make sure scout
+    BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
+
+    //Build Additional Supply Provider
+    // TODO: change to "Train Unit (BWAPI::Zerg_Overlord)" bc more explicit
+    //BT_DECO_REPEATER* pBuildSupplyProviderForeverRepeater = new BT_DECO_REPEATER("RepeatForeverBuildSupplyProvider", selectHQAction, 0, true, false, false);
     BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
     BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
 
@@ -84,7 +92,20 @@ void StarterBot::save_base_position() {
     BWAPI::Unit base = Tools::GetUnitOfType(BWAPI::UnitType(131));
 
     BWAPI::Position base_pos = base->getPosition();
+    BWAPI::TilePosition base_tile_pos = base->getTilePosition();
     this->pData->basePosition = base_pos;
+    if (base_tile_pos == BWAPI::TilePosition(31, 7)) {
+		this->pData->enemyBasesPositions.push_back(BWAPI::Position(2112, 3824));
+        //this->pData->naturalPosition = BWAPI::Position(992, 3472);
+        //this->pData->enemyNaturalPosition = BWAPI::Position(2080, 656);
+        this->pData->naturalTilePosition = BWAPI::TilePosition(63, 19);
+        this->pData->enemyNaturalTilePosition = BWAPI::TilePosition(29, 107);
+	}
+	else { // base_tile_pos == BWAPI::TilePosition(64, 118)
+		this->pData->enemyBasesPositions.push_back(BWAPI::Position(1056, 272));
+        this->pData->naturalTilePosition = BWAPI::TilePosition(29, 107);
+        this->pData->enemyNaturalTilePosition = BWAPI::TilePosition(63, 19);
+	}
 }
 void StarterBot::create_minerals_table() {
     //function done by Matt, ask me i you have quesions.
@@ -297,6 +318,13 @@ void StarterBot::onUnitCreate(BWAPI::Unit unit)
 // Called whenever a unit finished construction, with a pointer to the unit
 void StarterBot::onUnitComplete(BWAPI::Unit unit)
 {
+    // debug message when a unit is created
+    if (unit->getType() == BWAPI::UnitTypes::Zerg_Hatchery) {
+        BWAPI::Position pos = unit->getPosition();
+        BWAPI::UnitType type = unit->getType();
+        BWAPI::TilePosition tile = unit->getTilePosition();
+        std::cout << "A " << type << " has been created at " << pos << "in" << tile << std::endl;
+    }
 	
 }
 
