@@ -6,11 +6,9 @@
 #include <queue>
 #include <Job.h>
 
-#define THRESHOLD1_MINERALS 200
 #define THRESHOLD1_UNUSED_SUPPLY 2
 
 #define NWANTED_WORKERS_TOTAL 20
-#define NWANTED_WORKERS_FARMING_MINERALS 10
 
 class Blackboard {
 public:
@@ -18,16 +16,20 @@ public:
 	
 	BuildOrder buildOrder;
 
-	int currMinerals;
-	int thresholdMinerals;
-	int currSupply;
-	int thresholdSupply = 0; // modifiable with the amount of HQ we have
+	// purpose: if the mineral count (with self()->minerals()) update is not instant after using minerals
+	// otherwise just remove this attribute
+	int currMinerals; 
 
-	int nWantedWorkersTotal;
-	int nWantedWorkersFarmingMinerals;
+	int currSupply;
+	int thresholdSupply = 0; // modifiable with the amount of HQ we have + unit production
+
+	// TODO: replace with "number of workers per base" and "number of minerals per base" 
+	// (not more than 2 workers / mineral, don't forget to update)
+	int nWantedWorkersTotal; 
 
 	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals;
 
+	// useful?
 	int nbOverlords = 0;
 
 	//position of OUR starting base : 
@@ -47,6 +49,6 @@ public:
 	std::queue<BWAPI::TechType> techsRequested; 
 
 	//std::unordered_set<BWAPI::Unit> unitsFarmingMinerals; //#TODO: associate them to bases (not to HQ btw)
-	//Game::()
+
 	std::queue<Job> jobQueue;
 };

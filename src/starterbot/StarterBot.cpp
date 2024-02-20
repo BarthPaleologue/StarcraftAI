@@ -10,7 +10,6 @@ StarterBot::StarterBot()
 {
     pData = new Blackboard();
     pData->currMinerals = 0;
-    pData->thresholdMinerals = THRESHOLD1_MINERALS;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
 
