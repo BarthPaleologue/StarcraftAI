@@ -193,8 +193,13 @@ void StarterBot::onFrame()
         if (m_unitBT.count(unit)) break; // the unit already has a BT
         if (!unit->isCompleted()) break; // the unit is not completed
 
-        auto unitBT = new BT_ACTION_LOG("DoNothing", nullptr, "Do nothing");
-        m_unitBT.insert(std::make_pair(unit, unitBT));
+		switch (unit->getType()) {
+		case BWAPI::UnitTypes::Zerg_Overlord:
+			m_unitBT.insert(std::make_pair(unit, new BT_ACTION_GO_TO_ENEMY_BASE("GoToEnnemyBase", unit, nullptr)));
+			break;
+		default:
+			m_unitBT.insert(std::make_pair(unit, new BT_ACTION_LOG("DoNothing", nullptr, "Do nothing")));
+		}
     }
 
     // iterate over all the BTs, those assigned to dead units can be removed
