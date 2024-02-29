@@ -60,7 +60,7 @@ StarterBot::StarterBot()
 
     // Build Natural Base
     // make sure scout
-    BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
+    //BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
 
     //Build Additional Supply Provider
     // TODO: change to "Train Unit (BWAPI::Zerg_Overlord)" bc more explicit
@@ -164,7 +164,7 @@ void StarterBot::onFrame()
     // Update our MapTools information
     m_mapTools.onFrame();
 
-    pData->buildOrder.evaluate(pData->unitsRequested);
+    pData->buildOrder.evaluate(pData);
 
     pData->currMinerals = BWAPI::Broodwar->self()->minerals();
     pData->currSupply = Tools::GetUnusedSupply(true);

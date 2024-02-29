@@ -54,7 +54,8 @@ BWAPI::Unit BuildOrderTools::findStartedBuilding(BWAPI::UnitType _unitType)
 		if (unit->getType() == _unitType) //&& unit->isCompleted())
 		{
 			//std::cout << "found a " << unit->getType() << std::endl;
-			return unit;
+			if (unit->isBeingConstructed())
+				return unit;
 		}
 	}
 	// If we didn't find a valid unit to return, make sure we return nullptr
