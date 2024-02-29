@@ -185,6 +185,30 @@ void StarterBot::onFrame()
         pBT = nullptr;
     }
 
+    // iterate over all units, those who don't yet have a BT will be assigned one
+    BWAPI::Unitset allUnits = BWAPI::Broodwar->self()->getUnits();
+    for (auto it = allUnits.begin(); it != allUnits.end(); ++it) {
+        BWAPI::Unit unit = *it;
+        if (m_unitBT.count(unit)) break; // the unit already has a BT
+        if (!unit->isCompleted()) break; // the unit is not completed
+
+
+        auto unitBT = new BT_DECORATOR("EntryPoint", nullptr);
+        m_unitBT.insert(std::make_pair(unit, unitBT));
+    }
+
+
+    // iterate over all the BTs, those assigned to dead units can be removed
+    for (const auto& [unit, unitBT] : m_unitBT) {
+        if (unit->getHitPoints() > 0) break; // the unit is alive
+        m_unitBT.erase(unit);
+    }
+
+    // execute all BTs
+    for (const auto& [unit, unitBT] : m_unitBT) {
+        unitBT->Evaluate(pData);
+    }
+
     //Test BT
     /*if (pBtTest != nullptr && pBtTest->Evaluate(pData) != BT_NODE::RUNNING)
     {

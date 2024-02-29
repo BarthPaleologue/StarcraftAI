@@ -15,6 +15,8 @@ private:
 	BT_NODE* pBtTest;
 	Blackboard *pData;
 
+	std::map<BWAPI::Unit, BT_NODE*> m_unitBT{};
+
 public:
 
     StarterBot();
