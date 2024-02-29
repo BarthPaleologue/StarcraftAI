@@ -5,6 +5,8 @@
 #include <format>
 
 #include "BT.h"
+#include <OverlordUtils.h>
+#include <ZerglingUtils.h>
 
 StarterBot::StarterBot()
 {
@@ -193,12 +195,11 @@ void StarterBot::onFrame()
 
 		switch (unit->getType()) {
 		case BWAPI::UnitTypes::Zerg_Overlord:
-			m_unitBT.insert(std::make_pair(unit, new BT_ACTION_GO_TO_ENEMY_BASE("GoToEnnemyBase", unit, nullptr)));
+			m_unitBT.insert(std::make_pair(unit, OverlordUtils::CreateTree(unit)));
 			break;
             
 		case BWAPI::UnitTypes::Zerg_Zergling: {
-            BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", nullptr);
-			m_unitBT.insert(std::make_pair(unit, new BT_ACTION_GO_TO_ENEMY_BASE("MoveToEnnemyBase", unit, buildOrderFinished)));
+			m_unitBT.insert(std::make_pair(unit, ZerglingUtils::CreateTree(unit)));
 			break;
 		}
 		default:

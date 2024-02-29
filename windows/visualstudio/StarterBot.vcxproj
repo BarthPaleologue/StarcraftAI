@@ -62,10 +62,12 @@
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
     <ClInclude Include="..\..\src\starterbot\Job.h" />
     <ClInclude Include="..\..\src\starterbot\MapTools.h" />
+    <ClInclude Include="..\..\src\starterbot\OverlordUtils.h" />
     <ClInclude Include="..\..\src\starterbot\ReplayParser.h" />
     <ClInclude Include="..\..\src\starterbot\StarterBot.h" />
     <ClInclude Include="..\..\src\starterbot\TargetingTools.h" />
     <ClInclude Include="..\..\src\starterbot\Tools.h" />
+    <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\starterbot\BT\BT_ACTION.cpp" />

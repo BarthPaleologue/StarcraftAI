@@ -236,6 +236,10 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.h" />
+    <ClInclude Include="..\..\src\starterbot\ForceTools.h" />
+    <ClInclude Include="..\..\src\starterbot\OverlordUtils.h" />
+    <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BT">
