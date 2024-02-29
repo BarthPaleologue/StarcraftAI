@@ -12,7 +12,7 @@ BT_NODE::State BT_ACTION_GO_TO_ENEMY_BASE::Evaluate(void* data)
 
 std::string BT_ACTION_GO_TO_ENEMY_BASE::GetDescription()
 {
-	return "GO TO ENNEMY BASE";
+	return "GO TO ENEMY BASE";
 }
 
 BT_NODE::State BT_ACTION_GO_TO_ENEMY_BASE::GoToEnnemyBase(void* data)
