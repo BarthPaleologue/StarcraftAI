@@ -23,7 +23,6 @@ BT_NODE::State BT_ACTION_BUILD::Build(void* data)
 
     if (pData->currMinerals < m_building.mineralPrice())
     {
-        std::cout <<"minerals < price" << std::endl;
 		return BT_NODE::FAILURE;
 	}
 
