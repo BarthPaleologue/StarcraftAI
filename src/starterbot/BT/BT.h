@@ -33,9 +33,11 @@
 #include "BT_COND_EXPLORED.h"
 
 ///Decorator Conditions
+#include "BT_DECO_UNIT_CONDITION.h"
 #include "BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.h"
 #include "BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY.h"
 #include "BT_DECO_CONDITION_BUILD_ORDER_FINISHED.h"
+#include "BT_DECO_CONDITION_UNIT_IDLE.h"
 
 ///Actions
 #include "BT_ACTION_IDLE.h"
