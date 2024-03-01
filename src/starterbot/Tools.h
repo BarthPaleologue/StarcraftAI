@@ -30,7 +30,5 @@ namespace Tools
 
     void DrawUnitHealthBars();
     void DrawHealthBar(BWAPI::Unit unit, double ratio, BWAPI::Color color, int yOffset);
-
-    extern BWAPI::Position m_lastRightClickPosition;
  
 }
