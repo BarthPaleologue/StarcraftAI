@@ -309,7 +309,9 @@ void StarterBot::drawDebugInformation()
     //std::string buildOrderStr = "Buildorder: " + std::to_string(pData->buildOrder.getCurrentIndex()) + "/" + std::to_string(pData->buildOrder.getSize());
     //BWAPI::Broodwar->drawTextScreen(BWAPI::Position(10, 10), buildOrderStr.c_str());
     std::string supplyUsedStr = "Supply: " + std::to_string(BWAPI::Broodwar->self()->supplyUsed()) + "/" + std::to_string(Tools::GetTotalSupply(true));
+    std::string rightClickStr = "Right Click: " + std::to_string(Tools::m_lastRightClickPosition.x) + ", " + std::to_string(Tools::m_lastRightClickPosition.y);
     BWAPI::Broodwar->drawTextScreen(BWAPI::Position(20, 10), supplyUsedStr.c_str());
+    BWAPI::Broodwar->drawTextScreen(BWAPI::Position(20, 20), rightClickStr.c_str());
     Tools::DrawUnitCommands();
     Tools::DrawUnitBoundingBoxes();
 }
