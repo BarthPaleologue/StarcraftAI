@@ -13,6 +13,7 @@ std::string BT_DECO_CONDITION_UNIT_IDLE::GetDescription()
 
 bool BT_DECO_CONDITION_UNIT_IDLE::IsIdle(BWAPI::Unit unit, void* data)
 {
-	return unit->isIdle();
+	if (unit->isSelected()) return false;
+	else return unit->isIdle();
 }
 
