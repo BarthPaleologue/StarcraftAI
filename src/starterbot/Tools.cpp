@@ -204,6 +204,13 @@ void Tools::DrawUnitCommands()
 
         // If the previous command had a ground position target, draw it in red
         // Example: move to location on the map
+        if (unit->isSelected())
+        {
+            std::string posStr = "Selected Unit Position: " + std::to_string(unit->getPosition().x) + "," + std::to_string(unit->getPosition().y);
+            BWAPI::Broodwar->drawTextScreen(BWAPI::Position(20, 20), posStr.c_str() );
+            std::string tileStr = "Selected Unit TilePosition: " + std::to_string(unit->getTilePosition().x) + "," + std::to_string(unit->getTilePosition().y);
+            BWAPI::Broodwar->drawTextScreen(BWAPI::Position(20, 30), tileStr.c_str());
+        }
         if (command.getTargetPosition() != BWAPI::Positions::None)
         {
             BWAPI::Broodwar->drawLineMap(unit->getPosition(), command.getTargetPosition(), BWAPI::Colors::Red);
@@ -365,4 +372,3 @@ void Tools::DrawHealthBar(BWAPI::Unit unit, double ratio, BWAPI::Color color, in
         BWAPI::Broodwar->drawLineMap(BWAPI::Position(i, hpTop), BWAPI::Position(i, hpBottom), BWAPI::Colors::Black);
     }
 }
-

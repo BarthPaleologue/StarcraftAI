@@ -68,9 +68,10 @@ StarterBot::StarterBot()
     // make sure scout before that
     //BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
 
-    //Build Additional Supply Provider (overlord)
-    BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
-    BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
+    //Build Additional overlords
+    //BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
+    //BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
+    OverlordUtils::CreateTrainingTree(selectHQAction);
 
     //Training Workers
     BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
@@ -200,7 +201,7 @@ void StarterBot::onFrame()
 
 		switch (unit->getType()) {
 		case BWAPI::UnitTypes::Zerg_Overlord:
-			m_unitBT.insert(std::make_pair(unit, OverlordUtils::CreateTree(unit)));
+			m_unitBT.insert(std::make_pair(unit, OverlordUtils::CreateIndividualTree(unit)));
 			break;
             
 		case BWAPI::UnitTypes::Zerg_Zergling: {

@@ -30,6 +30,8 @@ public:
 	// otherwise just remove this attribute
 	int currMinerals; 
 
+	BWAPI::UnitType focusedTrainingUnit = BWAPI::UnitTypes::Zerg_Drone;
+
 	int currSupply;
 	int thresholdSupply = 0; // modifiable with the amount of HQ we have + unit production
 
