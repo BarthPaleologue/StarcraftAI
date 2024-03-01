@@ -7,8 +7,18 @@
 #include <Job.h>
 
 #define THRESHOLD1_UNUSED_SUPPLY 2
-
 #define NWANTED_WORKERS_TOTAL 20
+
+
+const BWAPI::TilePosition START_TILE_POS[2] = {
+	BWAPI::TilePosition(31,7), 
+	BWAPI::TilePosition(64, 118)
+};
+
+const BWAPI::TilePosition NATURAL_TILE_POS[2] = {
+	BWAPI::TilePosition(63,19),
+	BWAPI::TilePosition(29, 107)
+};
 
 class Blackboard {
 public:

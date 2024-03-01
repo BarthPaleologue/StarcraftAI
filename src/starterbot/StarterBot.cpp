@@ -61,12 +61,10 @@ StarterBot::StarterBot()
     BT_COND_NOTHING_REQUESTED* pNothingElseRequested = new BT_COND_NOTHING_REQUESTED("CondNothingElseRequested", pDecoMineralsRequiredElsewhere);
 
     // Build Natural Base
-    // make sure scout
+    // make sure scout before that
     //BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
 
-    //Build Additional Supply Provider
-    // TODO: change to "Train Unit (BWAPI::Zerg_Overlord)" bc more explicit
-    //BT_DECO_REPEATER* pBuildSupplyProviderForeverRepeater = new BT_DECO_REPEATER("RepeatForeverBuildSupplyProvider", selectHQAction, 0, true, false, false);
+    //Build Additional Supply Provider (overlord)
     BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
     BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
 
@@ -92,6 +90,8 @@ void StarterBot::save_base_position() {
     BWAPI::Position base_pos = base->getPosition();
     BWAPI::TilePosition base_tile_pos = base->getTilePosition();
     this->pData->basePosition = base_pos;
+    // TODO: check consistency, as position is supposed to be TilePosition * 32
+    //       which doesn't seem to be the case here!
     if (base_tile_pos == BWAPI::TilePosition(31, 7)) {
 		this->pData->enemyBasesPositions.push_back(BWAPI::Position(2112, 3824));
         //this->pData->naturalPosition = BWAPI::Position(992, 3472);
@@ -188,6 +188,7 @@ void StarterBot::onFrame()
     for (auto it = allUnits.begin(); it != allUnits.end(); ++it) {
         BWAPI::Unit unit = *it;
 		if (unit == nullptr) continue; // the unit is null (should not happen)
+		if (!unit->exists()) continue; // the unit does not exist (dead)
         if (m_unitBT.count(unit)) continue; // the unit already has a BT
         if (!unit->isCompleted()) continue; // the unit is not completed
         if (unit->getType() == BWAPI::UnitTypes::Zerg_Egg) continue; // the unit is an egg, we will assign a BT once it is a true unit
