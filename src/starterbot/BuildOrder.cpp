@@ -9,11 +9,11 @@ BuildOrder::BuildOrder() {
 	// see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
 	/*m_order = {
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
-		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build},
 		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
 		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build},
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, e_orderItemAction::Train},
 	};*/
 
@@ -76,6 +76,7 @@ bool BuildOrder::evaluate(Blackboard* pData) {
 			actionSuccess = true;
 			break;
 		}
+		// build natural hatchery at natural position
 		if (currentItem.unitType == BWAPI::UnitTypes::Zerg_Hatchery) {
 			Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition, false);
 		}

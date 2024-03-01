@@ -207,6 +207,7 @@ void Tools::DrawUnitCommands()
         if (command.getTargetPosition() != BWAPI::Positions::None)
         {
             BWAPI::Broodwar->drawLineMap(unit->getPosition(), command.getTargetPosition(), BWAPI::Colors::Red);
+            BWAPI::Broodwar->drawTextScreen(BWAPI::Position(12, 0), "Command: %s", command.getType().c_str());
         }
 
         // If the previous command had a tile position target, draw it in red
@@ -222,6 +223,10 @@ void Tools::DrawUnitCommands()
         {
             BWAPI::Broodwar->drawLineMap(unit->getPosition(), command.getTarget()->getPosition(), BWAPI::Colors::White);
         }
+        if (command.getType() == BWAPI::UnitCommandTypes::Right_Click_Position)
+        {
+			Tools::m_lastRightClickPosition = command.getTargetPosition();
+		}
     }
 }
 
@@ -366,3 +371,4 @@ void Tools::DrawHealthBar(BWAPI::Unit unit, double ratio, BWAPI::Color color, in
     }
 }
 
+BWAPI::Position Tools::m_lastRightClickPosition = BWAPI::Positions::None;
