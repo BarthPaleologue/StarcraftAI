@@ -27,7 +27,15 @@ bool BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS::IsThereNotEnoughOverlords(void* dat
 		BWAPI::Broodwar->self()->allUnitCount(BWAPI::UnitTypes::Zerg_Lair) +
 		BWAPI::Broodwar->self()->allUnitCount(BWAPI::UnitTypes::Zerg_Hive);
 
-	const int unusedSupply = Tools::GetTotalSupply(true) - BWAPI::Broodwar->self()->supplyUsed();
+	int unusedSupply = Tools::GetTotalSupply(true) - BWAPI::Broodwar->self()->supplyUsed();
+
+	// take into account endangered overlords
+	for (auto& unit : BWAPI::Broodwar->self()->getUnits()) {
+		if (unit->getType() != BWAPI::UnitTypes::Zerg_Overlord) continue; // not an overlord, we skip it
+		if (!unit->isUnderAttack()) continue; // not under attack, we skip it
+		
+		unusedSupply -= BWAPI::UnitTypes::Zerg_Overlord.supplyProvided();
+	}
 
 	return (float)unusedSupply < (float)nbBases * (float)focusedTrainedUnitSupply * (float)overlordTrainingTime / (float)focusedTrainedUnitTrainingTime;
 }
