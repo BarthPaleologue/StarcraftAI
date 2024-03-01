@@ -48,13 +48,17 @@ StarterBot::StarterBot()
     BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false, true);
     BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pFarmingMineralsForeverRepeater);
 
+    // ---- testing "BT_DECO_COND_NOT_ENOUGH_UNIT" -----
+    //BT_DECO_REPEATER* pTestingDecoCondNotEnoughUnit = new BT_DECO_REPEATER("TestingDecoCondNotEnoughUnit", pMainParallelSeq, 0, true, false, true);
+    //BT_DECO_CONDITION_NOT_ENOUGH_UNIT* pTest = new BT_DECO_CONDITION_NOT_ENOUGH_UNIT("test", pTestingDecoCondNotEnoughUnit, BWAPI::UnitTypes::Zerg_Evolution_Chamber, 2);
+    //BWAPI::TilePosition NONE_POS(-1, -1);
+    //BT_ACTION_BUILD* pBuildEvolutionChambers = new BT_ACTION_BUILD("buildEvoChambers", BWAPI::UnitTypes::Zerg_Evolution_Chamber, NONE_POS, pTest);
+
     // ---------------------- HQ (Hatchery, Lair, Hive) management ---------------------
-    // 
 
     // actually modifiable into a larva management
     BT_DECO_REPEATER* pHQActionRepeater = new BT_DECO_REPEATER("RepeatForeverHQAction", pMainParallelSeq, 0, true, false, true);
     BT_SELECTOR* selectHQAction = new BT_SELECTOR("SelectHQAction", pHQActionRepeater, 10);
-
 
     // check if not sparing minerals for tasks already required from elsewhere
     BT_DECO_INVERTER* pDecoMineralsRequiredElsewhere = new BT_DECO_INVERTER("DecoMineralsRequiredElsewhere", selectHQAction);

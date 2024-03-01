@@ -13,7 +13,7 @@ BT_NODE::State BT_ACTION_BUILD::Evaluate(void* data)
 
 std::string BT_ACTION_BUILD::GetDescription()
 {
-    return "BUILD ?";
+    return "BUILD " + m_building;
 }
 
 
@@ -26,7 +26,9 @@ BT_NODE::State BT_ACTION_BUILD::Build(void* data)
 		return BT_NODE::FAILURE;
 	}
 
-    bool startedBuilding = Tools::BuildBuildingAtPosition(m_building, m_tilePos, m_duplicate);
+    bool startedBuilding = (m_tilePos == BWAPI::TilePosition(-1, -1)) ?
+        Tools::BuildBuildingAtPosition(m_building, m_tilePos, m_duplicate)
+        : Tools::BuildBuilding(m_building);
 
     return startedBuilding ? BT_NODE::SUCCESS : BT_NODE::FAILURE;
 }

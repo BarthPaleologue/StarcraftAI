@@ -27,7 +27,7 @@ int Tools::CountUnitsOfType(BWAPI::UnitType type, const BWAPI::Unitset& units)
     int sum = 0;
     for (auto& unit : units)
     {
-        if (unit->getType() == type)
+        if (unit->getType() == type || unit->getBuildType() == type)
         {
             sum++;
         }
@@ -90,7 +90,7 @@ BWAPI::Unit Tools::GetDepot()
 }
 
 
-BWAPI::Unit Tools::GetClosestUnitOfType(BWAPI::UnitType type, BWAPI::Position position, float distance)
+BWAPI::Unit Tools::GetClosestUnitOfType(BWAPI::UnitType type, BWAPI::Position position, float _distance)
 {
     // For each unit that we own
     BWAPI::Unit closestUnit = nullptr;
@@ -103,9 +103,9 @@ BWAPI::Unit Tools::GetClosestUnitOfType(BWAPI::UnitType type, BWAPI::Position po
         // if the unit is of the correct type, and it actually has been constructed, return it
         if (unit->getType() == type && unit->isCompleted())
         {
-            if (unit->getDistance(position) < distance)
+            if (unit->getDistance(position) < _distance)
             {
-                distance = unit->getDistance(position);
+                _distance = unit->getDistance(position);
                 closestUnit = unit;
             }
         }
