@@ -60,11 +60,10 @@ StarterBot::StarterBot()
 
     // Build Natural Base
     // make sure scout
-    BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
+    // NOT YET!
+    //BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
 
-    //Build Additional Supply Provider
-    // TODO: change to "Train Unit (BWAPI::Zerg_Overlord)" bc more explicit
-    //BT_DECO_REPEATER* pBuildSupplyProviderForeverRepeater = new BT_DECO_REPEATER("RepeatForeverBuildSupplyProvider", selectHQAction, 0, true, false, false);
+    //Build Additional Supply Provider (overlord)
     BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
     BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
 
@@ -94,6 +93,8 @@ void StarterBot::save_base_position() {
     BWAPI::Position base_pos = base->getPosition();
     BWAPI::TilePosition base_tile_pos = base->getTilePosition();
     this->pData->basePosition = base_pos;
+    // TODO: check consistency, as position is supposed to be TilePosition * 32
+    //       which doesn't seem to be the case here!
     if (base_tile_pos == BWAPI::TilePosition(31, 7)) {
 		this->pData->enemyBasesPositions.push_back(BWAPI::Position(2112, 3824));
         //this->pData->naturalPosition = BWAPI::Position(992, 3472);

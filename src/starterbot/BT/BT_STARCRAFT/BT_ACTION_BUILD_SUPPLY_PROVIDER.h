@@ -7,6 +7,7 @@
 //--------------------
 class BT_ACTION_BUILD_SUPPLY_PROVIDER: public BT_ACTION {
 public:
+    [[deprecated("Zergs can't 'build' an overlord")]]
     BT_ACTION_BUILD_SUPPLY_PROVIDER(std::string name, BT_NODE* parent);
 
 private:

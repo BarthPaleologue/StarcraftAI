@@ -20,8 +20,8 @@ BT_NODE::State BT_ACTION_GO_TO_ENEMY_BASE::GoToEnnemyBase(void* data)
 	Blackboard* blackboard = (Blackboard*)data;
 
 	if (!blackboard->enemyBasesPositions.empty()) {
-		// we found at least one ennemy base
-		BWAPI::Position tilePosition = blackboard->ennemyBasesPositions[0];
+		// we found at least one enemy base
+		BWAPI::Position tilePosition = blackboard->enemyBasesPositions[0];
 
 		m_unit->move(tilePosition);
 
