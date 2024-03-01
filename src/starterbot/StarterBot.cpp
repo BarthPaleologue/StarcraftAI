@@ -5,6 +5,8 @@
 #include <format>
 
 #include "BT.h"
+#include <OverlordUtils.h>
+#include <ZerglingUtils.h>
 
 StarterBot::StarterBot()
 {
@@ -59,8 +61,7 @@ StarterBot::StarterBot()
     BT_COND_NOTHING_REQUESTED* pNothingElseRequested = new BT_COND_NOTHING_REQUESTED("CondNothingElseRequested", pDecoMineralsRequiredElsewhere);
 
     // Build Natural Base
-    // make sure scout
-    // NOT YET!
+    // make sure scout before that
     //BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
 
     //Build Additional Supply Provider (overlord)
@@ -77,10 +78,6 @@ StarterBot::StarterBot()
 
     BT_DECO_RETURN_SUCCESS* sucessTrainingZergling = new BT_DECO_RETURN_SUCCESS("SucessTrainingZergling", buildOrderFinishedSequencer);
     BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, true, sucessTrainingZergling);
-
-    BT_DECO_RETURN_SUCCESS* successMoveAllZergling = new BT_DECO_RETURN_SUCCESS("successMoveAllZergling", buildOrderFinishedSequencer);
-    BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE* sendZerglings = new BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE("moveAllZerglingsToEnnemyBase", successMoveAllZergling);
-
 
     // ---------------------- End of HQ management ---------------------
 }
@@ -154,6 +151,13 @@ void StarterBot::onStart()
     this->save_base_position();
     this->create_minerals_table();
 
+    BWAPI::UnitType typeA = BWAPI::UnitTypes::Terran_Marine;
+    BWAPI::UnitType typeB = BWAPI::UnitTypes::Zerg_Zergling;
+    float n;
+
+
+
+
 }
 
 // Called on each frame of the game
@@ -162,7 +166,7 @@ void StarterBot::onFrame()
     // Update our MapTools information
     m_mapTools.onFrame();
 
-    pData->buildOrder.evaluate(pData->unitsRequested);
+    pData->buildOrder.evaluate(pData);
 
     pData->currMinerals = BWAPI::Broodwar->self()->minerals();
     pData->currSupply = Tools::GetUnusedSupply(true);
@@ -177,6 +181,44 @@ void StarterBot::onFrame()
         std::cout << "end of BT execution" << std::endl;
         delete (BT_DECORATOR*)pBT;
         pBT = nullptr;
+    }
+
+    // iterate over all units, those who don't yet have a BT will be assigned one
+    BWAPI::Unitset allUnits = BWAPI::Broodwar->self()->getUnits();
+    for (auto it = allUnits.begin(); it != allUnits.end(); ++it) {
+        BWAPI::Unit unit = *it;
+		if (unit == nullptr) continue; // the unit is null (should not happen)
+        if (m_unitBT.count(unit)) continue; // the unit already has a BT
+        if (!unit->isCompleted()) continue; // the unit is not completed
+        if (unit->getType() == BWAPI::UnitTypes::Zerg_Egg) continue; // the unit is an egg, we will assign a BT once it is a true unit
+		if (unit->getType() == BWAPI::UnitTypes::Zerg_Larva) continue; // the unit is a larva, we will assign a BT once it is a true unit
+
+		switch (unit->getType()) {
+		case BWAPI::UnitTypes::Zerg_Overlord:
+			m_unitBT.insert(std::make_pair(unit, OverlordUtils::CreateTree(unit)));
+			break;
+            
+		case BWAPI::UnitTypes::Zerg_Zergling: {
+			m_unitBT.insert(std::make_pair(unit, ZerglingUtils::CreateTree(unit)));
+			break;
+		}
+		default:
+			m_unitBT.insert(std::make_pair(unit, new BT_ACTION_LOG("DoNothing", nullptr, "Do nothing")));
+		}
+    }
+
+    // iterate over all the BTs, those assigned to dead units can be removed
+    for (const auto& [unit, unitBT] : m_unitBT) {
+        if (unit->exists()) continue; // the unit is alive
+
+		delete (BT_DECORATOR*)unitBT;
+
+        m_unitBT.erase(unit);
+    }
+
+    // execute all BTs
+    for (const auto& [unit, unitBT] : m_unitBT) {
+        unitBT->Evaluate(pData);
     }
 
     //Test BT

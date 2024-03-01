@@ -170,9 +170,9 @@ bool Tools::BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition bu
 
     // Get a unit that we own that is of the given type so it can build
     // If we can't find a valid builder unit, then we have to cancel the building
-    //BWAPI::Position buildingPos(buildPos);
-    //BWAPI::Unit builder = Tools::GetClosestUnitOfType(builderType, buildingPos);
-    BWAPI::Unit builder = Tools::GetUnitOfType(builderType);
+    BWAPI::Position buildingPos(buildPos);
+    BWAPI::Unit builder = Tools::GetClosestUnitOfType(builderType, buildingPos);
+    //BWAPI::Unit builder = Tools::GetUnitOfType(builderType);
     if (!builder) { 
         return false; }
     if (!duplicate) {
@@ -183,9 +183,11 @@ bool Tools::BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition bu
 				return false;
 			}
 		}
-        
     }
-    std::cout <<"try to build " << type << "at " << buildPos << std::endl;
+    if (!BWAPI::Broodwar->isExplored(buildPos)) {
+		builder->move(buildingPos);
+        return false;
+	}
     // Ask BWAPI for a building location near the desired position for the type
     int maxBuildRange = 64;
     bool buildingOnCreep = type.requiresCreep();

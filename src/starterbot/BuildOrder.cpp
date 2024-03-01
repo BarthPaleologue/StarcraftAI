@@ -1,11 +1,12 @@
 #include "BuildOrder.h"
 #include "BuildOrderTools.h"
-#include "Blackboard.h"
 #include <iostream>
+#include <Blackboard.h>
 
 using namespace BuildOrderTools;
 
 BuildOrder::BuildOrder() {
+<<<<<<< HEAD
 	//// see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
 	//m_order = {
 	//	{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
@@ -15,6 +16,18 @@ BuildOrder::BuildOrder() {
 	//	{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
 	//	{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, e_orderItemAction::Train}
 	//};
+=======
+	// see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
+	m_order = {
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build},
+		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
+		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, e_orderItemAction::Train},
+	};
+>>>>>>> 536c604732adac79e8b50b2dd35e36c4d7565363
 
 	// see https://liquipedia.net/starcraft/12_Hatch_(vs._Protoss)
 	m_order = {
@@ -49,7 +62,8 @@ int BuildOrder::getSize() {
 /// Checks the current supply against the next stage of the build order. If the supply is enough, the next stage of the build order is executed (return true)
 /// In the eventuality that the supply is not enough, nothing is done (return false)
 /// </summary>
-bool BuildOrder::evaluate(std::queue<BWAPI::UnitType>& _unitsRequested) {
+bool BuildOrder::evaluate(Blackboard* pData) {
+	std::queue<BWAPI::UnitType>& _unitsRequested = pData->unitsRequested;
 	// avoid segfault if the build order is finished
 	if (isFinished()) {
 		return false;
@@ -74,9 +88,12 @@ bool BuildOrder::evaluate(std::queue<BWAPI::UnitType>& _unitsRequested) {
 			actionSuccess = true;
 			break;
 		}
-		
-		//TODO: add a "if Hatchery"
-		Tools::BuildBuilding(currentItem.unitType);
+		if (currentItem.unitType == BWAPI::UnitTypes::Zerg_Hatchery) {
+			Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition, false);
+		}
+		else {
+			actionSuccess = Tools::BuildBuilding(currentItem.unitType);
+		}
 		break;
 	case e_orderItemAction::Cancel:
 		if (cancelConstruction(currentItem.unitType)) {
@@ -99,6 +116,7 @@ bool BuildOrder::evaluate(std::queue<BWAPI::UnitType>& _unitsRequested) {
 	}
 
 	if (actionSuccess) {
+		std::cout << currentItem.unitType << "successfully started" << std::endl;
 		nextTask();
 	}
 	return true;

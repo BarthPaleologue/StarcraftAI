@@ -12,7 +12,7 @@ BT_NODE::State BT_ACTION_GO_TO_ENEMY_BASE::Evaluate(void* data)
 
 std::string BT_ACTION_GO_TO_ENEMY_BASE::GetDescription()
 {
-	return "GO TO ENNEMY BASE";
+	return "GO TO ENEMY BASE";
 }
 
 BT_NODE::State BT_ACTION_GO_TO_ENEMY_BASE::GoToEnnemyBase(void* data)
@@ -20,7 +20,11 @@ BT_NODE::State BT_ACTION_GO_TO_ENEMY_BASE::GoToEnnemyBase(void* data)
 	Blackboard* blackboard = (Blackboard*)data;
 
 	if (!blackboard->enemyBasesPositions.empty()) {
+<<<<<<< HEAD
 		// we found at least one enemy base
+=======
+		// we found at least one ennemy base
+>>>>>>> 536c604732adac79e8b50b2dd35e36c4d7565363
 		BWAPI::Position tilePosition = blackboard->enemyBasesPositions[0];
 
 		m_unit->move(tilePosition);

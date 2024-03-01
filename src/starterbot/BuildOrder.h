@@ -5,6 +5,8 @@
 #include <functional> // to have function as attribute
 #include <queue>
 
+class Blackboard;
+
 enum class e_orderItemAction {
 	Build, // Build the unit type
 	Cancel, // Cancel the build process of the unit type
@@ -37,7 +39,7 @@ public:
 	BuildOrder();
 
 	void nextTask();
-	bool evaluate(std::queue<BWAPI::UnitType>& _unitsRequested);
+	bool evaluate(Blackboard* pData);
 
 	bool isFinished();
 
