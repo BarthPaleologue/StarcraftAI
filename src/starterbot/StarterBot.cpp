@@ -188,6 +188,7 @@ void StarterBot::onFrame()
     for (auto it = allUnits.begin(); it != allUnits.end(); ++it) {
         BWAPI::Unit unit = *it;
 		if (unit == nullptr) continue; // the unit is null (should not happen)
+		if (!unit->exists()) continue; // the unit does not exist (dead)
         if (m_unitBT.count(unit)) continue; // the unit already has a BT
         if (!unit->isCompleted()) continue; // the unit is not completed
         if (unit->getType() == BWAPI::UnitTypes::Zerg_Egg) continue; // the unit is an egg, we will assign a BT once it is a true unit
