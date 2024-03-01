@@ -126,6 +126,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\Squad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
@@ -263,6 +264,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\Squad.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BT">

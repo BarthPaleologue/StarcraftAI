@@ -67,6 +67,7 @@
     <ClInclude Include="..\..\src\starterbot\MapTools.h" />
     <ClInclude Include="..\..\src\starterbot\OverlordUtils.h" />
     <ClInclude Include="..\..\src\starterbot\ReplayParser.h" />
+    <ClInclude Include="..\..\src\starterbot\Squad.h" />
     <ClInclude Include="..\..\src\starterbot\StarterBot.h" />
     <ClInclude Include="..\..\src\starterbot\TargetingTools.h" />
     <ClInclude Include="..\..\src\starterbot\Tools.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="..\..\src\starterbot\MapTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\ReplayParser.cpp" />
     <ClCompile Include="..\..\src\starterbot\Source.cpp" />
+    <ClCompile Include="..\..\src\starterbot\Squad.cpp" />
     <ClCompile Include="..\..\src\starterbot\StarterBot.cpp" />
     <ClCompile Include="..\..\src\starterbot\TargetingTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\Tools.cpp" />
