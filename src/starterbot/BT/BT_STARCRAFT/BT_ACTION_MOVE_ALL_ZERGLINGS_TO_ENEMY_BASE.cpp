@@ -12,7 +12,7 @@ BT_NODE::State BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE::Evaluate(void* data)
 
 std::string BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE::GetDescription()
 {
-	return "ALL ZERGLINGS GO TO ENNEMY BASE";
+	return "ALL ZERGLINGS GO TO ENEMY BASE";
 }
 
 BT_NODE::State BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE::GoToEnnemyBase(void* data)
@@ -20,7 +20,7 @@ BT_NODE::State BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE::GoToEnnemyBase(void* 
 	Blackboard* blackboard = (Blackboard*)data;
 
 	if (!blackboard->enemyBasesPositions.empty()) {
-		// we found at least one ennemy base
+		// we found at least one enemy base
 		BWAPI::Position tilePosition = blackboard->enemyBasesPositions[0];
 
 		std::vector<BWAPI::Unit> zerglings;

@@ -48,27 +48,30 @@ StarterBot::StarterBot()
     BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false, true);
     BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pFarmingMineralsForeverRepeater);
 
+    // ---- testing "BT_DECO_COND_NOT_ENOUGH_UNIT" -----
+    //BT_DECO_REPEATER* pTestingDecoCondNotEnoughUnit = new BT_DECO_REPEATER("TestingDecoCondNotEnoughUnit", pMainParallelSeq, 0, true, false, true);
+    //BT_DECO_CONDITION_NOT_ENOUGH_UNIT* pTest = new BT_DECO_CONDITION_NOT_ENOUGH_UNIT("test", pTestingDecoCondNotEnoughUnit, BWAPI::UnitTypes::Zerg_Evolution_Chamber, 2);
+    //BWAPI::TilePosition NONE_POS(-1, -1);
+    //BT_ACTION_BUILD* pBuildEvolutionChambers = new BT_ACTION_BUILD("buildEvoChambers", BWAPI::UnitTypes::Zerg_Evolution_Chamber, NONE_POS, pTest);
+
     // ---------------------- HQ (Hatchery, Lair, Hive) management ---------------------
-    // 
 
     // actually modifiable into a larva management
     BT_DECO_REPEATER* pHQActionRepeater = new BT_DECO_REPEATER("RepeatForeverHQAction", pMainParallelSeq, 0, true, false, true);
     BT_SELECTOR* selectHQAction = new BT_SELECTOR("SelectHQAction", pHQActionRepeater, 10);
-
 
     // check if not sparing minerals for tasks already required from elsewhere
     BT_DECO_INVERTER* pDecoMineralsRequiredElsewhere = new BT_DECO_INVERTER("DecoMineralsRequiredElsewhere", selectHQAction);
     BT_COND_NOTHING_REQUESTED* pNothingElseRequested = new BT_COND_NOTHING_REQUESTED("CondNothingElseRequested", pDecoMineralsRequiredElsewhere);
 
     // Build Natural Base
-    // make sure scout
+    // make sure scout before that
     //BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
 
-    //Build Additional Supply Provider
-    // TODO: change to "Train Unit (BWAPI::Zerg_Overlord)" bc more explicit
-    //BT_DECO_REPEATER* pBuildSupplyProviderForeverRepeater = new BT_DECO_REPEATER("RepeatForeverBuildSupplyProvider", selectHQAction, 0, true, false, false);
-    BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
-    BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
+    //Build Additional overlords
+    //BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
+    //BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
+    OverlordUtils::CreateTrainingTree(selectHQAction);
 
     //Training Workers
     BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
@@ -93,6 +96,8 @@ void StarterBot::save_base_position() {
 
     BWAPI::TilePosition base_tile_pos = base->getTilePosition();
     this->pData->basePosition = base_pos;
+    // TODO: check consistency, as position is supposed to be TilePosition * 32
+    //       which doesn't seem to be the case here!
     if (base_tile_pos == BWAPI::TilePosition(31, 7)) {
 		this->pData->enemyBasesPositions.push_back(BWAPI::Position(2112, 3824));
         //this->pData->naturalPosition = BWAPI::Position(992, 3472);
@@ -192,6 +197,7 @@ void StarterBot::onFrame()
     for (auto it = allUnits.begin(); it != allUnits.end(); ++it) {
         BWAPI::Unit unit = *it;
 		if (unit == nullptr) continue; // the unit is null (should not happen)
+		if (!unit->exists()) continue; // the unit does not exist (dead)
         if (m_unitBT.count(unit)) continue; // the unit already has a BT
         if (!unit->isCompleted()) continue; // the unit is not completed
         if (unit->getType() == BWAPI::UnitTypes::Zerg_Egg) continue; // the unit is an egg, we will assign a BT once it is a true unit
@@ -199,7 +205,7 @@ void StarterBot::onFrame()
 
 		switch (unit->getType()) {
 		case BWAPI::UnitTypes::Zerg_Overlord:
-			m_unitBT.insert(std::make_pair(unit, OverlordUtils::CreateTree(unit)));
+			m_unitBT.insert(std::make_pair(unit, OverlordUtils::CreateIndividualTree(unit)));
 			break;
             
 		case BWAPI::UnitTypes::Zerg_Zergling: {

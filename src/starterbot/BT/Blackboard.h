@@ -8,8 +8,18 @@
 #include <Job.h>
 
 #define THRESHOLD1_UNUSED_SUPPLY 2
-
 #define NWANTED_WORKERS_TOTAL 20
+
+
+const BWAPI::TilePosition START_TILE_POS[2] = {
+	BWAPI::TilePosition(31,7), 
+	BWAPI::TilePosition(64, 118)
+};
+
+const BWAPI::TilePosition NATURAL_TILE_POS[2] = {
+	BWAPI::TilePosition(63,19),
+	BWAPI::TilePosition(29, 107)
+};
 
 class Blackboard {
 public:
@@ -20,6 +30,8 @@ public:
 	// purpose: if the mineral count (with self()->minerals()) update is not instant after using minerals
 	// otherwise just remove this attribute
 	int currMinerals; 
+
+	BWAPI::UnitType focusedTrainingUnit = BWAPI::UnitTypes::Zerg_Drone;
 
 	int currSupply;
 	int thresholdSupply = 0; // modifiable with the amount of HQ we have + unit production
