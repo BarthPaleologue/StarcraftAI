@@ -3,6 +3,7 @@
 #include <queue>
 #include <BWAPI.h>
 #include "BuildOrder.h"
+#include "OwnedBase.h"
 #include <queue>
 #include <Job.h>
 
@@ -35,11 +36,14 @@ public:
 	//position of OUR starting base : 
 	BWAPI::Position basePosition;
 
+
 	//what we need for the minerals occupency table:
 	std::vector<int> minerals_indx_to_ID;
 	std::map<int, int> minerals_ID_to_indx;
 	std::vector<int> mineralsOccupancyTable;
 
+	//our bases <3
+	std::vector<OwnedBase> ownedBases;
 	std::vector<BWAPI::Position> enemyBasesPositions{};
 	BWAPI::TilePosition naturalTilePosition;
 	BWAPI::TilePosition enemyNaturalTilePosition;

@@ -22,7 +22,6 @@ public:
     StarterBot();
 
     // helper functions to get you started with bot programming and learn the API
-    void sendIdleWorkersToMinerals();
     void trainAdditionalWorkers();
     void buildAdditionalSupply();
     void drawDebugInformation();

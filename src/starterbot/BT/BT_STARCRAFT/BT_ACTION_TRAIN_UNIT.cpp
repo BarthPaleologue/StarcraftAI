@@ -23,7 +23,7 @@ BT_NODE::State BT_ACTION_TRAIN_UNIT::TrainUnit(void* data)
 	Blackboard* pData = (Blackboard*)data;
 
 	const BWAPI::Unit myDepot = Tools::GetDepot();
-
+	
 	// finding all lavas
 	std::vector<BWAPI::Unit> larvas;
 	Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Larva, larvas);

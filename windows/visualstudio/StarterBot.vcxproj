@@ -63,6 +63,7 @@
     <ClInclude Include="..\..\src\starterbot\Job.h" />
     <ClInclude Include="..\..\src\starterbot\MapTools.h" />
     <ClInclude Include="..\..\src\starterbot\OverlordUtils.h" />
+    <ClInclude Include="..\..\src\starterbot\OwnedBase.h" />
     <ClInclude Include="..\..\src\starterbot\ReplayParser.h" />
     <ClInclude Include="..\..\src\starterbot\StarterBot.h" />
     <ClInclude Include="..\..\src\starterbot\TargetingTools.h" />
@@ -110,6 +111,7 @@
     <ClCompile Include="..\..\src\starterbot\Job.cpp" />
     <ClCompile Include="..\..\src\starterbot\main.cpp" />
     <ClCompile Include="..\..\src\starterbot\MapTools.cpp" />
+    <ClCompile Include="..\..\src\starterbot\OwnedBase.cpp" />
     <ClCompile Include="..\..\src\starterbot\ReplayParser.cpp" />
     <ClCompile Include="..\..\src\starterbot\Source.cpp" />
     <ClCompile Include="..\..\src\starterbot\StarterBot.cpp" />
