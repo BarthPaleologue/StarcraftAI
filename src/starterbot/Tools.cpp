@@ -371,4 +371,10 @@ void Tools::DrawHealthBar(BWAPI::Unit unit, double ratio, BWAPI::Color color, in
     {
         BWAPI::Broodwar->drawLineMap(BWAPI::Position(i, hpTop), BWAPI::Position(i, hpBottom), BWAPI::Colors::Black);
     }
+
+ 
+}
+
+bool Tools::IsMine(BWAPI::Unit unit) {
+    return unit->getPlayer() == BWAPI::Broodwar->self();
 }

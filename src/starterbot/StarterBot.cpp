@@ -91,8 +91,9 @@ StarterBot::StarterBot()
 void StarterBot::save_base_position() {
     //We look for a hatchery, and save its position. 
     BWAPI::Unit base = Tools::GetUnitOfType(BWAPI::UnitType(131));
-
     BWAPI::Position base_pos = base->getPosition();
+    this->pData->ownedBases.push_back(OwnedBase(base_pos));
+
     BWAPI::TilePosition base_tile_pos = base->getTilePosition();
     this->pData->basePosition = base_pos;
     // TODO: check consistency, as position is supposed to be TilePosition * 32
@@ -158,8 +159,11 @@ void StarterBot::onStart()
 
     BWAPI::UnitType typeA = BWAPI::UnitTypes::Terran_Marine;
     BWAPI::UnitType typeB = BWAPI::UnitTypes::Zerg_Zergling;
-    float n;
-
+    
+    //allocate all the workers to my base(if not worker : won't do anything)
+    for (auto& unit : BWAPI::Broodwar->self()->getUnits()) {
+        this->pData->ownedBases.at(0).allocateWorker(unit);
+    }
 
 
 
@@ -252,25 +256,6 @@ void StarterBot::onFrame()
     drawDebugInformation();
 }
 
-// Send our idle workers to mine minerals so they don't just stand there
-void StarterBot::sendIdleWorkersToMinerals()
-{
-    // Let's send all of our starting workers to the closest mineral to them
-    // First we need to loop over all of the units that we (BWAPI::Broodwar->self()) own
-    const BWAPI::Unitset& myUnits = BWAPI::Broodwar->self()->getUnits();
-    for (auto& unit : myUnits)
-    {
-        // Check the unit type, if it is an idle worker, then we want to send it somewhere
-        if (unit->getType().isWorker() && unit->isIdle())
-        {
-            // Get the closest mineral to this worker unit
-            BWAPI::Unit closestMineral = Tools::GetClosestUnitTo(unit, BWAPI::Broodwar->getMinerals());
-
-            // If a valid mineral was found, right click it with the unit in order to start harvesting
-            if (closestMineral) { unit->rightClick(closestMineral); }
-        }
-    }
-}
 
 // Train more workers so we can gather more income
 void StarterBot::trainAdditionalWorkers()
@@ -329,15 +314,19 @@ void StarterBot::onEnd(bool isWinner)
 // Called whenever a unit is destroyed, with a pointer to the unit
 void StarterBot::onUnitDestroy(BWAPI::Unit unit)
 {
-	//if the unit is farming then remove it from data structure
-    if (pData->unitsFarmingMinerals.contains(unit)) pData->unitsFarmingMinerals.erase(unit);
+
 }
 
 // Called whenever a unit is morphed, with a pointer to the unit
 // Zerg units morph when they turn into other units
 void StarterBot::onUnitMorph(BWAPI::Unit unit)
-{
-	
+{   
+    if ((unit->getInitialType() == BWAPI::Broodwar->self()->getRace().getWorker()) && Tools::IsMine(unit)) {
+        for (auto& base : this->pData->ownedBases) {
+            base.desallocateWorker(unit);
+        }
+    }
+
 }
 
 // Called whenever a text is sent to the game by a user
@@ -360,12 +349,39 @@ void StarterBot::onUnitCreate(BWAPI::Unit unit)
 // Called whenever a unit finished construction, with a pointer to the unit
 void StarterBot::onUnitComplete(BWAPI::Unit unit)
 {
-    // debug message when a unit is created
-    if (unit->getType() == BWAPI::UnitTypes::Zerg_Hatchery) {
+
+    //if unit is worker : attach it to its base (the closest base)
+    if (unit->getType() == BWAPI::Broodwar->self()->getRace().getWorker() && Tools::IsMine(unit)) {
+
+        BWAPI::Position unit_pos = unit->getPosition();
+        
+        float l_min = unit_pos.getDistance(pData->ownedBases.at(0).get_pos());
+        OwnedBase& spawningBase = pData->ownedBases.at(0);
+        
+        for (auto& base : pData->ownedBases) {
+            float l = unit_pos.getDistance(base.get_pos());
+            if (l < l_min) {
+                l_min = l;
+                spawningBase = base;
+            };
+        }
+        spawningBase.allocateWorker(unit);
+    }
+
+    else if (unit->getType() == BWAPI::Broodwar->self()->getRace().getResourceDepot()) {
         BWAPI::Position pos = unit->getPosition();
         BWAPI::UnitType type = unit->getType();
         BWAPI::TilePosition tile = unit->getTilePosition();
         std::cout << "A " << type << " has been created at " << pos << "in" << tile << std::endl;
+        
+        if (Tools::IsMine(unit)) {
+            //we have to check if this is our starting base ! Indeed, the starting base actually
+            //spawns at t=0... but it is already inside the vec ! (and it needs to be).
+            if (unit->getPosition().getDistance(this->pData->basePosition) > 0) {
+                this->pData->ownedBases.push_back(OwnedBase(unit->getPosition()));
+            }
+        }
+
     }
 	
 }

@@ -19,36 +19,14 @@ std::string BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS::GetDescription()
 BT_NODE::State BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS::SendIdleWorkerToMinerals(void* data)
 {
     Blackboard* pData = (Blackboard*)data;
-    const BWAPI::Unitset& myUnits = BWAPI::Broodwar->self()->getUnits();
-    for (auto& unit : myUnits)
+    BT_NODE::State result = BT_NODE::FAILURE;
+    for (auto& base : pData->ownedBases)
     {
-        // Check the unit type, if it is an idle worker, then we want to send it somewhere
-//        std::cout<<unit->getType().isWorker()<<std::endl;
-        if (unit->getType().isWorker() && unit->isIdle())
-        {   
-            std::vector<int> table = pData->mineralsOccupancyTable;
-            //find min:
-            int min = table.at(0);
-            int min_id = 0;
-            for (int i = 0; i < table.size(); i++) {
-                if (table.at(i) < min) {
-                    min = table.at(i);
-                    min_id = i;
-                }
-            }
-            int mineralID = pData->minerals_indx_to_ID.at(min_id);
-     
-            BWAPI::Unit mineralTarget = Tools::GetUnitById(mineralID,BWAPI::Broodwar->getMinerals());
-            unit->rightClick(mineralTarget);
-            pData->unitsFarmingMinerals.insert(unit);
-            pData->mineralsOccupancyTable.at(min_id)++;
-            /*std::cout << "====================" << std::endl;
-            std::cout << "Send workers success" << std::endl;
-            std::cout << "====================" << std::endl;*/
-            return BT_NODE::SUCCESS;
-
+        
+        BT_NODE::State my_state = base.base_SendIdleWorkerToMinerals();
+        if (my_state==BT_NODE::SUCCESS) {
+            result = BT_NODE::SUCCESS;
         }
     }
-    /*std::cout << "Send workers failed" << std::endl;*/
-    return BT_NODE::FAILURE;
+    return result;
 }
