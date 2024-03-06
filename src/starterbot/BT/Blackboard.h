@@ -5,7 +5,8 @@
 #include "BuildOrder.h"
 #include "OwnedBase.h"
 #include <queue>
-#include <Job.h>
+#include "Job.h"
+#include <map>
 
 #define THRESHOLD1_UNUSED_SUPPLY 2
 #define NWANTED_WORKERS_TOTAL 20
@@ -44,6 +45,8 @@ public:
 
 	// useful?
 	int nbOverlords = 0;
+
+	std::map<BWAPI::UnitType, int> minRequiredUnitCount;
 
 	//position of OUR starting base : 
 	BWAPI::Position basePosition;
