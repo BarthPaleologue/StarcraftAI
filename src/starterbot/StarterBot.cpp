@@ -49,16 +49,12 @@ StarterBot::StarterBot()
     //Build Additional overlords
     OverlordUtils::CreateTrainingTree(selectHQAction);
 
+    // Handling build order finished
+    ZerglingUtils::CreateTrainingTree(selectHQAction);
+
     //Training Workers
     BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
     BT_ACTION_TRAIN_UNIT* pTrainWorker = new BT_ACTION_TRAIN_UNIT("TrainWorker", BWAPI::UnitTypes::Zerg_Drone, false, pNotEnoughWorkers);
-
-    // Handling build order finished
-    BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", selectHQAction);
-    BT_PARALLEL_SEQUENCER* buildOrderFinishedSequencer = new BT_PARALLEL_SEQUENCER("BuildOrderFinishedSequencer", buildOrderFinished, 10);
-
-    BT_DECO_RETURN_SUCCESS* sucessTrainingZergling = new BT_DECO_RETURN_SUCCESS("SucessTrainingZergling", buildOrderFinishedSequencer);
-    BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, true, sucessTrainingZergling);
 
     // ---------------------- End of HQ management ---------------------
 }
