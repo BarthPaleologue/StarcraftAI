@@ -131,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\starterbot\Squad.cpp" />
     <ClCompile Include="..\..\src\starterbot\OwnedBase.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IS_IN_ENEMY_BASE.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
@@ -256,6 +259,23 @@
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\OverlordUtils.h" />
     <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h" />
+    <ClInclude Include="..\..\src\starterbot\OwnedBase.h" />
+    <ClInclude Include="..\..\src\starterbot\Squad.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_UNIT.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IDLE.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_UNIT_CONDITION.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IS_IN_ENEMY_BASE.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BT">
