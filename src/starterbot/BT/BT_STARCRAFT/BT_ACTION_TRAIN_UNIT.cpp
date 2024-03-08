@@ -21,8 +21,6 @@ std::string BT_ACTION_TRAIN_UNIT::GetDescription()
 BT_NODE::State BT_ACTION_TRAIN_UNIT::TrainUnit(void* data)
 {
 	Blackboard* pData = (Blackboard*)data;
-
-	const BWAPI::Unit myDepot = Tools::GetDepot();
 	
 	// finding all lavas
 	std::vector<BWAPI::Unit> larvas;

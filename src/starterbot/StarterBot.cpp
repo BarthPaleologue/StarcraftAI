@@ -17,28 +17,6 @@ StarterBot::StarterBot()
 
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
 
-    //pBtTest = nullptr;
-    /*
-    //Test BT nodes: BT_DECO_COND_GREATER_THAN, BT_DECO_COND_LESSER_THAN, BT_ACTION_LOG
-    pBtTest = new BT_DECORATOR("EntryPoint", nullptr);
-    BT_DECO_REPEATER* pForeverRepeater = new BT_DECO_REPEATER("RepeatForever", pBtTest, 0, true, false, false);
-    //BT_DECO_COND_GREATER_THAN<int>* pGreaterThan = new BT_DECO_COND_GREATER_THAN<int>("MineralsGreaterThanThreshold1", pForeverRepeater, THRESHOLD1_MINERALS, pData->currMinerals, false);
-    //BT_ACTION_LOG* pLog = new BT_ACTION_LOG("LogMSG", pGreaterThan, std::format("current minerals greater than {}", THRESHOLD1_MINERALS));
-    BT_DECO_COND_LESSER_THAN<int>* pLesserThan = new BT_DECO_COND_LESSER_THAN<int>("MineralsLesserThanThreshold1", pForeverRepeater, THRESHOLD1_MINERALS, pData->currMinerals, false);
-    BT_ACTION_LOG* pLog = new BT_ACTION_LOG("LogMSG", pLesserThan, std::format("current minerals lesser than {}", THRESHOLD1_MINERALS));
-    */
-
-    //Test BT nodes: BT_DECO_REPEATER (resetOnRepeat = true), BT_COND_GREATER_THAN, BT_COND_LESSER_THAN, BT_ACTION_LOG
-    //pBtTest = new BT_DECORATOR("EntryPoint", nullptr);
-    //BT_DECO_REPEATER* pForeverRepeater = new BT_DECO_REPEATER("RepeatForever", pBtTest, 0, true, false, true);
-    //BT_SEQUENCER* pSequencer = new BT_SEQUENCER("sequencer",pForeverRepeater, 2);
-    //BT_COND_GREATER_THAN<int> *pGreaterThan = new BT_COND_GREATER_THAN<int>("MineralsGreaterThanThreshold1",pSequencer,100, pData->currMinerals, false);
-    //BT_ACTION_LOG* pLog = new BT_ACTION_LOG("LogMSG", pSequencer, std::format("current minerals greater than {}", 100));
-    //BT_COND_LESSER_THAN<int>* pLesserThan = new BT_COND_LESSER_THAN<int>("MineralsLesserThanThreshold1", pSequencer, 100, pData->currMinerals, false);
-    //BT_ACTION_LOG* pLog = new BT_ACTION_LOG("LogMSG", pSequencer, std::format("current minerals lesser than {}", 100));
-
-
-
     // Starcraft AI BT
     pBT = new BT_DECORATOR("EntryPoint", nullptr);
     
@@ -69,8 +47,6 @@ StarterBot::StarterBot()
     //BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
 
     //Build Additional overlords
-    //BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY* pNotEnoughSupply = new BT_DECO_CONDITION_NOT_ENOUGH_SUPPLY("NotEnoughSupply", selectHQAction);
-    //BT_ACTION_TRAIN_UNIT* pBuildSupplyProvider = new BT_ACTION_TRAIN_UNIT("BuildSupplyProvider", BWAPI::UnitTypes::Zerg_Overlord, false, pNotEnoughSupply);
     OverlordUtils::CreateTrainingTree(selectHQAction);
 
     //Training Workers
@@ -164,9 +140,6 @@ void StarterBot::onStart()
     for (auto& unit : BWAPI::Broodwar->self()->getUnits()) {
         this->pData->ownedBases.at(0).allocateWorker(unit);
     }
-
-
-
 }
 
 // Called on each frame of the game
@@ -231,67 +204,11 @@ void StarterBot::onFrame()
         unitBT->Evaluate(pData);
     }
 
-    //Test BT
-    /*if (pBtTest != nullptr && pBtTest->Evaluate(pData) != BT_NODE::RUNNING)
-    {
-        delete (BT_DECORATOR*)pBtTest;
-        pBtTest = nullptr;
-    }*/
-
-    /*
-    // Send our idle workers to mine minerals so they don't just stand there
-    sendIdleWorkersToMinerals();
-
-    // Train more workers so we can gather more income
-    trainAdditionalWorkers();
-
-    // Build more supply if we are going to run out soon
-    buildAdditionalSupply();
-    */
-
     // Draw unit health bars, which brood war unfortunately does not do
     Tools::DrawUnitHealthBars();
 
     // Draw some relevent information to the screen to help us debug the bot
     drawDebugInformation();
-}
-
-
-// Train more workers so we can gather more income
-void StarterBot::trainAdditionalWorkers()
-{
-    const BWAPI::UnitType workerType = BWAPI::Broodwar->self()->getRace().getWorker();
-    const int workersWanted = 20;
-    const int workersOwned = Tools::CountUnitsOfType(workerType, BWAPI::Broodwar->self()->getUnits());
-
-    if (workersOwned < workersWanted)
-    {
-        // get the unit pointer to my depot
-        const BWAPI::Unit myDepot = Tools::GetDepot();
-
-        // if we have a valid depot unit and it's currently not training something, train a worker
-        // there is no reason for a bot to ever use the unit queueing system, it just wastes resources
-        if (myDepot && !myDepot->isTraining()) { myDepot->train(workerType); }
-    }
-}
-
-// Build more supply if we are going to run out soon
-void StarterBot::buildAdditionalSupply()
-{
-    // Get the amount of supply supply we currently have unused
-    const int unusedSupply = Tools::GetTotalSupply(true) - BWAPI::Broodwar->self()->supplyUsed();
-
-    // If we have a sufficient amount of supply, we don't need to do anything
-    if (unusedSupply >= 2) { return; }
-
-    // Otherwise, we are going to build a supply provider
-    const BWAPI::UnitType supplyProviderType = BWAPI::Broodwar->self()->getRace().getSupplyProvider();
-
-    const bool startedBuilding = Tools::BuildBuilding(supplyProviderType);
-    if (startedBuilding)
-    {
-        BWAPI::Broodwar->printf("Started Building %s", supplyProviderType.getName().c_str());
-    }
 }
 
 // Draw some relevent information to the screen to help us debug the bot
@@ -326,7 +243,6 @@ void StarterBot::onUnitMorph(BWAPI::Unit unit)
             base.desallocateWorker(unit);
         }
     }
-
 }
 
 // Called whenever a text is sent to the game by a user
