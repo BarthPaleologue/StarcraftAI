@@ -74,13 +74,13 @@ void StarterBot::save_base_position() {
 		this->pData->enemyBasesPositions.push_back(BWAPI::Position(2112, 3824));
         //this->pData->naturalPosition = BWAPI::Position(992, 3472);
         //this->pData->enemyNaturalPosition = BWAPI::Position(2080, 656);
-        this->pData->naturalTilePosition = BWAPI::TilePosition(63, 19);
-        this->pData->enemyNaturalTilePosition = BWAPI::TilePosition(29, 107);
+        this->pData->myPosIdx = 0;
+        this->pData->enemyPosIdx= 1;
 	}
 	else { // base_tile_pos == BWAPI::TilePosition(64, 118)
 		this->pData->enemyBasesPositions.push_back(BWAPI::Position(1056, 272));
-        this->pData->naturalTilePosition = BWAPI::TilePosition(29, 107);
-        this->pData->enemyNaturalTilePosition = BWAPI::TilePosition(63, 19);
+        this->pData->myPosIdx = 1;
+        this->pData->enemyPosIdx = 0;
 	}
 }
 void StarterBot::create_minerals_table() {
@@ -281,11 +281,6 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
     }
 
     else if (unit->getType() == BWAPI::Broodwar->self()->getRace().getResourceDepot()) {
-        BWAPI::Position pos = unit->getPosition();
-        BWAPI::UnitType type = unit->getType();
-        BWAPI::TilePosition tile = unit->getTilePosition();
-        std::cout << "A " << type << " has been created at " << pos << "in" << tile << std::endl;
-        
         if (Tools::IsMine(unit)) {
             //we have to check if this is our starting base ! Indeed, the starting base actually
             //spawns at t=0... but it is already inside the vec ! (and it needs to be).
@@ -295,6 +290,14 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
         }
 
     }
+
+    // building debugger
+    if (unit->getType().isBuilding() && Tools::IsMine(unit)) {
+        BWAPI::Position pos = unit->getPosition();
+        BWAPI::UnitType type = unit->getType();
+        BWAPI::TilePosition tile = unit->getTilePosition();
+        std::cout << "A " << type << " has been created at " << pos << "in" << tile << std::endl;
+	}
 	
 }
 

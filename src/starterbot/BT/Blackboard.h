@@ -12,6 +12,23 @@
 #define NWANTED_WORKERS_TOTAL 20
 
 
+const BWAPI::TilePosition BASE_TILE_POS[2][6] = {
+	{BWAPI::TilePosition(31,7),
+	BWAPI::TilePosition(63,19),
+	BWAPI::TilePosition(86,38),
+	BWAPI::TilePosition(7,28),
+	BWAPI::TilePosition(7,55),
+	BWAPI::TilePosition(86,6),},
+
+	{BWAPI::TilePosition(64, 118),
+	BWAPI::TilePosition(29, 107),
+	BWAPI::TilePosition(6, 88),
+	BWAPI::TilePosition(85, 96),
+	BWAPI::TilePosition(85, 70),
+	BWAPI::TilePosition(6, 119)}
+
+};
+
 const BWAPI::TilePosition START_TILE_POS[2] = {
 	BWAPI::TilePosition(31,7), 
 	BWAPI::TilePosition(64, 118)
@@ -20,6 +37,11 @@ const BWAPI::TilePosition START_TILE_POS[2] = {
 const BWAPI::TilePosition NATURAL_TILE_POS[2] = {
 	BWAPI::TilePosition(63,19),
 	BWAPI::TilePosition(29, 107)
+};
+
+const BWAPI::TilePosition SPAWNING_POOL_TILE_POS[2] = {
+	BWAPI::TilePosition(29, 12),
+	BWAPI::TilePosition(68, 114),
 };
 
 class Blackboard {
@@ -60,8 +82,8 @@ public:
 	//our bases <3
 	std::vector<OwnedBase> ownedBases;
 	std::vector<BWAPI::Position> enemyBasesPositions{};
-	BWAPI::TilePosition naturalTilePosition;
-	BWAPI::TilePosition enemyNaturalTilePosition;
+	int myPosIdx;
+	int enemyPosIdx;
 
 	// for units / techs we want right now but we don't have ressources so we don't train anything to wait for them
 	std::queue<BWAPI::UnitType> unitsRequested; // for now by build order, maybe add struct for prio
