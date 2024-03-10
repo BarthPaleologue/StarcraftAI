@@ -15,6 +15,11 @@ bool BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS::IsThereNotEnoughOverlords(void* dat
 {
 	const Blackboard* pBlackboard = (Blackboard*)data;
 
+	// first, we simply count the number of overlords we have and compare it to the minimum required
+	const int nbOverlords = Tools::CountUnitsOfType(BWAPI::UnitTypes::Zerg_Overlord, BWAPI::Broodwar->self()->getUnits());
+
+	if(pBlackboard->minRequiredUnitCount.count(BWAPI::UnitTypes::Zerg_Overlord) && nbOverlords < pBlackboard->minRequiredUnitCount.at(BWAPI::UnitTypes::Zerg_Overlord)) return true;
+
 	const int totalUnitSupply = Tools::GetTotalSupply(true);
 
 	const int overlordTrainingTime = BWAPI::UnitTypes::Zerg_Overlord.buildTime();

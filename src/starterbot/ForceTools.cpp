@@ -121,5 +121,8 @@ std::pair<float, float> ForceTools::fightPredictor(int nA,BWAPI::UnitType typeA,
 		float newNA = chargingPrediction(nA, typeA, playerA, nB, typeB, playerB);
 		return engagedCombatPrediction(newNA, typeA, playerA, nB, typeB, playerB, 1);
 	}
+	else {
+		throw "Error in fightPredictor";
+	}
 };
 

@@ -18,6 +18,11 @@ void Squad::removeUnit(BWAPI::Unit unit)
 	m_unitSet.erase(unit);
 }
 
+void Squad::moveTo(BWAPI::Position position)
+{
+	m_unitSet.move(position);
+}
+
 BWAPI::Unitset Squad::getUnits()
 {
 	return m_unitSet;

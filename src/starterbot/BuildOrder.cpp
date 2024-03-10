@@ -8,11 +8,11 @@ using namespace BuildOrderTools;
 BuildOrder::BuildOrder() {
 	// see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
 	m_order = {
-		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
-		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+		//{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
+		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},/*
 		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
 		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
-		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
+		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},*/
 	};
 
 	// see https://liquipedia.net/starcraft/12_Hatch_(vs._Protoss)
@@ -76,7 +76,15 @@ bool BuildOrder::evaluate(Blackboard* _pData) {
 		}
 		// build natural hatchery at natural position
 		if (currentItem.unitType == BWAPI::UnitTypes::Zerg_Hatchery) {
-			Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Hatchery, _pData->naturalTilePosition, false);
+			for (auto& baseTilePos : BASE_TILE_POS[_pData->myPosIdx]) {
+				if (BWAPI::Broodwar->canBuildHere(baseTilePos, BWAPI::UnitTypes::Zerg_Hatchery)) {
+					Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Hatchery, baseTilePos, false);
+					break;
+				}
+			}
+		}
+		else if (currentItem.unitType == BWAPI::UnitTypes::Zerg_Spawning_Pool) {
+			Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Spawning_Pool, SPAWNING_POOL_TILE_POS[_pData->myPosIdx], false);
 		}
 		else {
 			actionSuccess = Tools::BuildBuilding(currentItem.unitType);
