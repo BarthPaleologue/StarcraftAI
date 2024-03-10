@@ -36,6 +36,13 @@ class OwnedBase {
 		void allocateWorker(BWAPI::Unit worker);
 		void desallocateWorker(BWAPI::Unit worker);
 		
-		//send worker from this base to destBase.
-		void sendWorker(OwnedBase destBase, BWAPI::Unit worker);
+		//send a precise worker from this base to destBase.
+		void sendWorker(OwnedBase* destBase, BWAPI::Unit worker);
+		
+		//send SOME worker from "this" to dest_base;
+		void sendSomeone(OwnedBase* destBase);
+
+		//dispatch workers from other bases to my "this". 
+		void dispatchWorkersToMe(std::vector<OwnedBase> ownedBases);
+
 };
