@@ -34,14 +34,14 @@ const BWAPI::TilePosition START_TILE_POS[2] = {
 	BWAPI::TilePosition(64, 118)
 };
 
-const BWAPI::TilePosition NATURAL_TILE_POS[2] = {
-	BWAPI::TilePosition(63,19),
-	BWAPI::TilePosition(29, 107)
-};
-
 const BWAPI::TilePosition SPAWNING_POOL_TILE_POS[2] = {
 	BWAPI::TilePosition(29, 12),
 	BWAPI::TilePosition(68, 114),
+};
+
+const BWAPI::TilePosition SPIRE_TILE_POS[2] = {
+	BWAPI::TilePosition(63, 23),
+	BWAPI::TilePosition(31, 101),
 };
 
 class Blackboard {

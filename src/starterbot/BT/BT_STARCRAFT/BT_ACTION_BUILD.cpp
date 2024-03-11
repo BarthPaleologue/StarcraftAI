@@ -2,8 +2,8 @@
 #include "Tools.h"
 #include "Blackboard.h"
 
-BT_ACTION_BUILD::BT_ACTION_BUILD(std::string name, BWAPI::UnitType building, BWAPI::TilePosition &tilePos, BT_NODE* parent, bool duplicate)
-    : BT_ACTION(name, parent), m_building(building),m_tilePos(tilePos),m_duplicate(duplicate) {
+BT_ACTION_BUILD::BT_ACTION_BUILD(std::string name, BWAPI::UnitType building, BWAPI::TilePosition &tilePos, BT_NODE* parent)
+    : BT_ACTION(name, parent), m_building(building),m_tilePos(tilePos) {
 }
 
 BT_NODE::State BT_ACTION_BUILD::Evaluate(void* data)
@@ -27,7 +27,7 @@ BT_NODE::State BT_ACTION_BUILD::Build(void* data)
 	}
 
     bool startedBuilding = (m_tilePos == BWAPI::TilePosition(-1, -1)) ?
-        Tools::BuildBuildingAtPosition(m_building, m_tilePos, m_duplicate)
+        Tools::BuildBuildingAtPosition(m_building, m_tilePos)
         : Tools::BuildBuilding(m_building);
 
     return startedBuilding ? BT_NODE::SUCCESS : BT_NODE::FAILURE;

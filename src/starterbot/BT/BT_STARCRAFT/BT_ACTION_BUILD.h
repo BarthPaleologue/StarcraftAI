@@ -7,7 +7,7 @@
 //--------------------
 class BT_ACTION_BUILD : public BT_ACTION {
 public:
-    BT_ACTION_BUILD(std::string name, BWAPI::UnitType building, BWAPI::TilePosition &tilePos, BT_NODE* parent, bool duplicate=false);
+    BT_ACTION_BUILD(std::string name, BWAPI::UnitType building, BWAPI::TilePosition &tilePos, BT_NODE* parent);
 
 private:
     BWAPI::UnitType m_building;
