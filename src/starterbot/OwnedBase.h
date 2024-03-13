@@ -3,18 +3,26 @@
 #include "Tools.h"
 #include "BT_NODE.h"
 
+class MineralSpot {
+	public : 
+		BWAPI::Unit mineral;
+		std::vector<BWAPI::Unit> workers;
+
+		inline MineralSpot(BWAPI::Unit min) { this->mineral = min; };
+		inline void sendToMine(BWAPI::Unit worker) {
+			this->workers.push_back(worker);
+			worker->rightClick(mineral);
+		};
+};
+
+
 class OwnedBase {
 	private : 
 		BWAPI::Position pos;
 		
-		//Minerals : 
-		std::vector<int> minerals_indx_to_ID;
-		std::map<int, int> minerals_ID_to_indx;
-		std::vector<int> mineralsOccupancyTable;
-		//key : worker ID, value : associated Mineral Id;
-		
-		std::vector<BWAPI::Unit> baseWorkers;
-		std::map<int, int> workerMineralTable;
+
+		std::vector<MineralSpot> minerals;
+
 		
 
 
@@ -32,9 +40,12 @@ class OwnedBase {
 		//used in the node SendIdleWorkerToMinerals. Sens the workers OF THIS BASE to work
 		BT_NODE::State base_SendIdleWorkerToMinerals();
 		
+		MineralSpot* bestSpot();
+		MineralSpot* worstSpot();
+
 		//allocate/desallocate worker to a base : 
 		void allocateWorker(BWAPI::Unit worker);
-		void desallocateWorker(BWAPI::Unit worker);
+		void freeWorker(BWAPI::Unit worker);
 		
 		//send a precise worker from this base to destBase.
 		void sendWorker(OwnedBase* destBase, BWAPI::Unit worker);
@@ -43,6 +54,14 @@ class OwnedBase {
 		void sendSomeone(OwnedBase* destBase);
 
 		//dispatch workers from other bases to my "this". 
-		void dispatchWorkersToMe(std::vector<OwnedBase> ownedBases);
+		void dispatchWorkersToMe(std::vector<OwnedBase>* ownedBases);
+
+		inline void print_minerals() {
+			for (int i = 0; i < this->minerals.size();i++) {
+				std::cout << minerals.at(i).workers.size() << " - ";
+			}
+			std::cout<<""<<std::endl;
+		}
+
 
 };

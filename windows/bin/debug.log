@@ -1,4 +1,4 @@
-0 | 26108 | 0 | 2788046
+0 | 27412 | 0 | 2446859
 1 | 0 | 0 | 0
 2 | 0 | 0 | 0
 3 | 0 | 0 | 0
@@ -10,66 +10,21 @@ Connected
 Connection successful
 Waiting for game start
 Playing Game 0 on map (2)Destination.scx
-A Zerg_Hatchery has been created at (2112,3824)in(64,118)
-Zerg_Spawning_Poolsuccessfully started
-Zerg_Dronesuccessfully started
-A Zerg_Spawning_Pool has been created at (1872,3872)in(57,120)
-A Zerg_Hatchery has been created at (2784,2288)in(85,70)
-A Zerg_Hatchery has been created at (2784,3120)in(85,96)
-We lost!
-Game Over
-Waiting for game start
-failed, disconnecting
-Disconnected
-0 | 20944 | 0 | 2930140
-1 | 0 | 0 | 0
-2 | 0 | 0 | 0
-3 | 0 | 0 | 0
-4 | 0 | 0 | 0
-5 | 0 | 0 | 0
-6 | 0 | 0 | 0
-7 | 0 | 0 | 0
-Connected
-Connection successful
-Waiting for game start
-Playing Game 0 on map (2)Destination.scx
-A Zerg_Hatchery has been created at (1056,272)in(31,7)
-Zerg_Spawning_Poolsuccessfully started
-Zerg_Dronesuccessfully started
-A Zerg_Spawning_Pool has been created at (1104,416)in(33,12)
-A Zerg_Hatchery has been created at (2816,1264)in(86,38)
-A Zerg_Hatchery has been created at (288,944)in(7,28)
-A Zerg_Hatchery has been created at (2816,240)in(86,6)
-A Zerg_Hatchery has been created at (288,1808)in(7,55)
-We lost!
-Game Over
-Waiting for game start
-failed, disconnecting
-Disconnected
-0 | 24772 | 0 | 3222156
-1 | 0 | 0 | 0
-2 | 0 | 0 | 0
-3 | 0 | 0 | 0
-4 | 0 | 0 | 0
-5 | 0 | 0 | 0
-6 | 0 | 0 | 0
-7 | 0 | 0 | 0
-Connected
-Connection successful
-Waiting for game start
-Playing Game 0 on map (2)Destination.scx
-A Zerg_Hatchery has been created at (1056,272)in(31,7)
-We lost!
-Game Over
-Waiting for game start
-Playing Game 1 on map (2)Destination.scx
+desallocate
+desallocate
+desallocate
+desallocate
+desallocate
+desallocate
+desallocate
+desallocate
 A Zerg_Hatchery has been created at (1056,272)in(31,7)
 We lost!
 Game Over
 Waiting for game start
 failed, disconnecting
 Disconnected
-0 | 26228 | 0 | 3240234
+0 | 27452 | 0 | 3266843
 1 | 0 | 0 | 0
 2 | 0 | 0 | 0
 3 | 0 | 0 | 0
@@ -81,73 +36,26 @@ Connected
 Connection successful
 Waiting for game start
 Playing Game 0 on map (2)Destination.scx
-A Zerg_Hatchery has been created at (2112,3824)in(64,118)
-Zerg_Spawning_Poolsuccessfully started
-Zerg_Dronesuccessfully started
-A Zerg_Spawning_Pool has been created at (2032,3968)in(62,123)
-We lost!
-Game Over
-Waiting for game start
-failed, disconnecting
-Disconnected
-0 | 27092 | 0 | 3452031
-1 | 0 | 0 | 0
-2 | 0 | 0 | 0
-3 | 0 | 0 | 0
-4 | 0 | 0 | 0
-5 | 0 | 0 | 0
-6 | 0 | 0 | 0
-7 | 0 | 0 | 0
-Connected
-Connection successful
-Waiting for game start
-Playing Game 0 on map (2)Destination.scx
-A Zerg_Hatchery has been created at (2112,3824)in(64,118)
-Zerg_Spawning_Poolsuccessfully started
-Zerg_Dronesuccessfully started
-A Zerg_Spawning_Pool has been created at (2224,3680)in(68,114)
-We lost!
-Game Over
-Waiting for game start
-failed, disconnecting
-Disconnected
-0 | 25820 | 0 | 3662390
-1 | 0 | 0 | 0
-2 | 0 | 0 | 0
-3 | 0 | 0 | 0
-4 | 0 | 0 | 0
-5 | 0 | 0 | 0
-6 | 0 | 0 | 0
-7 | 0 | 0 | 0
-Connected
-Connection successful
-Waiting for game start
-Playing Game 0 on map (2)Destination.scx
-A Zerg_Hatchery has been created at (2112,3824)in(64,118)
-Zerg_Spawning_Poolsuccessfully started
-Zerg_Dronesuccessfully started
-We lost!
-Game Over
-Waiting for game start
-failed, disconnecting
-Disconnected
-0 | 17172 | 0 | 3703640
-1 | 0 | 0 | 0
-2 | 0 | 0 | 0
-3 | 0 | 0 | 0
-4 | 0 | 0 | 0
-5 | 0 | 0 | 0
-6 | 0 | 0 | 0
-7 | 0 | 0 | 0
-Connected
-Connection successful
-Waiting for game start
-Playing Game 0 on map (2)Destination.scx
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
 A Zerg_Hatchery has been created at (1056,272)in(31,7)
-Zerg_Spawning_Poolsuccessfully started
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
 Zerg_Dronesuccessfully started
-A Zerg_Spawning_Pool has been created at (1104,416)in(33,12)
-A Zerg_Spawning_Pool has been created at (976,416)in(29,12)
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
+ - trying to free - 
 We lost!
 Game Over
 Waiting for game start

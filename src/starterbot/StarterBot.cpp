@@ -236,7 +236,7 @@ void StarterBot::onUnitMorph(BWAPI::Unit unit)
 {   
     if ((unit->getInitialType() == BWAPI::Broodwar->self()->getRace().getWorker()) && Tools::IsMine(unit)) {
         for (auto& base : this->pData->ownedBases) {
-            base.desallocateWorker(unit);
+            base.freeWorker(unit);
         }
     }
 }
