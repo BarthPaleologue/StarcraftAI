@@ -2,7 +2,7 @@
 #include <unordered_set>
 #include <queue>
 #include <BWAPI.h>
-#include "BuildOrder.h"
+#include "buildOrder/BuildOrder.h"
 #include "OwnedBase.h"
 #include <queue>
 #include "Job.h"
