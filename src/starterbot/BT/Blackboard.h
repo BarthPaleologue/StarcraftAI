@@ -11,6 +11,7 @@
 #define THRESHOLD1_UNUSED_SUPPLY 2
 #define NWANTED_WORKERS_TOTAL 20
 
+const BWAPI::TilePosition NONE_POS(-1, -1);
 
 const BWAPI::TilePosition BASE_TILE_POS[2][6] = {
 	{BWAPI::TilePosition(31,7),
@@ -46,7 +47,7 @@ const BWAPI::TilePosition SPIRE_TILE_POS[2] = {
 
 class Blackboard {
 public:
-	Blackboard(): buildOrder() {}
+	Blackboard(e_buildOrderType _boType): buildOrder(_boType) {}
 	
 	BuildOrder buildOrder;
 

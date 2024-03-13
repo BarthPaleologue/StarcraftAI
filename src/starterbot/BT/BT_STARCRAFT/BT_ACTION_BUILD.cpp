@@ -2,7 +2,7 @@
 #include "Tools.h"
 #include "Blackboard.h"
 
-BT_ACTION_BUILD::BT_ACTION_BUILD(std::string name, BWAPI::UnitType building, BWAPI::TilePosition &tilePos, BT_NODE* parent)
+BT_ACTION_BUILD::BT_ACTION_BUILD(std::string name, BWAPI::UnitType building, const BWAPI::TilePosition &tilePos, BT_NODE* parent)
     : BT_ACTION(name, parent), m_building(building),m_tilePos(tilePos) {
 }
 
@@ -26,7 +26,7 @@ BT_NODE::State BT_ACTION_BUILD::Build(void* data)
 		return BT_NODE::FAILURE;
 	}
 
-    bool startedBuilding = (m_tilePos == BWAPI::TilePosition(-1, -1)) ?
+    bool startedBuilding = (m_tilePos != NONE_POS) ?
         Tools::BuildBuildingAtPosition(m_building, m_tilePos)
         : Tools::BuildBuilding(m_building);
 
