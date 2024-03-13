@@ -64,7 +64,7 @@ StarterBot::StarterBot()
     // ==========================================================
     //pBtTest = new BT_DECORATOR("EntryPoint", nullptr);
 
-    //BT_PARALLEL_SEQUENCER* pMainParallelSeq = new BT_PARALLEL_SEQUENCER("MainParallelSequence", pBT, 10);
+    //BT_PARALLEL_SEQUENCER* pMainParallelSeq = new BT_PARALLEL_SEQUENCER("MainParallelSequence", pBtTest, 10);
 
     ////Farming Minerals forever
     //BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false, true);
@@ -79,10 +79,6 @@ StarterBot::StarterBot()
     //// check if not sparing minerals for tasks already required from elsewhere
     //BT_DECO_INVERTER* pDecoMineralsRequiredElsewhere = new BT_DECO_INVERTER("DecoMineralsRequiredElsewhere", selectHQAction);
     //BT_COND_NOTHING_REQUESTED* pNothingElseRequested = new BT_COND_NOTHING_REQUESTED("CondNothingElseRequested", pDecoMineralsRequiredElsewhere);
-
-    //// Build Natural Base
-    //// make sure scout before that
-    ////BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
 
     ////Build Additional overlords
     //OverlordUtils::CreateTrainingTree(selectHQAction);
@@ -206,6 +202,8 @@ void StarterBot::onFrame()
 		if (!unit->exists()) continue; // the unit does not exist (dead)
         if (m_unitBT.count(unit)) continue; // the unit already has a BT
         if (!unit->isCompleted()) continue; // the unit is not completed
+
+        // TODO: if zerg egg is dying then cancel last sec
         if (unit->getType() == BWAPI::UnitTypes::Zerg_Egg) continue; // the unit is an egg, we will assign a BT once it is a true unit
 		if (unit->getType() == BWAPI::UnitTypes::Zerg_Larva) continue; // the unit is a larva, we will assign a BT once it is a true unit
 

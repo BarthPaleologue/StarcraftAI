@@ -58,7 +58,7 @@ public:
 	BWAPI::UnitType focusedTrainingUnit = BWAPI::UnitTypes::Zerg_Drone;
 
 	int currSupply;
-	int thresholdSupply = 0; // modifiable with the amount of HQ we have + unit production
+	int thresholdSupply = 0; //if it's -1 then it's calculated by overlord management 
 
 	// TODO: replace with "number of workers per base" and "number of minerals per base" 
 	// (not more than 2 workers / mineral, don't forget to update)

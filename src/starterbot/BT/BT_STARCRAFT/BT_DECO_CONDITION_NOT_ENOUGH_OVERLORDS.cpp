@@ -41,6 +41,8 @@ bool BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS::IsThereNotEnoughOverlords(void* dat
 		
 		unusedSupply -= BWAPI::UnitTypes::Zerg_Overlord.supplyProvided();
 	}
-
+	if (pBlackboard->thresholdSupply >= 0) { // hardcoded threshold (notably for all-ins)
+		return unusedSupply <= pBlackboard->thresholdSupply;
+	}
 	return (float)unusedSupply < (float)nbBases * (float)focusedTrainedUnitSupply * (float)overlordTrainingTime / (float)focusedTrainedUnitTrainingTime;
 }
