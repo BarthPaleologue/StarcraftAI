@@ -10,7 +10,7 @@
 
 StarterBot::StarterBot()
 {
-    pData = new Blackboard(e_buildOrderType::NinePool);
+    pData = new Blackboard(e_buildOrderType::FourPool);
     pData->currMinerals = 0;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
@@ -299,7 +299,7 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
 
     //if unit is worker : attach it to its base (the closest base)
     if (unit->getType() == BWAPI::Broodwar->self()->getRace().getWorker() && Tools::IsMine(unit)) {
-
+        std::cout << "new worker ! yay !" << std::endl;
         BWAPI::Position unit_pos = unit->getPosition();
         
         float l_min = unit_pos.getDistance(pData->ownedBases.at(0).get_pos());
@@ -317,6 +317,8 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
 
     else if (unit->getType() == BWAPI::Broodwar->self()->getRace().getResourceDepot()) {
         if (Tools::IsMine(unit)) {
+            std::cout << "new base ! yay !" << std::endl;
+
             //we have to check if this is our starting base ! Indeed, the starting base actually
             //spawns at t=0... but it is already inside the vec ! (and it needs to be).
             if (unit->getPosition().getDistance(this->pData->basePosition) > 0) {
@@ -333,7 +335,6 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
         BWAPI::TilePosition tile = unit->getTilePosition();
         std::cout << "A " << type << " has been created at " << pos << "in" << tile << std::endl;
 	}
-	
 }
 
 // Called whenever a unit appears, with a pointer to the destroyed unit

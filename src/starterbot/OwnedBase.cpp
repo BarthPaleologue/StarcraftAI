@@ -1,11 +1,14 @@
 #include "OwnedBase.h"
 
 OwnedBase::OwnedBase(BWAPI::Position pos) {
+    std::cout << "call 1" << std::endl;
 	this->pos = pos;
 	this->create_minerals_table();
 }
 
 void OwnedBase::create_minerals_table() {
+    std::cout << "call 2" << std::endl;
+
     BWAPI::Unitset myMinerals = BWAPI::Broodwar->getMinerals();
 
     float r = 400;
@@ -19,6 +22,8 @@ void OwnedBase::create_minerals_table() {
 }
 
 MineralSpot* OwnedBase::bestSpot() {
+    std::cout << "call 3" << std::endl;
+
     int argmin = 0;
     int my_min = this->minerals.at(0).workers.size();
     for (int i = 0; i < this->minerals.size(); i++) {
@@ -32,6 +37,8 @@ MineralSpot* OwnedBase::bestSpot() {
 }
 
 MineralSpot* OwnedBase::worstSpot() {
+    std::cout << "call 4" << std::endl;
+
     int argmax = 0;
     int my_max = this->minerals.at(0).workers.size();
     for (int i = 0; i < this->minerals.size(); i++) {
@@ -45,9 +52,11 @@ MineralSpot* OwnedBase::worstSpot() {
 }
 
 BT_NODE::State OwnedBase::base_SendIdleWorkerToMinerals() {
-       
-    MineralSpot* BestSpot = this->bestSpot();
+    std::cout << "call 5" << std::endl;
+    this->print_minerals();
     for (MineralSpot min : this->minerals) {
+        MineralSpot* BestSpot = this->bestSpot();
+
         for (BWAPI::Unit worker : min.workers) {
             if (worker->isIdle()) {
                 BestSpot->sendToMine(worker);
@@ -60,6 +69,8 @@ BT_NODE::State OwnedBase::base_SendIdleWorkerToMinerals() {
 }
 
 void OwnedBase::allocateWorker(BWAPI::Unit worker) {
+    std::cout << "call 6" << std::endl;
+
     if (worker->getType() != BWAPI::Broodwar->self()->getRace().getWorker()) {
         return;
     }
@@ -68,10 +79,11 @@ void OwnedBase::allocateWorker(BWAPI::Unit worker) {
 }
 
 void OwnedBase::freeWorker(BWAPI::Unit worker) {
+    std::cout << "call 7" << std::endl;
+
     if (worker->getType() != BWAPI::Broodwar->self()->getRace().getWorker()) {
             return;
     }
-    std::cout << " - trying to free - " << std::endl;
     for (MineralSpot m : this->minerals) {
         for (int i = 0; i < (& (& m)->workers)->size(); i++) {
             if ((&(&m)->workers)->at(i) == worker) {
@@ -84,6 +96,8 @@ void OwnedBase::freeWorker(BWAPI::Unit worker) {
 }
 
 void OwnedBase::sendWorker(OwnedBase* baseDest, BWAPI::Unit worker) {
+    std::cout << "call 8" << std::endl;
+
     if (worker->getType() != BWAPI::Broodwar->self()->getRace().getWorker()) {
         return;
     }
@@ -92,6 +106,8 @@ void OwnedBase::sendWorker(OwnedBase* baseDest, BWAPI::Unit worker) {
 ;
 
 void OwnedBase::sendSomeone(OwnedBase* destBase) {
+    std::cout << "call 9" << std::endl;
+
     //send a worker that is mining : we choose one that is mining the most saturated spot.
 
     MineralSpot* worst = this->worstSpot();
@@ -101,6 +117,7 @@ void OwnedBase::sendSomeone(OwnedBase* destBase) {
 
 
 void OwnedBase::dispatchWorkersToMe(std::vector<OwnedBase>* ownedBases) {
+    std::cout << "call 10" << std::endl;
 
     float maxDist = 2000;
     int max_workers_to_move=6;
