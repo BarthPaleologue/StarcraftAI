@@ -5,29 +5,48 @@
 
 using namespace BuildOrderTools;
 
-BuildOrder::BuildOrder() {
-	// see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
-	m_order = {
-		//{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
-		//{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
-		/*
-		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
-		{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
-		{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},*/
-	};
+BuildOrder::BuildOrder(e_buildOrderType _boType) {
+	switch (_boType) {
+	case(e_buildOrderType::NinePool):
+		m_order = {
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
+			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
+			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
+			// 8 zerglings
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+		};
+		break;
+	case(e_buildOrderType::TwelveHatch):
+		m_order = {
+			{ isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, e_orderItemAction::Train },
+			{ isSupplyTimingReached(12), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build },
+			{ isSupplyTimingReached(11), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build },
+		};
+		break;
+	case(e_buildOrderType::FourPool):
+		m_order = {
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
+			{isSupplyTimingReached(3), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train}
+		};
+		break;
 
-	// see https://liquipedia.net/starcraft/12_Hatch_(vs._Protoss)
-	m_order = {
-		{ isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, e_orderItemAction::Train },
-		{ isSupplyTimingReached(12), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build },
-		{ isSupplyTimingReached(11), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build },
-	};
-
-	// https://liquipedia.net/starcraft/4/5_Pool
-	/*m_order = {
-		{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
-		{isSupplyTimingReached(3), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train}
-	};*/
+	default:
+		m_order = {
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build },
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Creep_Colony, e_orderItemAction::Build},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Sunken_Colony, e_orderItemAction::Build},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Lair, e_orderItemAction::Build},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spire, e_orderItemAction::Build},
+		};
+		break;
+	}
 }
 
 void BuildOrder::nextTask()
