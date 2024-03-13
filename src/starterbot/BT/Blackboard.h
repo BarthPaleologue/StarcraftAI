@@ -11,6 +11,7 @@
 #define THRESHOLD1_UNUSED_SUPPLY 2
 #define NWANTED_WORKERS_TOTAL 20
 
+const BWAPI::TilePosition NONE_POS(-1, -1);
 
 const BWAPI::TilePosition BASE_TILE_POS[2][6] = {
 	{BWAPI::TilePosition(31,7),
@@ -34,19 +35,19 @@ const BWAPI::TilePosition START_TILE_POS[2] = {
 	BWAPI::TilePosition(64, 118)
 };
 
-const BWAPI::TilePosition NATURAL_TILE_POS[2] = {
-	BWAPI::TilePosition(63,19),
-	BWAPI::TilePosition(29, 107)
-};
-
 const BWAPI::TilePosition SPAWNING_POOL_TILE_POS[2] = {
 	BWAPI::TilePosition(29, 12),
 	BWAPI::TilePosition(68, 114),
 };
 
+const BWAPI::TilePosition SPIRE_TILE_POS[2] = {
+	BWAPI::TilePosition(63, 23),
+	BWAPI::TilePosition(31, 101),
+};
+
 class Blackboard {
 public:
-	Blackboard(): buildOrder() {}
+	Blackboard(e_buildOrderType _boType): buildOrder(_boType) {}
 	
 	BuildOrder buildOrder;
 
@@ -57,7 +58,7 @@ public:
 	BWAPI::UnitType focusedTrainingUnit = BWAPI::UnitTypes::Zerg_Drone;
 
 	int currSupply;
-	int thresholdSupply = 0; // modifiable with the amount of HQ we have + unit production
+	int thresholdSupply = 0; //if it's -1 then it's calculated by overlord management 
 
 	// TODO: replace with "number of workers per base" and "number of minerals per base" 
 	// (not more than 2 workers / mineral, don't forget to update)

@@ -163,7 +163,7 @@ bool Tools::BuildBuilding(BWAPI::UnitType type)
 }
 
 
-bool Tools::BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition buildPos, bool duplicate)
+bool Tools::BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition buildPos)
 {
     // Get the type of unit that is required to build the desired building
     BWAPI::UnitType builderType = type.whatBuilds().first;
@@ -173,17 +173,11 @@ bool Tools::BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition bu
     BWAPI::Position buildingPos(buildPos);
     BWAPI::Unit builder = Tools::GetClosestUnitOfType(builderType, buildingPos);
     //BWAPI::Unit builder = Tools::GetUnitOfType(builderType);
+    if (type.mineralPrice() > BWAPI::Broodwar->self()->minerals()) {
+		return false;
+	}
     if (!builder) { 
         return false; }
-    if (!duplicate) {
-        for (auto& unit: BWAPI::Broodwar->getUnitsOnTile(buildPos))
-        {
-            if (unit->getType() == type)
-            {
-				return false;
-			}
-		}
-    }
     if (!BWAPI::Broodwar->isExplored(buildPos)) {
 		builder->move(buildingPos);
         return false;
@@ -191,8 +185,8 @@ bool Tools::BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition bu
     // Ask BWAPI for a building location near the desired position for the type
     int maxBuildRange = 64;
     bool buildingOnCreep = type.requiresCreep();
-    BWAPI::TilePosition buildPosHere = BWAPI::Broodwar->getBuildLocation(type, buildPos, maxBuildRange, buildingOnCreep);
-    return builder->build(type, buildPosHere);
+    //BWAPI::TilePosition buildPosHere = BWAPI::Broodwar->getBuildLocation(type, buildPos, maxBuildRange, buildingOnCreep);
+    return builder->build(type, buildPos);
 }
 
 

@@ -7,6 +7,13 @@
 
 class Blackboard;
 
+enum class e_buildOrderType {
+	NinePool, // see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
+	FourPool, // https://liquipedia.net/starcraft/4/5_Pool
+	TwelveHatch, // see https://liquipedia.net/starcraft/12_Hatch_(vs._Protoss)
+	DEBUG // debug purposes, when you need to place buildings asap for ex
+};
+
 enum class e_orderItemAction {
 	Build, // Build the unit type
 	Cancel, // Cancel the build process of the unit type
@@ -36,7 +43,7 @@ struct OrderItem {
 class BuildOrder
 {
 public:
-	BuildOrder();
+	BuildOrder(e_buildOrderType _boType);
 
 	void nextTask();
 	bool evaluate(Blackboard* pData);

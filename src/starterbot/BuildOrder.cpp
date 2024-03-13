@@ -78,17 +78,34 @@ bool BuildOrder::evaluate(Blackboard* _pData) {
 		// build natural hatchery at natural position
 		if (currentItem.unitType == BWAPI::UnitTypes::Zerg_Hatchery) {
 			for (auto& baseTilePos : BASE_TILE_POS[_pData->myPosIdx]) {
-				if (BWAPI::Broodwar->canBuildHere(baseTilePos, BWAPI::UnitTypes::Zerg_Hatchery)) {
-					Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Hatchery, baseTilePos, false);
+				bool isBuilt = false;
+				for (auto& unit : BWAPI::Broodwar->getUnitsOnTile(baseTilePos)) {
+					if (unit->getType() == BWAPI::UnitTypes::Zerg_Hatchery) {
+						isBuilt = true;
+						break;
+					}
+				}
+				if (isBuilt) continue;
+				Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Hatchery, baseTilePos);
+				break;
+			}
+		}
+		else if (currentItem.unitType == BWAPI::UnitTypes::Zerg_Spawning_Pool) {
+			Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Spawning_Pool, SPAWNING_POOL_TILE_POS[_pData->myPosIdx]);
+		}
+		else if (currentItem.unitType == BWAPI::UnitTypes::Zerg_Spire) {
+			Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Extractor, SPIRE_TILE_POS[_pData->myPosIdx]);
+		}
+		else if (currentItem.unitType == BWAPI::UnitTypes::Zerg_Sunken_Colony) {
+			for (auto& unit : BWAPI::Broodwar->self()->getUnits()) {
+				if (unit->getType() == BWAPI::UnitTypes::Zerg_Creep_Colony && unit->isCompleted()) {
+					unit->morph(BWAPI::UnitTypes::Zerg_Sunken_Colony);
 					break;
 				}
 			}
 		}
-		else if (currentItem.unitType == BWAPI::UnitTypes::Zerg_Spawning_Pool) {
-			Tools::BuildBuildingAtPosition(BWAPI::UnitTypes::Zerg_Spawning_Pool, SPAWNING_POOL_TILE_POS[_pData->myPosIdx], false);
-		}
 		else {
-			actionSuccess = Tools::BuildBuilding(currentItem.unitType);
+			Tools::BuildBuilding(currentItem.unitType);
 		}
 		break;
 	case e_orderItemAction::Cancel:

@@ -18,7 +18,7 @@ namespace Tools
     BWAPI::Unit GetClosestUnitOfTypeBeingBuilt(BWAPI::UnitType type, BWAPI::Position position, float distance = 100000);
 
     bool BuildBuilding(BWAPI::UnitType type);
-    bool BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition position, bool duplicate=false);
+    bool BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition position);
 
     void DrawUnitBoundingBoxes();
     void DrawUnitCommands();
