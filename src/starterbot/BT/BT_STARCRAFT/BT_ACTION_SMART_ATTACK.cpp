@@ -1,6 +1,6 @@
 #include "BT_ACTION_SMART_ATTACK.h"
 #include "Tools.h"
-#include "ForceTools.h"
+#include "targeting/ForceTools.h"
 #include "Blackboard.h"
 
 BT_ACTION_SMART_ATTACK::BT_ACTION_SMART_ATTACK(std::string name, BWAPI::Unit unit, BT_NODE* parent)
