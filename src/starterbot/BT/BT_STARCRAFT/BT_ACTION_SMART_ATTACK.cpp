@@ -1,6 +1,6 @@
 #include "BT_ACTION_SMART_ATTACK.h"
 #include "Tools.h"
-#include "targeting/ForceTools.h"
+//#include "targeting/ForceTools.h"
 #include "Blackboard.h"
 
 BT_ACTION_SMART_ATTACK::BT_ACTION_SMART_ATTACK(std::string name, BWAPI::Unit unit, BT_NODE* parent)
@@ -22,7 +22,7 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 
 	BWAPI::Unitset ememyUnitsInRadius = Tools::GetUnitsInRadius(m_unit->getPosition(), 300, BWAPI::Broodwar->enemy()->getUnits());
 
-	std::map<BWAPI::Unit, std::pair<float, float>> combatPredictions;
+	/*std::map<BWAPI::Unit, std::pair<float, float>> combatPredictions;
 	for (auto& enemyUnit : ememyUnitsInRadius)
 	{
 		std::pair<float, float> prediction = ForceTools::fightPredictor(m_unit->getHitPoints(), m_unit->getType(), BWAPI::Broodwar->self(), enemyUnit->getHitPoints(), enemyUnit->getType(), BWAPI::Broodwar->enemy());
@@ -39,7 +39,9 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 	{
 		m_unit->attack(sortedPredictions[0].first);
 		return BT_NODE::SUCCESS;
-	}
+	}*/
 
-	return BT_NODE::FAILURE;
+	m_unit->attack(ememyUnitsInRadius.getClosestUnit());
+
+	return BT_NODE::SUCCESS;
 }
