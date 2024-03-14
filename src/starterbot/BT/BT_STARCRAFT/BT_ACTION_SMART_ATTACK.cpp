@@ -1,6 +1,7 @@
 #include "BT_ACTION_SMART_ATTACK.h"
 #include "Tools.h"
 #include "targeting/ForceTools.h"
+#include "targeting/TargetingTools.h"
 #include "Blackboard.h"
 
 BT_ACTION_SMART_ATTACK::BT_ACTION_SMART_ATTACK(std::string name, BWAPI::Unit unit, BT_NODE* parent)
@@ -33,87 +34,37 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 		return BT_NODE::SUCCESS;
 	}
 
-	// destroy buildings by priority
-	/* TODO(Barth)
-	* 
-	zerg:
-	zergling
-	sunken colony
-	sunken colony that's being morphed
-	drone attacking zerglings
-	spawning pool (morphed or not)
-	drones
-
-	protoss:
-	photon cannon that's built
-	photon cannon that's being built
-	probe attacking zerglings
-	zealot attacking zerglings
-	pylons
-	probes
-
-	terran if no bunker built:
-	scv building bunker
-	scv building barracks
-	scv attacking zerglings
-	marine attacking zergling
-	barracks (check if it's on the ground btw)
-	SCV
-	supply depot
-	other GROUND units (not possible to kill floating buildings)
-
-	terran if bunker built (not prio):
-	marine (absolutely crucial)
-	SCV attacking zerglings
-	SCV repairing bunker
-	bunker
-	(afterwards returns to "no bunker")
-
-	*/
-
-	std::vector<BWAPI::UnitType> priorityBuildings;
-	switch (blackboard->enemyRace)
-	{
-	case BWAPI::Races::Zerg:
-		priorityBuildings.push_back(BWAPI::UnitTypes::Zerg_Zergling);
-		priorityBuildings.push_back(BWAPI::UnitTypes::Zerg_Sunken_Colony);
-		priorityBuildings.push_back(BWAPI::UnitTypes::Zerg_Spawning_Pool);
-		priorityBuildings.push_back(BWAPI::UnitTypes::Zerg_Drone);
-	case BWAPI::Races::Protoss:
-		priorityBuildings.push_back(BWAPI::UnitTypes::Protoss_Photon_Cannon);
-		priorityBuildings.push_back(BWAPI::UnitTypes::Protoss_Probe);
-		priorityBuildings.push_back(BWAPI::UnitTypes::Protoss_Pylon);
-	case BWAPI::Races::Terran:
-		priorityBuildings.push_back(BWAPI::UnitTypes::Terran_SCV);
-		priorityBuildings.push_back(BWAPI::UnitTypes::Terran_Supply_Depot);
-	default:
-		break;
-	}
-
+	// destroy priority buildings
 	// assign a score to each enemy unit based on the priority
-	std::map<BWAPI::Unit, float> enemyUnitsScores;
+	std::map<BWAPI::Unit, int> enemyUnitsScores;
 	for (auto& enemyUnit : enemyUnitsInRadius)
 	{
-		float score = 0;
-		for (int i = 0; i < priorityBuildings.size(); i++)
+		int score = TargetingTools::LOWEST_PRIORITY;
+
+		switch (blackboard->enemyRace)
 		{
-			BWAPI::UnitType priorityBuilding = priorityBuildings[i];
-			if (enemyUnit->getType() == priorityBuilding)
-			{
-				score = std::max(score, 1.0f / ((float)i + 1.0f));
-				break;
-			}
+		case BWAPI::Races::Protoss:
+			score = TargetingTools::enemyProtossPriorityScore(enemyUnit);
+			break;
+		case BWAPI::Races::Terran:
+			score = TargetingTools::enemyTerranPriorityScore(enemyUnit);
+			break;
+		case BWAPI::Races::Zerg:
+			score = TargetingTools::enemyZergPriorityScore(enemyUnit);
+			break;
+		default:
+			break;
 		}
 
 		// the enemy unit is not a priority
-		if (score == 0) continue;
+		if (score == TargetingTools::LOWEST_PRIORITY) continue;
 
 		enemyUnitsScores[enemyUnit] = score;
 	}
 
 	// sort the scores to get the best target
-	std::vector<std::pair<BWAPI::Unit, float>> sortedScores(enemyUnitsScores.begin(), enemyUnitsScores.end());
-	std::sort(sortedScores.begin(), sortedScores.end(), [](const std::pair<BWAPI::Unit, float>& left, const std::pair<BWAPI::Unit, float>& right) {
+	std::vector<std::pair<BWAPI::Unit, int>> sortedScores(enemyUnitsScores.begin(), enemyUnitsScores.end());
+	std::sort(sortedScores.begin(), sortedScores.end(), [](const std::pair<BWAPI::Unit, int>& left, const std::pair<BWAPI::Unit, int>& right) {
 		return left.second > right.second;
 	});
 
