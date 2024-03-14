@@ -176,6 +176,8 @@ void StarterBot::onFrame()
     std::vector<BWAPI::Unit> overlords;
     Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Overlord, overlords);
     pData->nbOverlords = overlords.size();
+
+    pData->enemyRace = BWAPI::Broodwar->enemy()->getRace();
     
     // AI BT
     if (pBT != nullptr && pBT->Evaluate(pData) != BT_NODE::RUNNING)

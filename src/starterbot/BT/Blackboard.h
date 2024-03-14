@@ -86,6 +86,8 @@ public:
 	int myPosIdx;
 	int enemyPosIdx;
 
+	BWAPI::Race enemyRace;
+
 	// for units / techs we want right now but we don't have ressources so we don't train anything to wait for them
 	std::queue<BWAPI::UnitType> unitsRequested; // for now by build order, maybe add struct for prio
 	std::queue<BWAPI::TechType> techsRequested; 
