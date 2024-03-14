@@ -21,7 +21,7 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 {
 	Blackboard* blackboard = (Blackboard*)data;
 
-	BWAPI::Unitset enemyUnitsInRadius = Tools::GetUnitsInRadius(m_unit->getPosition(), 500, BWAPI::Broodwar->enemy()->getUnits());
+	BWAPI::Unitset enemyUnitsInRadius = Tools::GetUnitsInRadius(m_unit->getPosition(), 900, BWAPI::Broodwar->enemy()->getUnits());
 
 	// check if an enemy can be one shotted
 	for (auto& enemyUnit : enemyUnitsInRadius)
