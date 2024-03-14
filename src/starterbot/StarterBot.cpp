@@ -209,12 +209,9 @@ void StarterBot::onFrame()
 			m_unitBT.insert(std::make_pair(unit, OverlordUtils::CreateIndividualTree(unit)));
 			break;
             
-		case BWAPI::UnitTypes::Zerg_Zergling: {
+		case BWAPI::UnitTypes::Zerg_Zergling:
 			m_unitBT.insert(std::make_pair(unit, ZerglingUtils::CreateTree(unit)));
 			break;
-		}
-		default:
-			m_unitBT.insert(std::make_pair(unit, new BT_ACTION_LOG("DoNothing", nullptr, "Do nothing")));
 		}
     }
 
