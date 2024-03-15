@@ -20,9 +20,9 @@ class OwnedBase {
 	private : 
 		BWAPI::Position pos;
 		
-
 		std::vector<MineralSpot> minerals;
-
+		
+		int maxMineralDist = 400;
 		
 
 
@@ -61,7 +61,11 @@ class OwnedBase {
 				std::cout << minerals.at(i).workers.size() << " - ";
 			}
 			std::cout<<""<<std::endl;
+
 		}
+
+		//when a new mineral is discovered, we ceck if we need to add it.
+		void checkNewMineral(BWAPI::Unit mineral);
 
 
 };
