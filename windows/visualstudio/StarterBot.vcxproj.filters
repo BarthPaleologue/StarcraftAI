@@ -122,9 +122,6 @@
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\starterbot\OwnedBase.cpp" />
-    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IS_IN_ENEMY_BASE.cpp">
-      <Filter>BT\BT_STARCRAFT</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
@@ -142,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\starterbot\buildOrder\BuildOrderTools.cpp">
       <Filter>buildOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_SQUAD_CONDITION.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,9 +277,6 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_UNIT_CONDITION.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IS_IN_ENEMY_BASE.h">
-      <Filter>BT\BT_STARCRAFT</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
@@ -303,6 +303,11 @@
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\allInBT.h">
       <Filter>selfmadeBT</Filter>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_SQUAD_CONDITION.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,8 @@
 #include "BT_COND_NOTHING_REQUESTED.h"
 #include "BT_COND_VISIBLE.h"
 #include "BT_COND_EXPLORED.h"
+#include "BT_UNIT_CONDITION.h"
+#include "BT_SQUAD_CONDITION.h"
 
 ///Decorator Conditions
 #include "BT_DECO_UNIT_CONDITION.h"
@@ -38,7 +40,6 @@
 #include "BT_DECO_CONDITION_NOT_ENOUGH_UNIT.h"
 #include "BT_DECO_CONDITION_BUILD_ORDER_FINISHED.h"
 #include "BT_DECO_CONDITION_UNIT_IDLE.h"
-#include "BT_DECO_CONDITION_UNIT_IS_IN_ENEMY_BASE.h"
 #include "BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.h"
 
 ///Actions

@@ -19,14 +19,18 @@ BT_NODE::State BT_ACTION_GO_TO_ENEMY_BASE::GoToEnnemyBase(void* data)
 {
 	Blackboard* blackboard = (Blackboard*)data;
 
-	if (!blackboard->enemyBasesPositions.empty()) {
-		// we found at least one enemy base
-		BWAPI::Position tilePosition = blackboard->enemyBasesPositions[0];
+	if (blackboard->enemyBasesPositions.empty()) {
+		return BT_NODE::FAILURE;
+	}
 
-		m_unit->move(tilePosition);
+	// we found at least one enemy base
+	BWAPI::Position basePosition = blackboard->enemyBasesPositions[0];
 
+	if (m_unit->getDistance(basePosition) < 400) {
 		return BT_NODE::SUCCESS;
 	}
 
-	return BT_NODE::FAILURE;
+	m_unit->move(basePosition);
+
+	return BT_NODE::RUNNING;
 }

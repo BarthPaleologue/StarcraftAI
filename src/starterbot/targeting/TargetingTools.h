@@ -9,4 +9,10 @@ namespace TargetingTools {
 	//------------ utility functions ----------------
 	int unitCost(BWAPI::UnitType _unitType, double _gasFactor);
 	double gasFactor(int _baseCount);
+
+	const int LOWEST_PRIORITY = -10000;
+
+	int enemyZergPriorityScore(BWAPI::Unit unit);
+	int enemyTerranPriorityScore(BWAPI::Unit unit);
+	int enemyProtossPriorityScore(BWAPI::Unit unit);
 }

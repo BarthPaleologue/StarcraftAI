@@ -7,18 +7,23 @@ using namespace BuildOrderTools;
 
 BuildOrder::BuildOrder(e_buildOrderType _boType) {
 	switch (_boType) {
-	case(e_buildOrderType::NinePool):
+	case(e_buildOrderType::DEBUG):
 		m_order = {
+			{isSupplyTimingReached(2), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build },
 			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
 			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
-			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
+			{isSupplyTimingReached(99999), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+
+
+			//{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+			//{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
+			//{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+			//{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
 			// 8 zerglings
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			//{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			//{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			//{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			//{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
 		};
 		break;
 	case(e_buildOrderType::TwelveHatch):
@@ -42,6 +47,7 @@ BuildOrder::BuildOrder(e_buildOrderType _boType) {
 		break;
 
 	default:
+		//is called DEBUG, not default !
 		m_order = {
 			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build },
 			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
@@ -152,7 +158,6 @@ bool BuildOrder::evaluate(Blackboard* _pData) {
 		std::cout << "Error: unexpected orderItemAction" << std::endl;
 		break;
 	}
-
 	if (actionSuccess) {
 		std::cout << currentItem.unitType << "successfully started" << std::endl;
 		nextTask();
