@@ -19,7 +19,6 @@ StarterBot::StarterBot()
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
 
     pBT = BT_Builder::buildEarlyAllInBT();
-
 }
 
 //functions needed for initialisating : 
@@ -165,6 +164,7 @@ void StarterBot::onFrame()
     // execute all BTs
     for (const auto& [unit, unitBT] : m_unitBT) {
         unitBT->Evaluate(pData);
+        //unitBT->Reset();
     }
 
     // Draw unit health bars, which brood war unfortunately does not do

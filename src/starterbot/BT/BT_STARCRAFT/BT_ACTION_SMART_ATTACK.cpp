@@ -14,14 +14,16 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::Evaluate(void* data)
 
 std::string BT_ACTION_SMART_ATTACK::GetDescription()
 {
-	return "GO TO ENEMY BASE";
+	return "ACTION_SMART_ATTACK";
 }
 
 BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 {
+	//std::cout << "SMART_ATTACK" << std::endl;
+
 	Blackboard* blackboard = (Blackboard*)data;
 
-	BWAPI::Unitset enemyUnitsInRadius = Tools::GetUnitsInRadius(m_unit->getPosition(), 400, BWAPI::Broodwar->enemy()->getUnits());
+	BWAPI::Unitset enemyUnitsInRadius = BWAPI::Broodwar->enemy()->getUnits(); //Tools::GetUnitsInRadius(m_unit->getPosition(), 400, BWAPI::Broodwar->enemy()->getUnits());
 
 	// check if an enemy can be one shotted
 	for (auto& enemyUnit : enemyUnitsInRadius)
@@ -31,6 +33,7 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 		if (dammage < enemyUnit->getHitPoints()) continue;
 
 		m_unit->attack(enemyUnit);
+		//std::cout << "one shotting " << enemyUnit->getType().c_str() << std::endl;
 		return BT_NODE::SUCCESS;
 	}
 
@@ -72,6 +75,7 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 	if (!sortedScores.empty())
 	{
 		m_unit->attack(sortedScores[0].first);
+		//std::cout << "priority attacking " << sortedScores[0].first->getType().c_str() << std::endl;
 		return BT_NODE::SUCCESS;
 	}
 
@@ -90,8 +94,11 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 	if (closestEnemy != nullptr)
 	{
 		m_unit->attack(closestEnemy);
+		//std::cout << "closest attacking " << closestEnemy->getType().c_str() << std::endl;
 		return BT_NODE::SUCCESS;
 	}
+
+	//std::cout << "attacking nothing" << std::endl;
 
 	// there is no enemy in range
 	return BT_NODE::FAILURE;
