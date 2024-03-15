@@ -15,12 +15,12 @@ protected:
     bool m_triggerOnlyOnce;
 
 public:
-    BT_DECO_CONDITION_UNIT_QUORUM(std::string name, BWAPI::UnitType unitType, BT_NODE* parent, CONDITION_CBK conditionCBK, int quorum, bool triggerOnlyOnce);
+    BT_DECO_CONDITION_UNIT_QUORUM(std::string name, BWAPI::UnitType unitType, BT_NODE* parent, int quorum, bool triggerOnlyOnce);
 
     State Evaluate(void* data) override;
 
     std::string GetDescription() override;
 
-    bool IsQuorumReached(BWAPI::UnitType unitType, int quorum, bool triggerOnlyOnce, bool hasAlreadyTriggered, void* data);
+    static bool IsQuorumReached(BWAPI::UnitType unitType, int quorum, bool triggerOnlyOnce, bool hasAlreadyTriggered, void* data);
 };
 
