@@ -298,6 +298,14 @@
     <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrderTools.h">
       <Filter>buildOrder</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\mainBT.h">
+      <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\selfmadeBT.h">
+      <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\allInBT.h">
+      <Filter>selfmadeBT</Filter>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
@@ -320,6 +328,9 @@
     </Filter>
     <Filter Include="buildOrder">
       <UniqueIdentifier>{5ef694ed-a785-428c-b8ff-e41422f8b736}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="selfmadeBT">
+      <UniqueIdentifier>{3762d5a0-307b-4d2f-aa11-606012931d3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -65,6 +65,9 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.h" />
     <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrder.h" />
     <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrderTools.h" />
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\allInBT.h" />
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\mainBT.h" />
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\selfmadeBT.h" />
     <ClInclude Include="..\..\src\starterbot\targeting\ForceTools.h" />
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
     <ClInclude Include="..\..\src\starterbot\Job.h" />
@@ -276,6 +279,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>BWAPI.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -339,7 +343,7 @@
       <EnablePREfast>false</EnablePREfast>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ProgramDataBaseFileName>
       </ProgramDataBaseFileName>

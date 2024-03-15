@@ -5,82 +5,21 @@
 #include <format>
 
 #include "BT.h"
+#include "selfmadeBT/selfmadeBT.h"
 #include <OverlordUtils.h>
 #include <ZerglingUtils.h>
 
 StarterBot::StarterBot()
 {
-    pData = new Blackboard(e_buildOrderType::DEBUG);
+    pData = new Blackboard(e_buildOrderType::FourPool);
     pData->currMinerals = 0;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
 
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
 
-    // ==========================================================
-    // ==================== Starcraft AI BT =====================
-    // ==========================================================
+    pBT = BT_Builder::buildEarlyAllInBT();
 
-    pBT = new BT_DECORATOR("EntryPoint", nullptr);
-    
-    BT_PARALLEL_SEQUENCER* pMainParallelSeq = new BT_PARALLEL_SEQUENCER("MainParallelSequence", pBT, 10);
-
-    //Farming Minerals forever
-    BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false, true);
-    BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pFarmingMineralsForeverRepeater);
-
-    // ---------------------- HQ (Hatchery, Lair, Hive) management ---------------------
-
-    // actually modifiable into a larva management
-    BT_DECO_REPEATER* pHQActionRepeater = new BT_DECO_REPEATER("RepeatForeverHQAction", pMainParallelSeq, 0, true, false, true);
-    BT_SELECTOR* selectHQAction = new BT_SELECTOR("SelectHQAction", pHQActionRepeater, 10);
-
-    // check if not sparing minerals for tasks already required from elsewhere
-    BT_DECO_INVERTER* pDecoMineralsRequiredElsewhere = new BT_DECO_INVERTER("DecoMineralsRequiredElsewhere", selectHQAction);
-    BT_COND_NOTHING_REQUESTED* pNothingElseRequested = new BT_COND_NOTHING_REQUESTED("CondNothingElseRequested", pDecoMineralsRequiredElsewhere);
-
-    // Build Natural Base
-    // make sure scout before that
-    //BT_ACTION_BUILD* pBuildNaturalBase = new BT_ACTION_BUILD("BuildNaturalBase", BWAPI::UnitTypes::Zerg_Hatchery, pData->naturalTilePosition,selectHQAction);
-
-    //Build Additional overlords
-    OverlordUtils::CreateTrainingTree(selectHQAction);
-
-    // Handling build order finished
-    ZerglingUtils::CreateTrainingTree(selectHQAction);
-
-    //Training Workers
-    BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
-    BT_ACTION_TRAIN_UNIT* pTrainWorker = new BT_ACTION_TRAIN_UNIT("TrainWorker", BWAPI::UnitTypes::Zerg_Drone, false, pNotEnoughWorkers);
-
-    // ---------------------- End of HQ management ---------------------
-
-    // ==========================================================
-    // ================= End of Starcraft AI BT =================
-    // ==========================================================
-
-    // ==========================================================
-    // ===================== 4 pool (temp) BT ===================
-    // ==========================================================
-    pBtTest = new BT_DECORATOR("EntryPoint", nullptr);
-
-    BT_PARALLEL_SEQUENCER* pMainParallelSeqTest = new BT_PARALLEL_SEQUENCER("MainParallelSequenceTest", pBtTest, 10);
-
-    //Farming Minerals forever
-    BT_DECO_REPEATER* pFarmingMineralsForeverRepeaterTest = new BT_DECO_REPEATER("RepeatForeverFarmingMineralsTest", pMainParallelSeqTest, 0, true, false, true);
-    BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMineralsTest = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMineralsTest", pFarmingMineralsForeverRepeaterTest);
-
-    // ---------------------- HQ (Hatchery, Lair, Hive) management ---------------------
-
-    BT_DECO_REPEATER* pHQActionRepeaterTest = new BT_DECO_REPEATER("RepeatForeverHQActionTest", pMainParallelSeqTest, 0, true, false, true);
-    BT_SELECTOR* selectHQActionTest = new BT_SELECTOR("SelectHQActionTest", pHQActionRepeaterTest, 10);
-
-    //Build Additional overlords
-    OverlordUtils::CreateTrainingTree(selectHQActionTest);
-
-    // Handling build order finished
-    ZerglingUtils::CreateTrainingTree(selectHQActionTest);
-    
 }
 
 //functions needed for initialisating : 
@@ -338,22 +277,15 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
         }
         //remove the wrong worker (the one that was morphed into the extractor...
         //before : 
-        std::cout << "BEFORE" << std::endl;
-        this->pData->ownedBases.at(argmin).print_minerals();
-        this->pData->ownedBases.at(argmin).print_gaz();
-        
+
         this->pData->ownedBases.at(argmin).remove_imposter();
         this->pData->ownedBases.at(argmin).set_gaz(unit);
         
-        std::cout << "AFTER" << std::endl;
-        this->pData->ownedBases.at(argmin).print_minerals();
-        this->pData->ownedBases.at(argmin).print_gaz();
+
         for (int k = 0; k < 3; k++) {
 
-            std::cout << "after send SOMEONE k =" << k <<" : "<< std::endl;
             this->pData->ownedBases.at(argmin).allocateWorker(this->pData->ownedBases.at(argmin).worstSpot()->workers.at(0));
-            this->pData->ownedBases.at(argmin).print_minerals();
-            this->pData->ownedBases.at(argmin).print_gaz();
+   
         };
     }
 
