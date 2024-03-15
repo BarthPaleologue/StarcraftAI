@@ -10,7 +10,7 @@
 
 StarterBot::StarterBot()
 {
-    pData = new Blackboard(e_buildOrderType::FourPool);
+    pData = new Blackboard(e_buildOrderType::DEBUG);
     pData->currMinerals = 0;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
@@ -156,10 +156,7 @@ void StarterBot::onStart()
     BWAPI::UnitType typeA = BWAPI::UnitTypes::Terran_Marine;
     BWAPI::UnitType typeB = BWAPI::UnitTypes::Zerg_Zergling;
     
-    //allocate all the workers to my base(if not worker : won't do anything)
-    for (auto& unit : BWAPI::Broodwar->self()->getUnits()) {
-        this->pData->ownedBases.at(0).allocateWorker(unit);
-    }
+
 }
 
 // Called on each frame of the game
@@ -268,6 +265,7 @@ void StarterBot::onUnitMorph(BWAPI::Unit unit)
     if ((unit->getInitialType() == BWAPI::Broodwar->self()->getRace().getWorker()) && Tools::IsMine(unit)) {
         for (auto& base : this->pData->ownedBases) {
             base.freeWorker(unit);
+
         }
     }
 }
@@ -295,34 +293,71 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
 
     //if unit is worker : attach it to its base (the closest base)
     if (unit->getType() == BWAPI::Broodwar->self()->getRace().getWorker() && Tools::IsMine(unit)) {
-        std::cout << "new worker ! yay !" << std::endl;
+
         BWAPI::Position unit_pos = unit->getPosition();
         
         float l_min = unit_pos.getDistance(pData->ownedBases.at(0).get_pos());
-        OwnedBase& spawningBase = pData->ownedBases.at(0);
+        int argmin = 0;
         
-        for (auto& base : pData->ownedBases) {
-            float l = unit_pos.getDistance(base.get_pos());
+        for (int i = 0; i < this->pData->ownedBases.size();i++) {
+            float l = unit_pos.getDistance(this->pData->ownedBases.at(i).get_pos());
             if (l < l_min) {
                 l_min = l;
-                spawningBase = base;
+                argmin = i;;
             };
         }
-        spawningBase.allocateWorker(unit);
+        this->pData->ownedBases.at(argmin).allocateWorker(unit);
     }
-
+    
+    //if unit is ressource depot : we add it to our bases list.
     else if (unit->getType() == BWAPI::Broodwar->self()->getRace().getResourceDepot()) {
         if (Tools::IsMine(unit)) {
-            std::cout << "new base ! yay !" << std::endl;
-
             //we have to check if this is our starting base ! Indeed, the starting base actually
             //spawns at t=0... but it is already inside the vec ! (and it needs to be).
             if (unit->getPosition().getDistance(this->pData->basePosition) > 0) {
                 this->pData->ownedBases.push_back(OwnedBase(unit->getPosition()));
+                int n = this->pData->ownedBases.size();
+
+                this->pData->ownedBases.at(n-1).dispatchWorkersToMe(&this->pData->ownedBases);
             }
         }
 
     }
+
+    //if this is an extractor : add it to the the closest base.
+    else if (unit->getType() == BWAPI::Broodwar->self()->getRace().getRefinery() && Tools::IsMine(unit)) {
+        float l_min = unit->getPosition().getDistance(pData->ownedBases.at(0).get_pos());
+        int argmin = 0;
+
+        for (int i = 0; i < this->pData->ownedBases.size(); i++) {
+            float l = unit->getPosition().getDistance(this->pData->ownedBases.at(i).get_pos());
+            if (l < l_min) {
+                l_min = l;
+                argmin = i;;
+            };
+        }
+        //remove the wrong worker (the one that was morphed into the extractor...
+        //before : 
+        std::cout << "BEFORE" << std::endl;
+        this->pData->ownedBases.at(argmin).print_minerals();
+        this->pData->ownedBases.at(argmin).print_gaz();
+        
+        this->pData->ownedBases.at(argmin).remove_imposter();
+        this->pData->ownedBases.at(argmin).set_gaz(unit);
+        
+        std::cout << "AFTER" << std::endl;
+        this->pData->ownedBases.at(argmin).print_minerals();
+        this->pData->ownedBases.at(argmin).print_gaz();
+        for (int k = 0; k < 3; k++) {
+
+            std::cout << "after send SOMEONE k =" << k <<" : "<< std::endl;
+            this->pData->ownedBases.at(argmin).allocateWorker(this->pData->ownedBases.at(argmin).worstSpot()->workers.at(0));
+            this->pData->ownedBases.at(argmin).print_minerals();
+            this->pData->ownedBases.at(argmin).print_gaz();
+        };
+    }
+
+    
 
     // building debugger
     if (unit->getType().isBuilding() && Tools::IsMine(unit)) {
@@ -337,7 +372,13 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
 // This is usually triggered when units appear from fog of war and become visible
 void StarterBot::onUnitShow(BWAPI::Unit unit)
 { 
-	
+    //if unit is ressource mineral : check possibly add it to its corresponding base.
+    if (unit->getType().isMineralField()) {
+        for (auto& base : this->pData->ownedBases) {
+            base.checkNewMineral(unit);
+        }
+    }
+
 }
 
 // Called whenever a unit gets hidden, with a pointer to the destroyed unit
