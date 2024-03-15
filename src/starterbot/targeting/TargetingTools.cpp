@@ -138,7 +138,7 @@ int TargetingTools::enemyTerranPriorityScore(BWAPI::Unit unit)
 		}
 		score--;
 
-		if (unit->getType() == BWAPI::UnitTypes::Terran_Barracks) {
+		if (unit->getType() == BWAPI::UnitTypes::Terran_Barracks && unit->isCompleted()) {
 			if (!unit->isLifted()) return score;
 		}
 		score--;
