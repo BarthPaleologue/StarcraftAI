@@ -45,7 +45,6 @@ ResourceSpot* OwnedBase::worstSpot() {
             my_max= mineral.workers.size();
         }
     }
-    std::cout << "worst spot: " << argmax << std::endl;
     return &minerals.at(argmax);
 }
 
@@ -152,7 +151,6 @@ void OwnedBase::checkNewMineral(BWAPI::Unit mineral) {
                 return;
             }
         }
-        std::cout << "checkNewMineral successs" << std::endl;
         this->minerals.push_back(ResourceSpot(mineral));
 
     }
@@ -181,7 +179,6 @@ void OwnedBase::remove_imposter() {
                 }
             }
             if (!found) {
-                std::cout << "IMPOSTER FOUND" << std::endl;
                 this->minerals.at(i).workers.erase(this->minerals.at(i).workers.begin() + j);
             }
         }

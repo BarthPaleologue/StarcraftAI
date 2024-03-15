@@ -274,6 +274,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>BWAPI.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -337,7 +338,7 @@
       <EnablePREfast>false</EnablePREfast>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ProgramDataBaseFileName>
       </ProgramDataBaseFileName>
