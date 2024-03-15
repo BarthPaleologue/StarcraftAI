@@ -60,6 +60,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IDLE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_UNIT.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_UNIT_CONDITION.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_SQUAD_CONDITION.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.h" />
     <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrder.h" />
     <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrderTools.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IDLE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_UNIT.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_UNIT_CONDITION.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_SQUAD_CONDITION.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.cpp" />
     <ClCompile Include="..\..\src\starterbot\buildOrder\BuildOrder.cpp" />
     <ClCompile Include="..\..\src\starterbot\buildOrder\BuildOrderTools.cpp" />

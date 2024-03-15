@@ -32,6 +32,7 @@
 #include "BT_COND_VISIBLE.h"
 #include "BT_COND_EXPLORED.h"
 #include "BT_UNIT_CONDITION.h"
+#include "BT_SQUAD_CONDITION.h"
 
 ///Decorator Conditions
 #include "BT_DECO_UNIT_CONDITION.h"
