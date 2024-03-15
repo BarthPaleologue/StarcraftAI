@@ -1,4 +1,4 @@
-0 | 5088 | 0 | 5917656
+0 | 35468 | 0 | 17681015
 1 | 0 | 0 | 0
 2 | 0 | 0 | 0
 3 | 0 | 0 | 0
@@ -10,67 +10,28 @@ Connected
 Connection successful
 Waiting for game start
 Playing Game 0 on map (2)Destination.scx
-plouf1
-plouf2
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-A Zerg_Hatchery has been created at (1056,272)in(31,7)
-plouf 6
-erase success
-Zerg_Hatcherysuccessfully started
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf1
-plouf2
-A Zerg_Hatchery has been created at (2080,656)in(63,19)
-checkNewMineral successs
-checkNewMineral successs
-checkNewMineral successs
-checkNewMineral successs
-checkNewMineral successs
-Zerg_Spawning_Poolsuccessfully started
-Zerg_Dronesuccessfully started
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-A Zerg_Spawning_Pool has been created at (976,416)in(29,12)
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
-plouf 5
-plouf 6
+A Zerg_Hatchery has been created at (2112,3824)in(64,118)
+Zerg_Extractorsuccessfully started
+BEFORE
+1 - 1 - 1 - 1 - 0 - 0 - 0 - 0 - 0 - 
+gaz :  0 
+IMPOSTER FOUND
+AFTER
+1 - 1 - 1 - 0 - 0 - 0 - 0 - 0 - 0 - 
+gaz : 0
+after send SOMEONE k =0 : 
+worst spot: 0
+0 - 1 - 1 - 0 - 0 - 0 - 0 - 0 - 0 - 
+gaz : 1
+after send SOMEONE k =1 : 
+worst spot: 1
+1 - 0 - 1 - 0 - 0 - 0 - 0 - 0 - 0 - 
+gaz : 1
+after send SOMEONE k =2 : 
+worst spot: 0
+1 - 0 - 1 - 0 - 0 - 0 - 0 - 0 - 0 - 
+gaz : 1
+A Zerg_Extractor has been created at (2112,3648)in(64,113)
 We lost!
 Game Over
 Waiting for game start

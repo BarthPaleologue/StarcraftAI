@@ -322,10 +322,43 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
                 this->pData->ownedBases.push_back(OwnedBase(unit->getPosition()));
                 int n = this->pData->ownedBases.size();
 
-//                this->pData->ownedBases.at(n-1).dispatchWorkersToMe(&this->pData->ownedBases);
+                this->pData->ownedBases.at(n-1).dispatchWorkersToMe(&this->pData->ownedBases);
             }
         }
 
+    }
+
+    //if this is an extractor : add it to the the closest base.
+    else if (unit->getType() == BWAPI::Broodwar->self()->getRace().getRefinery() && Tools::IsMine(unit)) {
+        float l_min = unit->getPosition().getDistance(pData->ownedBases.at(0).get_pos());
+        int argmin = 0;
+
+        for (int i = 0; i < this->pData->ownedBases.size(); i++) {
+            float l = unit->getPosition().getDistance(this->pData->ownedBases.at(i).get_pos());
+            if (l < l_min) {
+                l_min = l;
+                argmin = i;;
+            };
+        }
+        //remove the wrong worker (the one that was morphed into the extractor...
+        //before : 
+        std::cout << "BEFORE" << std::endl;
+        this->pData->ownedBases.at(argmin).print_minerals();
+        this->pData->ownedBases.at(argmin).print_gaz();
+        
+        this->pData->ownedBases.at(argmin).remove_imposter();
+        this->pData->ownedBases.at(argmin).set_gaz(unit);
+        
+        std::cout << "AFTER" << std::endl;
+        this->pData->ownedBases.at(argmin).print_minerals();
+        this->pData->ownedBases.at(argmin).print_gaz();
+        for (int k = 0; k < 3; k++) {
+
+            std::cout << "after send SOMEONE k =" << k <<" : "<< std::endl;
+            this->pData->ownedBases.at(argmin).allocateWorker(this->pData->ownedBases.at(argmin).worstSpot()->workers.at(0));
+            this->pData->ownedBases.at(argmin).print_minerals();
+            this->pData->ownedBases.at(argmin).print_gaz();
+        };
     }
 
     
