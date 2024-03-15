@@ -277,22 +277,15 @@ void StarterBot::onUnitComplete(BWAPI::Unit unit)
         }
         //remove the wrong worker (the one that was morphed into the extractor...
         //before : 
-        std::cout << "BEFORE" << std::endl;
-        this->pData->ownedBases.at(argmin).print_minerals();
-        this->pData->ownedBases.at(argmin).print_gaz();
-        
+
         this->pData->ownedBases.at(argmin).remove_imposter();
         this->pData->ownedBases.at(argmin).set_gaz(unit);
         
-        std::cout << "AFTER" << std::endl;
-        this->pData->ownedBases.at(argmin).print_minerals();
-        this->pData->ownedBases.at(argmin).print_gaz();
+
         for (int k = 0; k < 3; k++) {
 
-            std::cout << "after send SOMEONE k =" << k <<" : "<< std::endl;
             this->pData->ownedBases.at(argmin).allocateWorker(this->pData->ownedBases.at(argmin).worstSpot()->workers.at(0));
-            this->pData->ownedBases.at(argmin).print_minerals();
-            this->pData->ownedBases.at(argmin).print_gaz();
+   
         };
     }
 
