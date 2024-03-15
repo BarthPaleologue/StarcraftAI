@@ -31,7 +31,13 @@ BuildOrder::BuildOrder(e_buildOrderType _boType) {
 	case(e_buildOrderType::FourPool):
 		m_order = {
 			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
-			{isSupplyTimingReached(3), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train}
+			{isSupplyTimingReached(3), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+			// fill the supply limit with zerglings
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
 		};
 		break;
 
