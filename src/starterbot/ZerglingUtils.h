@@ -6,10 +6,9 @@ class ZerglingUtils
 {
 public:
 	static BT_NODE* CreateTree(BWAPI::Unit zergling) {
+		auto root = new BT_DECO_REPEATER("repeater", nullptr, 0, true, false, true);
 
-		auto repeat = new BT_DECO_REPEATER("repeater", nullptr, 0, true, false, true);
-
-		auto attackPlan = new BT_SEQUENCER("Root", repeat, 10);
+		auto attackPlan = new BT_SEQUENCER("Root", root, 10);
 
 		// go to enemy base
 		auto goToEnemyBase = new BT_ACTION_GO_TO_ENEMY_BASE("GoToEnemyBase", zergling, attackPlan);
@@ -17,7 +16,7 @@ public:
 		// choose which unit to attack
 		auto smartAttack = new BT_ACTION_SMART_ATTACK("SmartAttack", zergling, attackPlan);
 
-		return repeat;
+		return root;
 	}
 
 	static BT_NODE* CreateTrainingTree(BT_NODE* parent) {
