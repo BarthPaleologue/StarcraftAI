@@ -11,18 +11,14 @@
 
 StarterBot::StarterBot()
 {
-<<<<<<< HEAD
-    pData = new Blackboard(e_buildOrderType::NinePool);
-=======
-    pData = new Blackboard(e_buildOrderType::DEBUG);
->>>>>>> 0ab5bfb9f9d8fac1a587bfeb2b34ed85f0422fb6
+    pData = new Blackboard(e_buildOrderType::FourPool);
     pData->currMinerals = 0;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
 
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
 
-    pBT = BT_Builder::buildMainBT();
+    pBT = BT_Builder::buildEarlyAllInBT();
 
 }
 
@@ -120,18 +116,18 @@ void StarterBot::onFrame()
     pData->enemyRace = BWAPI::Broodwar->enemy()->getRace();
     
     // AI BT
-    /*if (pBT != nullptr && pBT->Evaluate(pData) != BT_NODE::RUNNING)
+    if (pBT != nullptr && pBT->Evaluate(pData) != BT_NODE::RUNNING)
     {
         std::cout << "end of BT execution" << std::endl;
         delete (BT_DECORATOR*)pBT;
         pBT = nullptr;
-    }*/
-    if (pBtTest != nullptr && pBtTest->Evaluate(pData) != BT_NODE::RUNNING)
+    }
+    /*if (pBtTest != nullptr && pBtTest->Evaluate(pData) != BT_NODE::RUNNING)
     {
         std::cout << "end of BT_Test execution" << std::endl;
         delete (BT_DECORATOR*)pBtTest;
         pBtTest = nullptr;
-    }
+    }*/
 
     // iterate over all units, those who don't yet have a BT will be assigned one
     BWAPI::Unitset allUnits = BWAPI::Broodwar->self()->getUnits();
