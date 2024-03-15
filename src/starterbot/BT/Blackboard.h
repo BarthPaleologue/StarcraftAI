@@ -2,7 +2,7 @@
 #include <unordered_set>
 #include <queue>
 #include <BWAPI.h>
-#include "BuildOrder.h"
+#include "buildOrder/BuildOrder.h"
 #include "OwnedBase.h"
 #include <queue>
 #include "Job.h"
@@ -85,6 +85,8 @@ public:
 	std::vector<BWAPI::Position> enemyBasesPositions{};
 	int myPosIdx;
 	int enemyPosIdx;
+
+	BWAPI::Race enemyRace;
 
 	// for units / techs we want right now but we don't have ressources so we don't train anything to wait for them
 	std::queue<BWAPI::UnitType> unitsRequested; // for now by build order, maybe add struct for prio

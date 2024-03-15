@@ -84,13 +84,10 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_COND_LESSER_THAN.cpp">
       <Filter>BT</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\starterbot\BuildOrder.cpp" />
-    <ClCompile Include="..\..\src\starterbot\BuildOrderTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\Job.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\starterbot\TargetingTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.cpp">
       <Filter>BT</Filter>
     </ClCompile>
@@ -109,8 +106,6 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\starterbot\Source.cpp" />
-    <ClCompile Include="..\..\src\starterbot\ForceTools.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
@@ -126,12 +121,26 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\starterbot\Squad.cpp" />
     <ClCompile Include="..\..\src\starterbot\OwnedBase.cpp" />
-    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IS_IN_ENEMY_BASE.cpp">
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.cpp">
+    <ClCompile Include="..\..\src\starterbot\targeting\ForceTools.cpp">
+      <Filter>targeting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\targeting\TargetingTools.cpp">
+      <Filter>targeting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\targeting\Squad.cpp">
+      <Filter>targeting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\buildOrder\BuildOrder.cpp">
+      <Filter>buildOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\buildOrder\BuildOrderTools.cpp">
+      <Filter>buildOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
   </ItemGroup>
@@ -225,13 +234,10 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_COND_LESSER_THAN.h">
       <Filter>BT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\BuildOrder.h" />
-    <ClInclude Include="..\..\src\starterbot\BuildOrderTools.h" />
     <ClInclude Include="..\..\src\starterbot\Job.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\TargetingTools.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_COND_NOTHING_REQUESTED.h">
       <Filter>BT</Filter>
     </ClInclude>
@@ -250,14 +256,12 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\ForceTools.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\OverlordUtils.h" />
     <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h" />
     <ClInclude Include="..\..\src\starterbot\OwnedBase.h" />
-    <ClInclude Include="..\..\src\starterbot\Squad.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
@@ -270,10 +274,25 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_UNIT_CONDITION.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IS_IN_ENEMY_BASE.h">
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.h">
+    <ClInclude Include="..\..\src\starterbot\targeting\ForceTools.h">
+      <Filter>targeting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\targeting\TargetingTools.h">
+      <Filter>targeting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\targeting\Squad.h">
+      <Filter>targeting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrder.h">
+      <Filter>buildOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrderTools.h">
+      <Filter>buildOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
   </ItemGroup>
@@ -283,6 +302,12 @@
     </Filter>
     <Filter Include="BT\BT_STARCRAFT">
       <UniqueIdentifier>{f7d3a676-4252-4269-9d78-432aabc0f416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="targeting">
+      <UniqueIdentifier>{f2c1a3f6-c6f8-439f-a9bd-d63157b71341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="buildOrder">
+      <UniqueIdentifier>{5ef694ed-a785-428c-b8ff-e41422f8b736}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
