@@ -26,7 +26,7 @@ BT_NODE::State BT_ACTION_GO_TO_ENEMY_BASE::GoToEnnemyBase(void* data)
 	// we found at least one enemy base
 	BWAPI::Position basePosition = blackboard->enemyBasesPositions[0];
 
-	if (m_unit->getDistance(basePosition) < 700) {
+	if (m_unit->getDistance(basePosition) < 400) {
 		return BT_NODE::SUCCESS;
 	}
 
