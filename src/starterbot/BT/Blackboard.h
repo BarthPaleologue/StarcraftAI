@@ -16,16 +16,16 @@ const BWAPI::TilePosition NONE_POS(-1, -1);
 const BWAPI::TilePosition BASE_TILE_POS[2][6] = {
 	{BWAPI::TilePosition(31,7),
 	BWAPI::TilePosition(63,19),
-	BWAPI::TilePosition(86,38),
 	BWAPI::TilePosition(7,28),
 	BWAPI::TilePosition(7,55),
+	BWAPI::TilePosition(86,38),
 	BWAPI::TilePosition(86,6),},
 
 	{BWAPI::TilePosition(64, 118),
 	BWAPI::TilePosition(29, 107),
-	BWAPI::TilePosition(6, 88),
 	BWAPI::TilePosition(85, 96),
 	BWAPI::TilePosition(85, 70),
+	BWAPI::TilePosition(6, 88),
 	BWAPI::TilePosition(6, 119)}
 
 };
@@ -43,6 +43,42 @@ const BWAPI::TilePosition SPAWNING_POOL_TILE_POS[2] = {
 const BWAPI::TilePosition SPIRE_TILE_POS[2] = {
 	BWAPI::TilePosition(63, 23),
 	BWAPI::TilePosition(31, 101),
+};
+
+const BWAPI::Position DEFENCE_POS[2][7] = {
+	{BWAPI::Position(1650,300),
+	BWAPI::Position(2050,800),
+	BWAPI::Position(480,1100),
+	BWAPI::Position(553,1533),
+	BWAPI::Position(2793,1311),
+	BWAPI::Position(2788,322),
+	BWAPI::Position(1670,275),},
+	
+	{BWAPI::Position(1370, 3730),
+	BWAPI::Position(1050, 3250),
+	BWAPI::Position(2586, 2963),
+	BWAPI::Position(2550, 2501),
+	BWAPI::Position(333, 2779),
+	BWAPI::Position(239, 3705),
+	BWAPI::Position(1386,3792),}
+};
+
+const BWAPI::Position ATTACK_POS[2][7] = {
+	{BWAPI::Position(1855,488),
+	BWAPI::Position(1619,1062),
+	BWAPI::Position(724,1267),
+	BWAPI::Position(700,1370),
+	BWAPI::Position(2582,1530),
+	BWAPI::Position(2976,488),
+	BWAPI::Position(1852,127)},
+
+	{BWAPI::Position(1190, 3550),
+	BWAPI::Position(1468, 3026),
+	BWAPI::Position(2349, 2805),
+	BWAPI::Position(2351, 2651),
+	BWAPI::Position(455, 2630),
+	BWAPI::Position(119, 3510),
+	BWAPI::Position(1214,3934),}
 };
 
 class Blackboard {
