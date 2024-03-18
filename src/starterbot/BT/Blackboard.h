@@ -81,6 +81,12 @@ const BWAPI::Position ATTACK_POS[2][7] = {
 	BWAPI::Position(1214,3934),}
 };
 
+const BWAPI::Position STATION_POS[2] = {
+	BWAPI::Position(1275, 1924),
+	BWAPI::Position(1767, 2218)
+};
+
+
 class Blackboard {
 public:
 	Blackboard(e_buildOrderType _boType): buildOrder(_boType) {}
