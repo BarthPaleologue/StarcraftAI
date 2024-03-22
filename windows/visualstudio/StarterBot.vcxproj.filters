@@ -292,9 +292,9 @@
     <ClInclude Include="..\..\src\starterbot\targeting\TargetingTools.h">
       <Filter>targeting</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\src\starterbot\targeting\HarassmentManager.h">
+    <ClInclude Include="..\..\src\starterbot\targeting\HarassmentManager.h">
       <Filter>targeting</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClInclude Include="..\..\src\starterbot\targeting\Squad.h">
       <Filter>targeting</Filter>
     </ClInclude>
