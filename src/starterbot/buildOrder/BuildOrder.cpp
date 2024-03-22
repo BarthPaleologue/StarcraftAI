@@ -5,7 +5,7 @@
 
 using namespace BuildOrderTools;
 
-BuildOrder::BuildOrder(e_buildOrderType _boType) {
+BuildOrder::BuildOrder(e_buildOrderType _boType): m_buildOrderType(_boType) {
 	switch (_boType) {
 	case(e_buildOrderType::NinePool):
 		m_order = {
@@ -50,6 +50,10 @@ BuildOrder::BuildOrder(e_buildOrderType _boType) {
 		};
 		break;
 	}
+}
+
+e_buildOrderType BuildOrder::getBuildOrderType() {
+	return m_buildOrderType;
 }
 
 void BuildOrder::nextTask()

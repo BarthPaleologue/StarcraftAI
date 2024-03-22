@@ -42,25 +42,12 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 	std::map<BWAPI::Unit, int> enemyUnitsScores;
 	for (auto& enemyUnit : enemyUnitsInRadius)
 	{
-		int score = TargetingTools::LOWEST_PRIORITY;
+		int score = HarassmentManager::LOWEST_PRIORITY;
 
-		switch (blackboard->enemyRace)
-		{
-		case BWAPI::Races::Protoss:
-			score = TargetingTools::enemyProtossPriorityScore(enemyUnit);
-			break;
-		case BWAPI::Races::Terran:
-			score = TargetingTools::enemyTerranPriorityScore(enemyUnit);
-			break;
-		case BWAPI::Races::Zerg:
-			score = TargetingTools::enemyZergPriorityScore(enemyUnit);
-			break;
-		default:
-			break;
-		}
+		score = blackboard->harassmentManager.getTargetPriority(enemyUnit, blackboard->enemyRace);
 
 		// the enemy unit is not a priority
-		if (score == TargetingTools::LOWEST_PRIORITY) continue;
+		if (score == HarassmentManager::LOWEST_PRIORITY) continue;
 
 		enemyUnitsScores[enemyUnit] = score;
 	}

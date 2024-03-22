@@ -78,6 +78,7 @@
     <ClInclude Include="..\..\src\starterbot\targeting\Squad.h" />
     <ClInclude Include="..\..\src\starterbot\StarterBot.h" />
     <ClInclude Include="..\..\src\starterbot\targeting\TargetingTools.h" />
+    <ClInclude Include="..\..\src\starterbot\targeting\HarassmentManager.h" />
     <ClInclude Include="..\..\src\starterbot\Tools.h" />
     <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h" />
   </ItemGroup>
@@ -134,6 +135,7 @@
     <ClCompile Include="..\..\src\starterbot\targeting\Squad.cpp" />
     <ClCompile Include="..\..\src\starterbot\StarterBot.cpp" />
     <ClCompile Include="..\..\src\starterbot\targeting\TargetingTools.cpp" />
+    <ClCompile Include="..\..\src\starterbot\targeting\HarassmentManager.cpp" />
     <ClCompile Include="..\..\src\starterbot\Tools.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.cpp" />
   </ItemGroup>

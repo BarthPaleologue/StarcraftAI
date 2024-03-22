@@ -7,6 +7,7 @@
 #include <queue>
 #include "Job.h"
 #include <map>
+#include <targeting/HarassmentManager.h>
 
 #define THRESHOLD1_UNUSED_SUPPLY 2
 #define NWANTED_WORKERS_TOTAL 20
@@ -129,6 +130,8 @@ public:
 	int enemyPosIdx;
 
 	BWAPI::Race enemyRace;
+
+	HarassmentManager harassmentManager = HarassmentManager();
 
 	// for units / techs we want right now but we don't have ressources so we don't train anything to wait for them
 	std::queue<BWAPI::UnitType> unitsRequested; // for now by build order, maybe add struct for prio
