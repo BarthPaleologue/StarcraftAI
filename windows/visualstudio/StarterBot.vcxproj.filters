@@ -312,6 +312,10 @@
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\allInBT.h">
       <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\MutaliskUtils.h">
+      <Filter>selfmadeBT</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>

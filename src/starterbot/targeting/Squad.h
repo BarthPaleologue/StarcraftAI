@@ -16,6 +16,8 @@ public:
 	void moveTo(BWAPI::Position position);
 	
 	BWAPI::Unitset getUnits();
+
+	BWAPI::Position getPosition();
 	
 	bool containsUnit(BWAPI::Unit unit);
 	

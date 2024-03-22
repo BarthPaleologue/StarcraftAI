@@ -67,6 +67,7 @@
     <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrderTools.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\allInBT.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\mainBT.h" />
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\MutaliskUtils.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\selfmadeBT.h" />
     <ClInclude Include="..\..\src\starterbot\targeting\ForceTools.h" />
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
