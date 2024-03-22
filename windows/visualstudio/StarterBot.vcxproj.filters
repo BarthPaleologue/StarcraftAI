@@ -131,6 +131,9 @@
     <ClCompile Include="..\..\src\starterbot\targeting\TargetingTools.cpp">
       <Filter>targeting</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\targeting\HarassmentManager.cpp">
+      <Filter>targeting</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\starterbot\targeting\Squad.cpp">
       <Filter>targeting</Filter>
     </ClCompile>
@@ -289,6 +292,9 @@
     <ClInclude Include="..\..\src\starterbot\targeting\TargetingTools.h">
       <Filter>targeting</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\src\starterbot\targeting\HarassmentManager.h">
+      <Filter>targeting</Filter>
+    </ClCompile>
     <ClInclude Include="..\..\src\starterbot\targeting\Squad.h">
       <Filter>targeting</Filter>
     </ClInclude>
