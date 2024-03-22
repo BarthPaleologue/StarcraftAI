@@ -268,8 +268,6 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\OverlordUtils.h" />
-    <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h" />
     <ClInclude Include="..\..\src\starterbot\OwnedBase.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.h">
       <Filter>BT\BT_STARCRAFT</Filter>
@@ -324,6 +322,12 @@
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_QUORUM.h">
       <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h">
+      <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\OverlordUtils.h">
+      <Filter>selfmadeBT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
