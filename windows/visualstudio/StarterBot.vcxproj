@@ -51,6 +51,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_VISIBLE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.h" />
@@ -69,6 +70,7 @@
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\mainBT.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\MutaliskUtils.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\selfmadeBT.h" />
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\UpgradeBT.h" />
     <ClInclude Include="..\..\src\starterbot\targeting\ForceTools.h" />
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
     <ClInclude Include="..\..\src\starterbot\Job.h" />
@@ -115,6 +117,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_VISIBLE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.cpp" />

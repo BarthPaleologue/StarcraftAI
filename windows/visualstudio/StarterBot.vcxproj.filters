@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_QUORUM.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
@@ -329,6 +330,10 @@
     <ClInclude Include="..\..\src\starterbot\OverlordUtils.h">
       <Filter>selfmadeBT</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\UpgradeBT.h">
+      <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BT">
