@@ -87,12 +87,20 @@ const BWAPI::Position STATION_POS[2] = {
 	BWAPI::Position(1767, 2218)
 };
 
+enum class GameStage {
+	EARLY,
+	MID,
+	LATE
+};
+
 
 class Blackboard {
 public:
 	Blackboard(e_buildOrderType _boType): buildOrder(_boType) {}
 	
 	BuildOrder buildOrder;
+
+	GameStage gameStage = GameStage::EARLY;
 
 	// purpose: if the mineral count (with self()->minerals()) update is not instant after using minerals
 	// otherwise just remove this attribute
