@@ -3,6 +3,7 @@
 #include "BT.h"
 #include "ZerglingUtils.h"
 #include "OverlordUtils.h"
+#include "MutaliskUtils.h"
 
 namespace BT_Builder {
 	BT_NODE* buildMainBT(Blackboard *blackboard) {
@@ -40,6 +41,8 @@ namespace BT_Builder {
         else {
             ZerglingUtils::CreateTrainingTree(selectHQAction);
         }
+
+        MutaliskUtils::TrainingTree(selectHQAction);
 
         //Training Workers
         BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
