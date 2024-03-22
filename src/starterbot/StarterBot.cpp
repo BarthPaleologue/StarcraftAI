@@ -174,7 +174,7 @@ void StarterBot::onFrame()
         };
     }
 
-    // iterate over all the BTs, those assigned to dead units can be removed
+    // iterate over all the unit BTs, those assigned to dead units can be removed
     for (const auto& [unit, unitBT] : m_unitBT) {
         if (unit->exists()) continue; // the unit is alive
 
@@ -183,11 +183,32 @@ void StarterBot::onFrame()
         m_unitBT.erase(unit);
     }
 
+    // iterate over all the mutalisk squad BTs, those assigned to dead squads can be removed
+    for (const auto& [squad, squadBT] : m_mutaliskSquadsBT) {
+        bool isAtLeastOneMutaliskAlive = false;
+        for (const auto& mutalisk : squad->getUnits()) {
+            if (mutalisk->exists()) {
+				isAtLeastOneMutaliskAlive = true;
+				break;
+			}
+		}
+
+        if (isAtLeastOneMutaliskAlive) continue; // at least one mutalisk is alive
+
+		delete (BT_DECORATOR*)squadBT;
+
+		m_mutaliskSquadsBT.erase(squad);
+	}
+
     // execute all BTs
     for (const auto& [unit, unitBT] : m_unitBT) {
         unitBT->Evaluate(pData);
-        //unitBT->Reset();
     }
+
+    // execute all mutalisk squad BTs
+    for (const auto& [squad, squadBT] : m_mutaliskSquadsBT) {
+		squadBT->Evaluate(pData);
+	}
 
     // Draw unit health bars, which brood war unfortunately does not do
     Tools::DrawUnitHealthBars();
