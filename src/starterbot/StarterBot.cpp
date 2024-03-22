@@ -18,7 +18,7 @@ StarterBot::StarterBot()
 
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
 
-    pBT = BT_Builder::buildEarlyAllInBT();
+    pBT = BT_Builder::buildMainBT(pData);
 }
 
 //functions needed for initialisating : 

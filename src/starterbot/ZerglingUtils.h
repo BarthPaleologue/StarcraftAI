@@ -28,4 +28,14 @@ public:
 
 		return buildOrderFinished;
 	}
+
+	static BT_NODE* TrainingTreeEarlyVsProtoss(BT_NODE* parent) {
+		BT_DECO_CONDITION_BUILD_ORDER_FINISHED* root = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", parent);
+
+		BT_DECO_CONDITION_NOT_ENOUGH_UNIT* unitCountCheck = new BT_DECO_CONDITION_NOT_ENOUGH_UNIT("NotEnoughZerglings", root, BWAPI::UnitTypes::Zerg_Zergling);
+
+		BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, false, unitCountCheck);
+
+		return root;
+	}
 };
