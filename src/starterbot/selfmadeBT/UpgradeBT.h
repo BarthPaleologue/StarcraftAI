@@ -20,7 +20,7 @@ namespace BT_Builder {
 
 		auto hydraliskUpdateSequencer = new BT_SEQUENCER("HydrasUpdateSequencer", hydraliskQuorum, 2);
 
-		// TODO:select hydralisk upgrade
+		auto hydraliskUpgradeFromHydraliskDen = new BT_ACTION_UPGRADE_HYDRALISK_FROM_DEN("UpgradeHydraliskFromHydraliskDen", hydraliskUpdateSequencer);
 
 		// Ultralisk Upgrades
 		auto ultraliskCavernQuorum = new BT_DECO_CONDITION_UNIT_QUORUM("UltraliskCavernQuorum", BWAPI::UnitTypes::Zerg_Ultralisk_Cavern, root, 1, false);
