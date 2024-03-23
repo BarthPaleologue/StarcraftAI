@@ -9,9 +9,9 @@ namespace BT_Builder {
 		// Zergling Upgrades
 		auto zerglingQuorum = new BT_DECO_CONDITION_UNIT_QUORUM("ZerglingQuorum", BWAPI::UnitTypes::Zerg_Zergling, root, 12, false);
 
-		auto zerglingUpdateSequencer = new BT_SEQUENCER("ZerglingUpdateSequencer", zerglingQuorum, 2);
+		auto zerglingUpgradeSequencer = new BT_SEQUENCER("ZerglingUpgradeSequencer", zerglingQuorum, 2);
 
-		// TODO:select zergling upgrade
+		auto zerglingUpgradeFromSpawningPool = new BT_ACTION_UPGRADE_ZERGLING_FROM_SPAWNING_POOL("UpgradeZerglingFromSpawningPool", zerglingUpgradeSequencer);
 
 		// Hydralisk Upgrades
 		auto hydraliskQuorum = new BT_DECO_CONDITION_UNIT_QUORUM("HydrasQuorum", BWAPI::UnitTypes::Zerg_Hydralisk, root, 6, false);
