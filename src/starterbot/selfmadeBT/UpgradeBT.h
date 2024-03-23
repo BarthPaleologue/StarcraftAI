@@ -22,6 +22,8 @@ namespace BT_Builder {
 
 		auto hydraliskUpgradeFromHydraliskDen = new BT_ACTION_UPGRADE_HYDRALISK_FROM_DEN("UpgradeHydraliskFromHydraliskDen", hydraliskUpdateSequencer);
 
+		auto hydraliskUpgradeFromEvolutionChamber = new BT_ACTION_UPGRADE_HYDRALISK_FROM_EVOLUTION_CHAMBER("UpgradeHydraliskFromEvolutionChamber", hydraliskUpdateSequencer);
+
 		// Ultralisk Upgrades
 		auto ultraliskCavernQuorum = new BT_DECO_CONDITION_UNIT_QUORUM("UltraliskCavernQuorum", BWAPI::UnitTypes::Zerg_Ultralisk_Cavern, root, 1, false);
 
