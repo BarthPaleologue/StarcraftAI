@@ -3,9 +3,10 @@
 #include "BT.h"
 #include "ZerglingUtils.h"
 #include "OverlordUtils.h"
+#include "MutaliskUtils.h"
 
 namespace BT_Builder {
-	BT_NODE* buildMainBT() {
+	BT_NODE* buildMainBT(Blackboard *blackboard) {
         BT_NODE* pBT = new BT_DECORATOR("EntryPoint", nullptr);
 
         BT_PARALLEL_SEQUENCER* pMainParallelSeq = new BT_PARALLEL_SEQUENCER("MainParallelSequence", pBT, 10);
@@ -31,8 +32,17 @@ namespace BT_Builder {
         //Build Additional overlords
         OverlordUtils::CreateTrainingTree(selectHQAction);
 
-        // Handling build order finished
-        ZerglingUtils::CreateTrainingTree(selectHQAction);
+        // Training Zerglings:
+
+        if (BWAPI::Broodwar->enemy()->getRace() == BWAPI::Races::Protoss) {
+            blackboard->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Zergling] = 8;
+            ZerglingUtils::TrainingTreeEarlyVsProtoss(selectHQAction);
+        }
+        else {
+            ZerglingUtils::CreateTrainingTree(selectHQAction);
+        }
+
+        MutaliskUtils::TrainingTree(selectHQAction);
 
         //Training Workers
         BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);

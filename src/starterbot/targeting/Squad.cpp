@@ -23,6 +23,10 @@ void Squad::moveTo(BWAPI::Position position)
 	m_unitSet.move(position);
 }
 
+BWAPI::Position Squad::getPosition() {
+	return m_unitSet.getPosition();
+}
+
 BWAPI::Unitset Squad::getUnits()
 {
 	return m_unitSet;
@@ -30,12 +34,7 @@ BWAPI::Unitset Squad::getUnits()
 
 bool Squad::containsUnit(BWAPI::Unit unit)
 {
-	for (auto& u : m_unitSet) {
-		if (u == unit) {
-			return true;
-		}
-	}
-	return false;
+	return m_unitSet.contains(unit);
 }
 
 bool Squad::isEmpty()

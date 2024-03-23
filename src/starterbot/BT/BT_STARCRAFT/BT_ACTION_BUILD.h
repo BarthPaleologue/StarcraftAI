@@ -14,7 +14,7 @@ private:
     BWAPI::TilePosition m_tilePos;
     bool m_duplicate;
 
-    State Evaluate(void* data) override;
+    BT_NODE::State Evaluate(void* data) override;
     std::string GetDescription() override;
     BT_NODE::State Build(void* data);
 };

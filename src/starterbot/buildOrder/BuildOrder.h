@@ -62,6 +62,8 @@ public:
 	/// <returns></returns>
 	int getSize();
 
+	e_buildOrderType getBuildOrderType();
+
 	// #rewrite
 	//void debug() const {
 	//	for (int i = 0; i < m_order.size(); i++) {
@@ -83,5 +85,6 @@ private:
 	// the current stage index of the build order
 	int m_currentOrderIndex = 0;
 	bool m_isCurrTaskStarted = false;
+	e_buildOrderType m_buildOrderType;
 };
 

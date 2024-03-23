@@ -51,6 +51,12 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_DEFILER.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_HYDRALISK_FROM_DEN.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_HYDRALISK_FROM_EVOLUTION_CHAMBER.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_MUTALISK.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ZERGLING_FROM_EVOLUTION_CHAMBER.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_VISIBLE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.h" />
@@ -59,6 +65,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IDLE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_UNIT.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_QUORUM.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_UNIT_CONDITION.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_SQUAD_CONDITION.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.h" />
@@ -66,7 +73,9 @@
     <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrderTools.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\allInBT.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\mainBT.h" />
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\MutaliskUtils.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\selfmadeBT.h" />
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\UpgradeBT.h" />
     <ClInclude Include="..\..\src\starterbot\targeting\ForceTools.h" />
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
     <ClInclude Include="..\..\src\starterbot\Job.h" />
@@ -77,6 +86,7 @@
     <ClInclude Include="..\..\src\starterbot\targeting\Squad.h" />
     <ClInclude Include="..\..\src\starterbot\StarterBot.h" />
     <ClInclude Include="..\..\src\starterbot\targeting\TargetingTools.h" />
+    <ClInclude Include="..\..\src\starterbot\targeting\HarassmentManager.h" />
     <ClInclude Include="..\..\src\starterbot\Tools.h" />
     <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h" />
   </ItemGroup>
@@ -112,12 +122,18 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_DEFILER.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_HYDRALISK_FROM_DEN.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_HYDRALISK_FROM_EVOLUTION_CHAMBER.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_MUTALISK.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_VISIBLE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_IDLE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_UNIT.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_QUORUM.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_UNIT_CONDITION.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_SQUAD_CONDITION.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.cpp" />
@@ -132,8 +148,10 @@
     <ClCompile Include="..\..\src\starterbot\targeting\Squad.cpp" />
     <ClCompile Include="..\..\src\starterbot\StarterBot.cpp" />
     <ClCompile Include="..\..\src\starterbot\targeting\TargetingTools.cpp" />
+    <ClCompile Include="..\..\src\starterbot\targeting\HarassmentManager.cpp" />
     <ClCompile Include="..\..\src\starterbot\Tools.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.cpp" />
+    <ClCompile Include="BT_ACTION_UPGRADE_ZERGLING_FROM_EVOLUTION_CHAMBER.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>StarterBot</ProjectName>

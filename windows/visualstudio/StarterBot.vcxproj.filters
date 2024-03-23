@@ -131,6 +131,9 @@
     <ClCompile Include="..\..\src\starterbot\targeting\TargetingTools.cpp">
       <Filter>targeting</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\targeting\HarassmentManager.cpp">
+      <Filter>targeting</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\starterbot\targeting\Squad.cpp">
       <Filter>targeting</Filter>
     </ClCompile>
@@ -144,6 +147,27 @@
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_SQUAD_CONDITION.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_QUORUM.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_MUTALISK.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_DEFILER.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_HYDRALISK_FROM_DEN.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_HYDRALISK_FROM_EVOLUTION_CHAMBER.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ACTION_UPGRADE_ZERGLING_FROM_EVOLUTION_CHAMBER.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
   </ItemGroup>
@@ -262,8 +286,6 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\OverlordUtils.h" />
-    <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h" />
     <ClInclude Include="..\..\src\starterbot\OwnedBase.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.h">
       <Filter>BT\BT_STARCRAFT</Filter>
@@ -286,6 +308,9 @@
     <ClInclude Include="..\..\src\starterbot\targeting\TargetingTools.h">
       <Filter>targeting</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\targeting\HarassmentManager.h">
+      <Filter>targeting</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\starterbot\targeting\Squad.h">
       <Filter>targeting</Filter>
     </ClInclude>
@@ -303,10 +328,44 @@
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\allInBT.h">
       <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\MutaliskUtils.h">
+      <Filter>selfmadeBT</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_UNIT_CONDITION.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_SQUAD_CONDITION.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_UNIT_QUORUM.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\ZerglingUtils.h">
+      <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\OverlordUtils.h">
+      <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\UpgradeBT.h">
+      <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_MUTALISK.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_DEFILER.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ZERGLING_FROM_EVOLUTION_CHAMBER.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_HYDRALISK_FROM_DEN.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_HYDRALISK_FROM_EVOLUTION_CHAMBER.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
   </ItemGroup>

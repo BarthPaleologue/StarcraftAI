@@ -8,6 +8,7 @@
 #include "selfmadeBT/selfmadeBT.h"
 #include <OverlordUtils.h>
 #include <ZerglingUtils.h>
+#include <selfmadeBT/MutaliskUtils.h>
 
 StarterBot::StarterBot()
 {
@@ -17,9 +18,10 @@ StarterBot::StarterBot()
     pData->thresholdSupply = 0;
 
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
+    pData->enemyTechSet = std::set<BWAPI::TechType>();
+pData->enemyTechBuildings = std::set<BWAPI::UnitType>();
 
-    pBT = BT_Builder::buildEarlyAllInBT();
-
+    pBT = BT_Builder::buildMainBT(pData);
 }
 
 //functions needed for initialisating : 
@@ -127,27 +129,48 @@ void StarterBot::onFrame()
     BWAPI::Unitset allUnits = BWAPI::Broodwar->self()->getUnits();
     for (auto it = allUnits.begin(); it != allUnits.end(); ++it) {
         BWAPI::Unit unit = *it;
-		if (unit == nullptr) continue; // the unit is null (should not happen)
-		if (!unit->exists()) continue; // the unit does not exist (dead)
+        if (unit == nullptr) continue; // the unit is null (should not happen)
+        if (!unit->exists()) continue; // the unit does not exist (dead)
         if (m_unitBT.count(unit)) continue; // the unit already has a BT
         if (!unit->isCompleted()) continue; // the unit is not completed
 
         // TODO: if zerg egg is dying then cancel last sec
         if (unit->getType() == BWAPI::UnitTypes::Zerg_Egg) continue; // the unit is an egg, we will assign a BT once it is a true unit
-		if (unit->getType() == BWAPI::UnitTypes::Zerg_Larva) continue; // the unit is a larva, we will assign a BT once it is a true unit
+        if (unit->getType() == BWAPI::UnitTypes::Zerg_Larva) continue; // the unit is a larva, we will assign a BT once it is a true unit
 
-		switch (unit->getType()) {
-		case BWAPI::UnitTypes::Zerg_Overlord:
-			m_unitBT.insert(std::make_pair(unit, OverlordUtils::CreateIndividualTree(unit)));
-			break;
-            
-		case BWAPI::UnitTypes::Zerg_Zergling:
-			m_unitBT.insert(std::make_pair(unit, ZerglingUtils::CreateTree(unit)));
-			break;
-		}
+        // Handle Mutalisk Squad Insertion
+        if (unit->getType() == BWAPI::UnitTypes::Zerg_Mutalisk) {
+            // if there is a squad close by, join it
+            bool foundASquad = false;
+            for (const auto [squad, squadBT] : m_mutaliskSquadsBT) {
+                if (squad->getPosition().getDistance(unit->getPosition()) < 100) {
+                    squad->addUnit(unit);
+                    foundASquad = true;
+                    break;
+                }
+            }
+
+            // If no squad was found, make a new one
+            if (!foundASquad) {
+                Squad* squad = new Squad();
+                squad->addUnit(unit);
+
+                m_mutaliskSquadsBT[squad] = MutaliskUtils::SquadTree(squad, nullptr);
+            }
+        }
+
+        switch (unit->getType()) {
+        case BWAPI::UnitTypes::Zerg_Overlord:
+            m_unitBT.insert(std::make_pair(unit, OverlordUtils::CreateIndividualTree(unit)));
+            break;
+
+        case BWAPI::UnitTypes::Zerg_Zergling:
+            m_unitBT.insert(std::make_pair(unit, ZerglingUtils::CreateTree(unit)));
+            break;
+        };
     }
 
-    // iterate over all the BTs, those assigned to dead units can be removed
+    // iterate over all the unit BTs, those assigned to dead units can be removed
     for (const auto& [unit, unitBT] : m_unitBT) {
         if (unit->exists()) continue; // the unit is alive
 
@@ -156,10 +179,32 @@ void StarterBot::onFrame()
         m_unitBT.erase(unit);
     }
 
+    // iterate over all the mutalisk squad BTs, those assigned to dead squads can be removed
+    for (const auto& [squad, squadBT] : m_mutaliskSquadsBT) {
+        bool isAtLeastOneMutaliskAlive = false;
+        for (const auto& mutalisk : squad->getUnits()) {
+            if (mutalisk->exists()) {
+				isAtLeastOneMutaliskAlive = true;
+				break;
+			}
+		}
+
+        if (isAtLeastOneMutaliskAlive) continue; // at least one mutalisk is alive
+
+		delete (BT_DECORATOR*)squadBT;
+
+		m_mutaliskSquadsBT.erase(squad);
+	}
+
     // execute all BTs
     for (const auto& [unit, unitBT] : m_unitBT) {
         unitBT->Evaluate(pData);
     }
+
+    // execute all mutalisk squad BTs
+    for (const auto& [squad, squadBT] : m_mutaliskSquadsBT) {
+		squadBT->Evaluate(pData);
+	}
 
     // Draw unit health bars, which brood war unfortunately does not do
     Tools::DrawUnitHealthBars();
@@ -304,7 +349,21 @@ void StarterBot::onUnitShow(BWAPI::Unit unit)
             base.checkNewMineral(unit);
         }
     }
-
+    // check technology
+    if (!Tools::IsMine(unit)) {
+        BWAPI::TechType tech = unit->getType().requiredTech();
+        BWAPI::UnitType techBuiding;
+        while (tech != BWAPI::TechTypes::None) {
+            if (this->pData->enemyTechSet.contains(tech)) {
+				break;
+			}
+            std::cout << "Enemy has tech: " << tech << std::endl;
+			this->pData->enemyTechSet.insert(tech);
+            techBuiding = tech.requiredUnit();
+            this->pData->enemyTechBuildings.insert(techBuiding);
+			tech = techBuiding.requiredTech();
+		}
+    }
 }
 
 // Called whenever a unit gets hidden, with a pointer to the destroyed unit

@@ -32,5 +32,5 @@ BT_NODE::State BT_ACTION_GO_TO_ENEMY_BASE::GoToEnnemyBase(void* data)
 
 	m_unit->move(basePosition);
 
-	return BT_NODE::RUNNING;
+	return BT_NODE::SUCCESS;
 }
