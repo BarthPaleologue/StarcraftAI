@@ -18,6 +18,8 @@ StarterBot::StarterBot()
     pData->thresholdSupply = 0;
 
     pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
+    pData->enemyTechSet = std::set<BWAPI::TechType>();
+pData->enemyTechBuildings = std::set<BWAPI::UnitType>();
 
     pBT = BT_Builder::buildMainBT(pData);
 }
@@ -353,7 +355,21 @@ void StarterBot::onUnitShow(BWAPI::Unit unit)
             base.checkNewMineral(unit);
         }
     }
-
+    // check technology
+    if (!Tools::IsMine(unit)) {
+        BWAPI::TechType tech = unit->getType().requiredTech();
+        BWAPI::UnitType techBuiding;
+        while (tech != BWAPI::TechTypes::None) {
+            if (this->pData->enemyTechSet.contains(tech)) {
+				break;
+			}
+            std::cout << "Enemy has tech: " << tech << std::endl;
+			this->pData->enemyTechSet.insert(tech);
+            techBuiding = tech.requiredUnit();
+            this->pData->enemyTechBuildings.insert(techBuiding);
+			tech = techBuiding.requiredTech();
+		}
+    }
 }
 
 // Called whenever a unit gets hidden, with a pointer to the destroyed unit

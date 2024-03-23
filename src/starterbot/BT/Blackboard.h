@@ -8,6 +8,7 @@
 #include "Job.h"
 #include <map>
 #include <targeting/HarassmentManager.h>
+#include <set>
 
 #define THRESHOLD1_UNUSED_SUPPLY 2
 #define NWANTED_WORKERS_TOTAL 20
@@ -96,15 +97,15 @@ enum class GameStage {
 
 class Blackboard {
 public:
-	Blackboard(e_buildOrderType _boType): buildOrder(_boType) {}
-	
+	Blackboard(e_buildOrderType _boType) : buildOrder(_boType) {}
+
 	BuildOrder buildOrder;
 
 	GameStage gameStage = GameStage::EARLY;
 
 	// purpose: if the mineral count (with self()->minerals()) update is not instant after using minerals
 	// otherwise just remove this attribute
-	int currMinerals; 
+	int currMinerals;
 
 	BWAPI::UnitType focusedTrainingUnit = BWAPI::UnitTypes::Zerg_Drone;
 
@@ -113,7 +114,7 @@ public:
 
 	// TODO: replace with "number of workers per base" and "number of minerals per base" 
 	// (not more than 2 workers / mineral, don't forget to update)
-	int nWantedWorkersTotal; 
+	int nWantedWorkersTotal;
 
 	std::unordered_set<BWAPI::Unit> unitsFarmingMinerals;
 
@@ -143,7 +144,10 @@ public:
 
 	// for units / techs we want right now but we don't have ressources so we don't train anything to wait for them
 	std::queue<BWAPI::UnitType> unitsRequested; // for now by build order, maybe add struct for prio
-	std::queue<BWAPI::TechType> techsRequested; 
+	std::queue<BWAPI::TechType> techsRequested;
 
 	std::queue<Job> jobQueue; // priority queue?
+
+	std::set<BWAPI::TechType> enemyTechSet;
+	std::set<BWAPI::UnitType> enemyTechBuildings;
 };
