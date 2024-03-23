@@ -10,12 +10,12 @@ template <typename T>
 BT_NODE::State BT_ACTION_UPDATE_BLACKBOARD<T>::Evaluate(void* data)
 {
 	//Blackboard* pData = (Blackboard*)data;
-	m_ref_to_blackboard = m_value;
+	m_ref_to_blackboard = m_value_to_assign;
 	return BT_NODE::SUCCESS;
 }
 
 template <typename T>
 std::string BT_ACTION_UPDATE_BLACKBOARD<T>::GetDescription()
 {
-	return "TOGGLE_ALL_IN " + m_toggle_value;
+	return "ACTION_UPDATE_BLACKBOARD";
 }

@@ -50,10 +50,12 @@ namespace BT_Builder
         // ----------------------------------END OF TRANSFER EVERYTHING INTO EARLY / MID / LATE BT ---------------------------
 
         //Training Workers
-        BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);
+        //BT_DECO_CONDITION* pNotAllIn = new BT_DECO_CONDITION("NotAllIn", selectHQAction, []()); // maybe a condition "read blackboard"?
+        BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction); //pNotAllIn);
         BT_ACTION_TRAIN_UNIT* pTrainWorker = new BT_ACTION_TRAIN_UNIT("TrainWorker", BWAPI::UnitTypes::Zerg_Drone, false, pNotEnoughWorkers);
 
         // ---------------------- End of HQ management ---------------------
+
         return pBT;
 	}
 }

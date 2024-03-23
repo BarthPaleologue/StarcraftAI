@@ -48,6 +48,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_SUPPLY_PROVIDER.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPDATE_BLACKBOARD.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.h" />
@@ -72,7 +73,9 @@
     <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrder.h" />
     <ClInclude Include="..\..\src\starterbot\buildOrder\BuildOrderTools.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\allInBT.h" />
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\earlyBT.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\mainBT.h" />
+    <ClInclude Include="..\..\src\starterbot\selfmadeBT\midBT.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\MutaliskUtils.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\selfmadeBT.h" />
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\UpgradeBT.h" />
@@ -119,6 +122,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_SUPPLY_PROVIDER.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPDATE_BLACKBOARD.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.cpp" />

@@ -11,7 +11,9 @@
 #include <set>
 
 #define THRESHOLD1_UNUSED_SUPPLY 2
-#define NWANTED_WORKERS_TOTAL 20
+
+int const DRONE_COUNT_WHILE_MUTA_HARASS = 20;
+int const ABSOLUTE_DRONE_LIMIT = 70;
 
 const BWAPI::TilePosition NONE_POS(-1, -1);
 
@@ -89,9 +91,8 @@ const BWAPI::Position STATION_POS[2] = {
 };
 
 enum class GameStage {
-	BUILD_ORDER_IN_PROGRESS,
 	EARLY,
-	MID,
+	MID, //includes late for now
 	LATE
 };
 
@@ -102,7 +103,7 @@ public:
 
 	BuildOrder buildOrder;
 
-	GameStage gameStage = GameStage::BUILD_ORDER_IN_PROGRESS;
+	GameStage gameStage = GameStage::EARLY;
 
 	bool allIn = false;
 
@@ -110,7 +111,7 @@ public:
 	// otherwise just remove this attribute
 	int currMinerals;
 
-	BWAPI::UnitType focusedTrainingUnit = BWAPI::UnitTypes::Zerg_Drone;
+	BWAPI::UnitType focusedTrainingUnit = BWAPI::UnitTypes::Zerg_Zergling;
 
 	int currSupply;
 	int thresholdSupply = 0; //if it's -1 then it's calculated by overlord management 

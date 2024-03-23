@@ -16,12 +16,27 @@ StarterBot::StarterBot()
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
 
-    pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL; // PLACEHOLDER!
+    pData->nWantedWorkersTotal = DRONE_COUNT_WHILE_MUTA_HARASS;
 
     pData->enemyTechSet = std::set<BWAPI::TechType>();
-pData->enemyTechBuildings = std::set<BWAPI::UnitType>();
+    pData->enemyTechBuildings = std::set<BWAPI::UnitType>();
 
-    pBT = BT_Builder::buildMainBT(pData);
+    pData->enemyRace = BWAPI::Broodwar->enemy()->getRace();
+    // early game
+    if (pData->enemyRace == BWAPI::Races::Terran) {
+        //pEarlyMacroBT = BT_Builder::terranEarlyMacroBT(pData)
+        //pMidMacroBT
+    }
+    else if (pData->enemyRace == BWAPI::Races::Protoss) {
+        //pEarlyMacroBT = BT_Builder::protossEarlyMacroBT(pData)
+        //pMidMacroBT
+    }
+    else { //zerg
+
+    }
+
+    pMainBT = BT_Builder::buildMainBT(pData);
+    
 }
 
 //functions needed for initialisating : 
@@ -114,16 +129,36 @@ void StarterBot::onFrame()
     std::vector<BWAPI::Unit> overlords;
     Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Overlord, overlords);
     pData->nbOverlords = overlords.size();
-
-    pData->enemyRace = BWAPI::Broodwar->enemy()->getRace();
     
     // AI BT
-    if (pBT != nullptr && pBT->Evaluate(pData) != BT_NODE::RUNNING)
+    if (pMainBT != nullptr && pMainBT->Evaluate(pData) != BT_NODE::RUNNING)
     {
-        std::cout << "end of BT execution" << std::endl;
-        delete (BT_DECORATOR*)pBT;
-        pBT = nullptr;
+        std::cout << "end of MainBT execution" << std::endl;
+        delete (BT_DECORATOR*)pMainBT;
+        pMainBT = nullptr;
     }
+
+    if (pData->gameStage == GameStage::EARLY && pEarlyMacroBT != nullptr && pEarlyMacroBT->Evaluate(pData) != BT_NODE::RUNNING)
+    {
+        std::cout << "end of EarlyBT execution" << std::endl;
+        delete (BT_DECORATOR*)pEarlyMacroBT;
+        pEarlyMacroBT = nullptr;
+    }
+
+    if (pData->gameStage == GameStage::MID && pMidMacroBT != nullptr && pMidMacroBT->Evaluate(pData) != BT_NODE::RUNNING)
+    {
+        std::cout << "end of MidBT execution" << std::endl;
+        delete (BT_DECORATOR*)pMidMacroBT;
+        pMidMacroBT = nullptr;
+    }
+
+    if (pData->gameStage == GameStage::LATE && pLateMacroBT != nullptr && pLateMacroBT->Evaluate(pData) != BT_NODE::RUNNING)
+    {
+        std::cout << "end of LateBT execution" << std::endl;
+        delete (BT_DECORATOR*)pLateMacroBT;
+        pLateMacroBT = nullptr;
+    }
+
 
     // iterate over all units, those who don't yet have a BT will be assigned one
     BWAPI::Unitset allUnits = BWAPI::Broodwar->self()->getUnits();

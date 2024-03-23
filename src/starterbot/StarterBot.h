@@ -11,7 +11,11 @@ class StarterBot
 {
 private:
     MapTools m_mapTools;
-	BT_NODE* pBT;
+	BT_NODE* pMainBT;
+	BT_NODE* pEarlyMacroBT;
+	BT_NODE* pMidMacroBT;
+	BT_NODE* pLateMacroBT;
+
 	//BT_NODE* pBtTest;
 	Blackboard *pData;
 
