@@ -122,12 +122,6 @@ void StarterBot::onFrame()
         delete (BT_DECORATOR*)pBT;
         pBT = nullptr;
     }
-    /*if (pBtTest != nullptr && pBtTest->Evaluate(pData) != BT_NODE::RUNNING)
-    {
-        std::cout << "end of BT_Test execution" << std::endl;
-        delete (BT_DECORATOR*)pBtTest;
-        pBtTest = nullptr;
-    }*/
 
     // iterate over all units, those who don't yet have a BT will be assigned one
     BWAPI::Unitset allUnits = BWAPI::Broodwar->self()->getUnits();
