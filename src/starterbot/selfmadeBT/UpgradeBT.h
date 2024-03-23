@@ -28,7 +28,7 @@ namespace BT_Builder {
 		// Defiler Upgrades
 		auto defilerMoundQuorum = new BT_DECO_CONDITION_UNIT_QUORUM("DefilerMoundQuorum", BWAPI::UnitTypes::Zerg_Defiler_Mound, root, 1, false);
 
-		// TODO:select defiler upgrade
+		auto upgradeDefiler = new BT_ACTION_UPGRADE_DEFILER("UpgradeDefiler", defilerMoundQuorum);
 
 		// Mutalisk Upgrades
 		auto mutaliskQuorum = new BT_DECO_CONDITION_UNIT_QUORUM("MutaliskQuorum", BWAPI::UnitTypes::Zerg_Mutalisk, root, 6, false);

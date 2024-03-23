@@ -51,6 +51,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_DEFILER.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_MUTALISK.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_DEFILER.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_MUTALISK.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ULTRALISK.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.cpp" />

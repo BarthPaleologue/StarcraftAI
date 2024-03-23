@@ -18,7 +18,7 @@ std::string BT_ACTION_UPGRADE_ULTRALISK::GetDescription()
 
 BT_NODE::State BT_ACTION_UPGRADE_ULTRALISK::ChooseUpgrade(void* data)
 {
-	if (BWAPI::Broodwar->self()->isUpgrading(BWAPI::UpgradeTypes::Chitinous_Plating) || BWAPI::Broodwar->self()->isUpgrading(BWAPI::UpgradeTypes::Chitinous_Plating))
+	if (BWAPI::Broodwar->self()->isUpgrading(BWAPI::UpgradeTypes::Chitinous_Plating) || BWAPI::Broodwar->self()->isUpgrading(BWAPI::UpgradeTypes::Anabolic_Synthesis))
 	{
 		return BT_NODE::RUNNING;
 	}
