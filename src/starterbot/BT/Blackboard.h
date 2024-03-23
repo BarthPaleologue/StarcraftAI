@@ -154,7 +154,7 @@ public:
 	bool EnemyHasTech(BWAPI::TechType tech) {
 		return enemyTechSet.contains(tech);
 	}
-	bool EnemyPossibleTech(BWAPI::TechType tech) {
+	bool EnemyMayHasTech(BWAPI::TechType tech) {
 		return enemyTechBuildings.contains(tech.whatResearches());
 	};
 };
