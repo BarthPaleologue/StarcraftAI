@@ -33,7 +33,7 @@ namespace BT_Builder {
 		// Mutalisk Upgrades
 		auto mutaliskQuorum = new BT_DECO_CONDITION_UNIT_QUORUM("MutaliskQuorum", BWAPI::UnitTypes::Zerg_Mutalisk, root, 6, false);
 
-		// TODO:select mutalisk upgrade
+		auto upgradeMutalisk = new BT_ACTION_UPGRADE_MUTALISK("UpgradeMutalisk", mutaliskQuorum);
 
 		return root;
 	}
