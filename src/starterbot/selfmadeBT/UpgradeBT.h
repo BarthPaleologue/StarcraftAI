@@ -13,6 +13,8 @@ namespace BT_Builder {
 
 		auto zerglingUpgradeFromSpawningPool = new BT_ACTION_UPGRADE_ZERGLING_FROM_SPAWNING_POOL("UpgradeZerglingFromSpawningPool", zerglingUpgradeSequencer);
 
+		auto zerglingUpgradeFromEvolutionChamber = new BT_ACTION_UPGRADE_ZERGLING_FROM_EVOLUTION_CHAMBER("UpgradeZerglingFromEvolutionChamber", zerglingUpgradeSequencer);
+
 		// Hydralisk Upgrades
 		auto hydraliskQuorum = new BT_DECO_CONDITION_UNIT_QUORUM("HydrasQuorum", BWAPI::UnitTypes::Zerg_Hydralisk, root, 6, false);
 
