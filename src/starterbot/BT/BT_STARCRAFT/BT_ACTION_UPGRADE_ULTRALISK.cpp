@@ -20,7 +20,7 @@ BT_NODE::State BT_ACTION_UPGRADE_ULTRALISK::ChooseUpgrade(void* data)
 {
 	if (BWAPI::Broodwar->self()->isUpgrading(BWAPI::UpgradeTypes::Chitinous_Plating) || BWAPI::Broodwar->self()->isUpgrading(BWAPI::UpgradeTypes::Anabolic_Synthesis))
 	{
-		return BT_NODE::RUNNING;
+		return BT_NODE::SUCCESS;
 	}
 
 	int chitinousPlatingLevel = BWAPI::Broodwar->self()->getUpgradeLevel(BWAPI::UpgradeTypes::Chitinous_Plating);
@@ -55,7 +55,7 @@ BT_NODE::State BT_ACTION_UPGRADE_ULTRALISK::ChooseUpgrade(void* data)
 		}
 	}
 
-	return BT_NODE::FAILURE;
+	return BT_NODE::SUCCESS;
 }
 
 

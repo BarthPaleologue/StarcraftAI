@@ -20,7 +20,7 @@ BT_NODE::State BT_ACTION_UPGRADE_MUTALISK::ChooseUpgrade(void* data)
 {
 	if (BWAPI::Broodwar->self()->isUpgrading(BWAPI::UpgradeTypes::Zerg_Flyer_Carapace) || BWAPI::Broodwar->self()->isUpgrading(BWAPI::UpgradeTypes::Zerg_Flyer_Attacks))
 	{
-		return BT_NODE::RUNNING;
+		return BT_NODE::SUCCESS;
 	}
 
 	int carapaceLevel = BWAPI::Broodwar->self()->getUpgradeLevel(BWAPI::UpgradeTypes::Zerg_Flyer_Carapace);
@@ -56,7 +56,7 @@ BT_NODE::State BT_ACTION_UPGRADE_MUTALISK::ChooseUpgrade(void* data)
 		}
 	}
 
-	return BT_NODE::FAILURE;
+	return BT_NODE::SUCCESS;
 }
 
 

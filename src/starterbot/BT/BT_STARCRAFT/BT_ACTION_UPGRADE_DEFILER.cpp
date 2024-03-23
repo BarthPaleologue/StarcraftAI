@@ -20,7 +20,7 @@ BT_NODE::State BT_ACTION_UPGRADE_DEFILER::ChooseUpgrade(void* data)
 {
 	if(BWAPI::Broodwar->self()->isResearching(BWAPI::TechTypes::Consume))
 	{
-		return BT_NODE::RUNNING;
+		return BT_NODE::SUCCESS;
 	}
 
 	if (BWAPI::Broodwar->self()->isResearchAvailable(BWAPI::TechTypes::Consume)) {
@@ -38,7 +38,7 @@ BT_NODE::State BT_ACTION_UPGRADE_DEFILER::ChooseUpgrade(void* data)
 
 	if(BWAPI::Broodwar->self()->isResearching(BWAPI::TechTypes::Plague))
 	{
-		return BT_NODE::RUNNING;
+		return BT_NODE::SUCCESS;
 	}
 
 	if (BWAPI::Broodwar->self()->isResearchAvailable(BWAPI::TechTypes::Plague)) {
@@ -56,7 +56,7 @@ BT_NODE::State BT_ACTION_UPGRADE_DEFILER::ChooseUpgrade(void* data)
 
 	if (BWAPI::Broodwar->self()->isUpgrading(BWAPI::UpgradeTypes::Metasynaptic_Node))
 	{
-		return BT_NODE::RUNNING;
+		return BT_NODE::SUCCESS;
 	}
 
 	int metasynapticNodeLevel = BWAPI::Broodwar->self()->getUpgradeLevel(BWAPI::UpgradeTypes::Metasynaptic_Node);
@@ -75,5 +75,5 @@ BT_NODE::State BT_ACTION_UPGRADE_DEFILER::ChooseUpgrade(void* data)
 		}
 	}
 
-	return BT_NODE::FAILURE;
+	return BT_NODE::SUCCESS;
 }

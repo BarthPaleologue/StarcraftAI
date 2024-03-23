@@ -52,7 +52,7 @@ BT_NODE::State BT_ACTION_UPGRADE_HYDRALISK_FROM_EVOLUTION_CHAMBER::ChooseUpgrade
 		}
 	}
 
-	return BT_NODE::State::FAILURE;
+	return BT_NODE::State::SUCCESS;
 }
 
 

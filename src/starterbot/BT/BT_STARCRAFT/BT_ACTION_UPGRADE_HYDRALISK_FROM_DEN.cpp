@@ -57,5 +57,5 @@ BT_NODE::State BT_ACTION_UPGRADE_HYDRALISK_FROM_DEN::ChooseUpgrade(void* data)
 		}
 	}
 
-	return BT_NODE::FAILURE;
+	return BT_NODE::SUCCESS;
 }
