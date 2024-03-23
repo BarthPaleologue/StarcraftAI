@@ -5,7 +5,8 @@
 #include "OverlordUtils.h"
 #include "MutaliskUtils.h"
 
-namespace BT_Builder {
+namespace BT_Builder
+{
 	BT_NODE* buildMainBT(Blackboard *blackboard) {
         BT_NODE* pBT = new BT_DECORATOR("EntryPoint", nullptr);
 
@@ -32,17 +33,21 @@ namespace BT_Builder {
         //Build Additional overlords
         OverlordUtils::CreateTrainingTree(selectHQAction);
 
+        // ------------------------------------------ TRANSFER EVERYTHING INTO EARLY / MID / LATE BT ---------------------------
+
         // Training Zerglings:
 
         if (BWAPI::Broodwar->enemy()->getRace() == BWAPI::Races::Protoss) {
             blackboard->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Zergling] = 8;
-            ZerglingUtils::TrainingTreeEarlyVsProtoss(selectHQAction);
+            ZerglingUtils::TrainingTreeEarly(selectHQAction);
         }
         else {
             ZerglingUtils::CreateTrainingTree(selectHQAction);
         }
 
         MutaliskUtils::TrainingTree(selectHQAction);
+
+        // ----------------------------------END OF TRANSFER EVERYTHING INTO EARLY / MID / LATE BT ---------------------------
 
         //Training Workers
         BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction);

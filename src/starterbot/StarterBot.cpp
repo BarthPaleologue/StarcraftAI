@@ -8,16 +8,16 @@
 #include "selfmadeBT/selfmadeBT.h"
 #include <OverlordUtils.h>
 #include <ZerglingUtils.h>
-#include <selfmadeBT/MutaliskUtils.h>
 
 StarterBot::StarterBot()
 {
-    pData = new Blackboard(e_buildOrderType::FourPool);
+    pData = new Blackboard(e_buildOrderType::NinePool);
     pData->currMinerals = 0;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
 
-    pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL;
+    pData->nWantedWorkersTotal = NWANTED_WORKERS_TOTAL; // PLACEHOLDER!
+
     pData->enemyTechSet = std::set<BWAPI::TechType>();
 pData->enemyTechBuildings = std::set<BWAPI::UnitType>();
 

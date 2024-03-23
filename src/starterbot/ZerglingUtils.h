@@ -29,7 +29,7 @@ public:
 		return buildOrderFinished;
 	}
 
-	static BT_NODE* TrainingTreeEarlyVsProtoss(BT_NODE* parent) {
+	static BT_NODE* TrainingTreeEarly(BT_NODE* parent) {
 		BT_DECO_CONDITION_BUILD_ORDER_FINISHED* root = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", parent);
 
 		BT_DECO_CONDITION_NOT_ENOUGH_UNIT* unitCountCheck = new BT_DECO_CONDITION_NOT_ENOUGH_UNIT("NotEnoughZerglings", root, BWAPI::UnitTypes::Zerg_Zergling);

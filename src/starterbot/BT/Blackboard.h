@@ -89,6 +89,7 @@ const BWAPI::Position STATION_POS[2] = {
 };
 
 enum class GameStage {
+	BUILD_ORDER_IN_PROGRESS,
 	EARLY,
 	MID,
 	LATE
@@ -101,7 +102,9 @@ public:
 
 	BuildOrder buildOrder;
 
-	GameStage gameStage = GameStage::EARLY;
+	GameStage gameStage = GameStage::BUILD_ORDER_IN_PROGRESS;
+
+	bool allIn = false;
 
 	// purpose: if the mineral count (with self()->minerals()) update is not instant after using minerals
 	// otherwise just remove this attribute
