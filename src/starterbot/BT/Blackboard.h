@@ -150,4 +150,8 @@ public:
 
 	std::set<BWAPI::TechType> enemyTechSet;
 	std::set<BWAPI::UnitType> enemyTechBuildings;
+
+	bool EnemyHasTech(BWAPI::TechType tech) {
+		return enemyTechSet.contains(tech);
+	}
 };
