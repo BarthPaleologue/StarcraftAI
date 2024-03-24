@@ -105,7 +105,6 @@ public:
 
 	GameStage gameStage = GameStage::EARLY;
 
-	bool allIn = false;
 
 	// purpose: if the mineral count (with self()->minerals()) update is not instant after using minerals
 	// otherwise just remove this attribute
@@ -161,4 +160,8 @@ public:
 	bool EnemyMayHasTech(BWAPI::TechType tech) {
 		return enemyTechBuildings.contains(tech.whatResearches());
 	};
+	
+	bool canAllIn(){
+		return Tools::canAllIn();
+	}
 };

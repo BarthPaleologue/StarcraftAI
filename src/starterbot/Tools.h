@@ -34,4 +34,6 @@ namespace Tools
     bool IsMine(BWAPI::Unit unit);
 
     bool TrainBuilderAtBase(BWAPI::Unit base, int num);
+
+    bool canAllIn();
 }
