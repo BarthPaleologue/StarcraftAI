@@ -170,6 +170,9 @@
     <ClCompile Include="BT_ACTION_UPGRADE_ZERGLING_FROM_EVOLUTION_CHAMBER.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_ATTACK.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_CHASE.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
@@ -394,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\selfmadeBT\midBT.h">
       <Filter>selfmadeBT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_ATTACK.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_CHASE.h">
       <Filter>BT\BT_STARCRAFT</Filter>
