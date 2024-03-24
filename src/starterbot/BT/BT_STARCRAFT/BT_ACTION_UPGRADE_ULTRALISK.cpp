@@ -13,7 +13,7 @@ BT_NODE::State BT_ACTION_UPGRADE_ULTRALISK::Evaluate(void* data)
 
 std::string BT_ACTION_UPGRADE_ULTRALISK::GetDescription()
 {
-	"BT_ACTION_UPGRADE_ULTRALISK";
+	return "BT_ACTION_UPGRADE_ULTRALISK";
 }
 
 BT_NODE::State BT_ACTION_UPGRADE_ULTRALISK::ChooseUpgrade(void* data)
