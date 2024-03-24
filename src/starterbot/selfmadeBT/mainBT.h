@@ -13,6 +13,9 @@ namespace BT_Builder
 
         BT_PARALLEL_SEQUENCER* pMainParallelSeq = new BT_PARALLEL_SEQUENCER("MainParallelSequence", pBT, 10);
 
+        // upgrade manager
+        BT_Builder::buildUpgradeBT(pMainParallelSeq);
+
         //Farming Minerals forever
         BT_DECO_REPEATER* pFarmingMineralsForeverRepeater = new BT_DECO_REPEATER("RepeatForeverFarmingMinerals", pMainParallelSeq, 0, true, false, true);
         BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS* pSendWorkerToMinerals = new BT_ACTION_SEND_IDLE_WORKER_TO_MINERALS("SendWorkerToMinerals", pFarmingMineralsForeverRepeater);
@@ -47,8 +50,6 @@ namespace BT_Builder
         }
 
         MutaliskUtils::TrainingTree(selectHQAction);
-
-        BT_Builder::buildUpgradeBT(selectHQAction);
 
         // ----------------------------------END OF TRANSFER EVERYTHING INTO EARLY / MID / LATE BT ---------------------------
 
