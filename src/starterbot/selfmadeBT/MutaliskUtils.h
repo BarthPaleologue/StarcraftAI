@@ -32,6 +32,8 @@ public:
 	static BT_NODE* AllInStrategy(Squad* squad, BT_NODE* parent) {
 		auto allInStrategy = new BT_SEQUENCER("AllInStrategy", parent, 10);
 
+		auto allInGoToEnemyBase = new BT_ACTION_SQUAD_GO_TO_ENEMY_BASE("allInGoToEnemyBase", squad, allInStrategy);
+
 		auto allInIsTargetInvalid = new BT_DECO_CONDITION_SQUAD_INVALID_TARGET("allInIsTargetInvalid", squad, allInStrategy);
 
 		auto allInChooseTarget = new BT_ACTION_MUTALISK_SQUAD_CHOOSE_TARGET("allInChooseTarget", squad, allInIsTargetInvalid);
