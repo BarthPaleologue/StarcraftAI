@@ -32,7 +32,7 @@ public:
 	static BT_NODE* MainStrategy(BWAPI::Unit zergling, BT_NODE* parent) {
 		auto mainStrategy = new BT_SEQUENCER("MainStrategy", parent, 10);
 
-		auto quorumCondition = new BT_DECO_CONDITION_UNIT_QUORUM("zerglingQuorum", BWAPI::UnitTypes::Zerg_Zergling, mainStrategy, 4, true);
+		auto quorumCondition = new BT_DECO_CONDITION_UNIT_QUORUM("zerglingQuorum", BWAPI::UnitTypes::Zerg_Zergling, mainStrategy, 8, true);
 
 		auto goToEnemyBase = new BT_ACTION_GO_TO_ENEMY_BASE("GoToEnemyBase", zergling, quorumCondition);
 

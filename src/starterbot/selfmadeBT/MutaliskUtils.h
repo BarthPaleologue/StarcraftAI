@@ -44,7 +44,9 @@ public:
 	}
 
 	static BT_NODE* MainStrategy(Squad* squad, BT_NODE* parent) {
-		auto mainStrategy = new BT_PARALLEL_SEQUENCER("MainStrategy", parent, 10);
+		auto quorumCheck = new BT_DECO_CONDITION_SQUAD_QUORUM("QuorumCheck", squad, parent, 8, true);
+
+		auto mainStrategy = new BT_PARALLEL_SEQUENCER("MainStrategy", quorumCheck, 10);
 
 		auto isTargetInvalid = new BT_DECO_CONDITION_SQUAD_INVALID_TARGET("IsTargetInvalid", squad, mainStrategy);
 
@@ -58,6 +60,6 @@ public:
 
 		auto attackAction = new BT_ACTION_MUTALISK_SQUAD_ATTACK("Attack", squad, attackActionSelector);
 
-		return mainStrategy;
+		return quorumCheck;
 	}
 };
