@@ -23,8 +23,6 @@ public:
 	
 	bool containsUnit(BWAPI::Unit unit);
 
-	BWAPI::Unit getLastTarget();
-
 	BWAPI::Unitset getEnemyUnitsInRadius(int radius);
 
 	void setTarget(BWAPI::Unit target);
@@ -48,7 +46,6 @@ public:
 private:
 	BWAPI::Unitset m_unitSet{};
 
-	BWAPI::Unit m_lastTarget = nullptr;
 	BWAPI::Unit m_target = nullptr;
 };
 

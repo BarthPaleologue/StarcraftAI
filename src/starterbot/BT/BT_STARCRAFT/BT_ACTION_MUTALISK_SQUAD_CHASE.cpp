@@ -18,7 +18,7 @@ std::string BT_ACTION_MUTALISK_SQUAD_CHASE::GetDescription()
 BT_NODE::State BT_ACTION_MUTALISK_SQUAD_CHASE::Chase(void* data)
 {
 	// First try to chase the last target of the squad
-	BWAPI::Unit squadLastTarget = m_squad->getLastTarget();
+	BWAPI::Unit squadLastTarget = m_squad->getTarget();
 	if (squadLastTarget != nullptr) {
 		m_squad->moveTo(squadLastTarget->getPosition());
 		return BT_NODE::State::SUCCESS;

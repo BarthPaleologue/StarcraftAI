@@ -11,7 +11,6 @@ Squad::~Squad()
 void Squad::attack(BWAPI::Unit target)
 {
 	m_unitSet.attack(target);
-	m_lastTarget = target;
 }
 
 void Squad::addUnit(BWAPI::Unit unit)
@@ -41,11 +40,6 @@ BWAPI::Unitset Squad::getUnits()
 bool Squad::containsUnit(BWAPI::Unit unit)
 {
 	return m_unitSet.contains(unit);
-}
-
-BWAPI::Unit Squad::getLastTarget()
-{
-	return m_lastTarget;
 }
 
 BWAPI::Unitset Squad::getEnemyUnitsInRadius(int radius)
