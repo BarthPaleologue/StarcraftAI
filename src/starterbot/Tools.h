@@ -36,4 +36,12 @@ namespace Tools
     bool TrainBuilderAtBase(BWAPI::Unit base, int num);
 
     bool canAllIn();
+    
+    bool cantWIn();
+
+
+
+    BWAPI::Position getClosestDefenceRegion(BWAPI::Position pos, int myIdx);
+    bool BuildCreepColony(BWAPI::Unit hatchery, int myIdx);
+    bool BuildSunkenColony(BWAPI::Unit hatchery);
 }

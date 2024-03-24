@@ -183,10 +183,10 @@ bool Tools::BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition bu
         return false;
 	}
     // Ask BWAPI for a building location near the desired position for the type
-    int maxBuildRange = 64;
+    int maxBuildRange = 500;
     bool buildingOnCreep = type.requiresCreep();
-    //BWAPI::TilePosition buildPosHere = BWAPI::Broodwar->getBuildLocation(type, buildPos, maxBuildRange, buildingOnCreep);
-    return builder->build(type, buildPos);
+    BWAPI::TilePosition buildPosHere = BWAPI::Broodwar->getBuildLocation(type, buildPos, maxBuildRange, buildingOnCreep);
+    return builder->build(type, buildPosHere);
 }
 
 
@@ -396,6 +396,49 @@ bool Tools::TrainBuilderAtBase(BWAPI::Unit base, int num) {
 	}
 }
 
+bool Tools::cantWIn(){
+    BWAPI::Player enemy = BWAPI::Broodwar->enemy();
+	BWAPI::Player me = BWAPI::Broodwar->self();
+
+	BWAPI::UnitType myWorker =me->getRace().getWorker();
+	BWAPI::UnitType enemyWorker =enemy->getRace().getWorker();
+
+
+	//compute my score : 
+	float myDPS=0;
+	float enemyDPS=0;
+    float myHp=0;
+	float enemyHp=0;
+
+
+	for (auto& unit : me->getUnits()){
+		float dps = ForceTools::unitDPS(unit.getType(),me,enemyWorker,enemy);;
+		if(dps>0 unit.getType()!= myWorker){
+			myDPS+=dps;
+			myHp+=unit.getType().maxHitPoints();
+		}
+	}
+	myDPS=myDPS/enemyWorker.maxHitPoints();
+	float myScore = myDPS * pow(myHp, 1.5);
+
+
+
+	//compute enemy score : 
+	for (auto& unit : enemy->getUnits()){
+		float dps = ForceTools::unitDPS(unit.getType(),enemy,myWorker,me);
+		if(dps>0){
+			enemyDPS+=dps;
+			enemyHp+=unit.getType().maxHitPoints();
+		}
+	}
+
+
+	enemyDPSDPS=enemyDPS/myWorker.maxHitPoints();
+	float enemyScore = enemyDPS * pow(enemyHp, 1.5);
+	
+
+	return (enemyScore>myScore)
+}
 bool Tools::canAllIn(){
     BWAPI::Player enemy = BWAPI::Broodwar->enemy();
 	BWAPI::Player me = BWAPI::Broodwar->self();
@@ -414,7 +457,7 @@ bool Tools::canAllIn(){
 
 	for (auto& unit : me->getUnits()){
 		float dps = ForceTools::unitDPS(unit.getType(),me,enemyWorker,enemy);;
-		if(dps>0){
+		if(dps>0 && unit.getType()!= myWorker){
 			myDPS+=dps;
 			myHp+=unit.getType().maxHitPoints();
             myCount++;
@@ -443,7 +486,8 @@ bool Tools::canAllIn(){
 	if(enemyScore>myScore) return false;
 	float remainingPercent = pow(1 - (enemyScore / myScore), (1 / (1.5)))
 
-    //check early game : 
+    //check early game : in the early game, we have more margin, because generaly 2 zerglings surviving
+    // are enough to win. Indeed, the opponent doesn't have a backlog of mineral to recruit new things.
     if(enemyCount<20 && myCount<20){
         if(remainingPercent>0.1) return true;
         return false;

@@ -400,6 +400,8 @@ void StarterBot::onUnitShow(BWAPI::Unit unit)
 			this->pData->enemyTechSet.insert(tech);
             techBuiding = tech.requiredUnit();
             this->pData->enemyTechBuildings.insert(techBuiding);
+            for (auto &t : unit->getType().requiredUnits())
+                this->pData->enemyTechBuildings.insert(t.first);
 			tech = techBuiding.requiredTech();
 		}
     }

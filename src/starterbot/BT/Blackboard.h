@@ -162,7 +162,13 @@ public:
 	bool EnemyMayHasTech(BWAPI::TechType tech) {
 		return enemyTechBuildings.contains(tech.whatResearches());
 	};
-	
+	bool EnemyHasBuilding(BWAPI::UnitType building) {
+		return enemyTechBuildings.contains(building);
+	}
+
+	bool cantWin(){
+		return !Tools::canAllIn();
+	}
 	bool canAllIn(){
 		return Tools::canAllIn();
 	}
