@@ -52,6 +52,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_HOLD_POSITION.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SQUAD_GO_TO_ENEMY_BASE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SQUAD_SPREAD.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPDATE_BLACKBOARD.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.h" />
@@ -66,6 +67,7 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ZERGLING_FROM_SPAWNING_POOL.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_VISIBLE.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_ALL_IN.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.h" />
     <ClInclude Include="..\..\src\starterbot\BT\Blackboard.h" />
@@ -135,6 +137,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_HOLD_POSITION.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SMART_ATTACK.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SQUAD_GO_TO_ENEMY_BASE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SQUAD_SPREAD.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_TRAIN_UNIT.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_GO_TO_ENEMY_BASE.cpp" />
@@ -147,6 +150,7 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_UPGRADE_ZERGLING_FROM_SPAWNING_POOL.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_EXPLORED.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_COND_VISIBLE.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_ALL_IN.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_OVERLORDS.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_SQUAD_COOLING_DOWN.cpp" />

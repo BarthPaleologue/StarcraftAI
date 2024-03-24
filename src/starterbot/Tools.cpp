@@ -372,3 +372,86 @@ void Tools::DrawHealthBar(BWAPI::Unit unit, double ratio, BWAPI::Color color, in
 bool Tools::IsMine(BWAPI::Unit unit) {
     return unit->getPlayer() == BWAPI::Broodwar->self();
 }
+
+
+bool Tools::TrainBuilderAtBase(BWAPI::Unit base, int num) {	
+    std::vector<BWAPI::Unit> larvas;
+    Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Larva, larvas);
+
+    // filtering to only get larvas that are not morphing
+    std::vector<BWAPI::Unit> lavasNearby;
+    for (auto larva : larvas) {
+        if (larva->isMorphing()) continue;
+        if (larva->getPosition().getDistance(base->getPosition()) < 200) {
+			lavasNearby.push_back(larva);
+		}
+    }
+    for (int i = 0; i < num; i++) {
+		if (lavasNearby.size() == 0) {
+			return false;
+		}
+		BWAPI::Unit larva = lavasNearby.back();
+		lavasNearby.pop_back();
+		larva->train(BWAPI::UnitTypes::Zerg_Drone);
+	}
+}
+
+bool Tools::canAllIn(){
+    BWAPI::Player enemy = BWAPI::Broodwar->enemy();
+	BWAPI::Player me = BWAPI::Broodwar->self();
+
+	BWAPI::UnitType myWorker =me->getRace().getWorker();
+	BWAPI::UnitType enemyWorker =enemy->getRace().getWorker();
+
+
+	//compute my score : 
+	float myDPS=0;
+	float enemyDPS=0;
+    float myHp=0;
+	float enemyHp=0;
+    float myCount=0;
+    float enemyCount=0;
+
+	for (auto& unit : me->getUnits()){
+		float dps = ForceTools::unitDPS(unit.getType(),me,enemyWorker,enemy);;
+		if(dps>0){
+			myDPS+=dps;
+			myHp+=unit.getType().maxHitPoints();
+            myCount++;
+		}
+	}
+	myDPS=myDPS/enemyWorker.maxHitPoints();
+	float myScore = myDPS * pow(myHp, 1.5);
+
+
+
+	//compute enemy score : 
+	for (auto& unit : enemy->getUnits()){
+		float dps = ForceTools::unitDPS(unit.getType(),enemy,myWorker,me);
+		if(dps>0){
+			enemyDPS+=dps;
+			enemyHp+=unit.getType().maxHitPoints();
+            enemyCount++;
+		}
+	}
+
+
+	enemyDPSDPS=enemyDPS/myWorker.maxHitPoints();
+	float enemyScore = enemyDPS * pow(enemyHp, 1.5);
+	
+
+	if(enemyScore>myScore) return false;
+	float remainingPercent = pow(1 - (enemyScore / myScore), (1 / (1.5)))
+
+    //check early game : 
+    if(enemyCount<20 && myCount<20){
+        if(remainingPercent>0.1) return true;
+        return false;
+
+    }
+
+    //else :
+	if(remainingPercent>0.25) return true;
+
+	return false;
+}
