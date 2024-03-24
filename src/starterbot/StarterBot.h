@@ -14,7 +14,7 @@ private:
 	BT_NODE* pMainBT;
 	BT_NODE* pEarlyMacroBT;
 	BT_NODE* pMidMacroBT;
-	BT_NODE* pLateMacroBT;
+	//BT_NODE* pLateMacroBT;
 
 	//BT_NODE* pBtTest;
 	Blackboard *pData;

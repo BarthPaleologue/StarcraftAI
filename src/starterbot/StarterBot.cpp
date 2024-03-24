@@ -11,18 +11,20 @@
 
 StarterBot::StarterBot()
 {
-    pData = new Blackboard(BuildOrderType::NINE_POOL);
+    pData = new Blackboard(BuildOrderType::TWELVE_HATCH);
     pData->currMinerals = 0;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
 
-    pData->nWantedWorkersTotal = DRONE_COUNT_WHILE_MUTA_HARASS;
+    
 
     pData->enemyTechSet = std::set<BWAPI::TechType>();
     pData->enemyTechBuildings = std::set<BWAPI::UnitType>();
 
     pData->enemyRace = BWAPI::Broodwar->enemy()->getRace();
     // early game
+    pData->nWantedWorkersTotal = DRONE_COUNT_WHILE_MUTA_HARASS;
+    pData->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Zergling] = 12;
     if (pData->enemyRace == BWAPI::Races::Terran) {
         //pEarlyMacroBT = BT_Builder::terranEarlyMacroBT(pData)
         //pMidMacroBT
@@ -130,8 +132,12 @@ void StarterBot::onFrame()
     Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Overlord, overlords);
     pData->nbOverlords = overlords.size();
 
-    if (pData->gameStage == GameStage::MID && pData->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Spire] == 0) {
+    // check transition to midgame
+    if (Tools::CountUnitsOfType(BWAPI::UnitTypes::Zerg_Lair, BWAPI::Broodwar->self()->getUnits()) >= 1 && pData->gameStage == GameStage::EARLY) {
+        pData->gameStage = GameStage::MID;
         pData->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Spire] = 1;
+        pData->focusedTrainingUnit = BWAPI::UnitTypes::Zerg_Mutalisk;
+        //pData->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Mutalisk] // calculate with damage on builder
     }
     
     // AI BT
@@ -156,12 +162,12 @@ void StarterBot::onFrame()
         pMidMacroBT = nullptr;
     }
 
-    if (pData->gameStage == GameStage::LATE && pLateMacroBT != nullptr && pLateMacroBT->Evaluate(pData) != BT_NODE::RUNNING)
+    /*if (pData->gameStage == GameStage::LATE && pLateMacroBT != nullptr && pLateMacroBT->Evaluate(pData) != BT_NODE::RUNNING)
     {
         std::cout << "end of LateBT execution" << std::endl;
         delete (BT_DECORATOR*)pLateMacroBT;
         pLateMacroBT = nullptr;
-    }
+    }*/
 
 
     // iterate over all units, those who don't yet have a BT will be assigned one

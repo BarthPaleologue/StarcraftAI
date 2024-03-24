@@ -44,10 +44,7 @@ namespace BT_Builder
             BT_DECO_CONDITION* pCheckIfReallyCantWin = new BT_DECO_CONDITION("CheckIfReallyCantWin", pBaseProductionMacro, nullptr); //TODO
             // after that: station zerglings (check squad control) + request upgrade
 
-            BT_DECO_CONDITION* pCheckIfEightCantWin = new BT_DECO_CONDITION("CheckIfCantWinWith8", pBaseProductionMacro, nullptr); //TODO
-            BT_ACTION_UPDATE_BLACKBOARD<int>* pMoreZerglings = new BT_ACTION_UPDATE_BLACKBOARD<int>("MoreZerglings", _blackboard->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Zergling], 12, pCheckIfEightCantWin);
-            // need "else: back to 8 zerglings" (likely selector -> needs repeater)
-
+            
             BT_NODE* pZerglings = ZerglingUtils::TrainingTreeEarly(pBaseProductionMacro);
 
 

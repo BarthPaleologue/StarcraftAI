@@ -37,22 +37,6 @@ namespace BT_Builder
         //Build Additional overlords
         OverlordUtils::CreateTrainingTree(selectHQAction);
 
-        // ------------------------------------------ TRANSFER EVERYTHING INTO EARLY / MID / LATE BT ---------------------------
-
-        // Training Zerglings:
-
-        if (BWAPI::Broodwar->enemy()->getRace() == BWAPI::Races::Protoss) {
-            blackboard->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Zergling] = 8;
-            ZerglingUtils::TrainingTreeEarly(selectHQAction);
-        }
-        else {
-            ZerglingUtils::CreateTrainingTree(selectHQAction);
-        }
-
-        MutaliskUtils::TrainingTree(selectHQAction);
-
-        // ----------------------------------END OF TRANSFER EVERYTHING INTO EARLY / MID / LATE BT ---------------------------
-
         //Training Workers
         //BT_DECO_CONDITION* pNotAllIn = new BT_DECO_CONDITION("NotAllIn", selectHQAction, []()); // maybe a condition "read blackboard"?
         BT_DECO_CONDITION_NOT_ENOUGH_WORKERS* pNotEnoughWorkers = new BT_DECO_CONDITION_NOT_ENOUGH_WORKERS("NotEnoughWorkers", selectHQAction); //pNotAllIn);

@@ -29,6 +29,8 @@ namespace BT_Builder
             // if can't muta bc they have a lot of goliath or wraith
                 // go for hydralisk (needs Hydralisk_Den first)
             // else request Hive
+        
+        MutaliskUtils::TrainingTree(selectHQAction);
 
         return pBT;
     }

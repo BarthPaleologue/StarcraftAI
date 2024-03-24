@@ -19,7 +19,7 @@ namespace BT_Builder {
         OverlordUtils::CreateTrainingTree(selectHQActionAllIn);
 
         // Handling build order finished
-        ZerglingUtils::CreateTrainingTree(selectHQActionAllIn);
+        ZerglingUtils::TrainingTreeAllIn(selectHQActionAllIn);
 
         return pBtAllIn;
 	}

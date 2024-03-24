@@ -42,7 +42,7 @@ public:
 		return mainStrategy;
 	}
 
-	static BT_NODE* CreateTrainingTree(BT_NODE* parent) {
+	static BT_NODE* TrainingTreeAllIn(BT_NODE* parent) {
 		BT_DECO_CONDITION_BUILD_ORDER_FINISHED* buildOrderFinished = new BT_DECO_CONDITION_BUILD_ORDER_FINISHED("BuildOrderFinished", parent);
 
 		BT_ACTION_TRAIN_UNIT* trainZergling = new BT_ACTION_TRAIN_UNIT("TrainZergling", BWAPI::UnitTypes::Zerg_Zergling, true, buildOrderFinished);
