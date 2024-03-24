@@ -91,7 +91,7 @@ HarassmentManager::HarassmentManager()
 	m_MutaliskSquadProtoss.push_back([](Squad squad, BWAPI::Unit unit) {
 		// units that can be one-shotted withtout taking too much damage
 		std::pair<float, float> prediction = ForceTools::fightPredictor(squad.getNbUnits(), BWAPI::UnitTypes::Zerg_Mutalisk, BWAPI::Broodwar->self(), 1, unit->getType(), BWAPI::Broodwar->enemy());
-		return prediction.first > 0;
+		return prediction.second <= 0.01;
 	});
 }
 
