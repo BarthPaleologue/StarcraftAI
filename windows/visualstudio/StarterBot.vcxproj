@@ -178,6 +178,10 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_BUILD_ORDER_FINISHED.cpp" />
     <ClCompile Include="BT_ACTION_UPGRADE_ZERGLING_FROM_EVOLUTION_CHAMBER.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="BT_DECO_CONDITION_CAN ALL_IN.h" />
+    <None Include="BT_DECO_CONDITION_CAN_ALL_IN.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>StarterBot</ProjectName>
     <ProjectGuid>{B2D2AD6C-D98B-42D0-8E4B-3C79D9DB27B7}</ProjectGuid>
