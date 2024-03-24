@@ -44,7 +44,7 @@ public:
 	}
 
 	static BT_NODE* MainStrategy(Squad* squad, BT_NODE* parent) {
-		auto quorumCheck = new BT_DECO_CONDITION_SQUAD_QUORUM("QuorumCheck", squad, parent, 4, true);
+		auto quorumCheck = new BT_DECO_CONDITION_SQUAD_QUORUM("QuorumCheck", squad, parent, 8, true);
 
 		auto mainStrategy = new BT_PARALLEL_SEQUENCER("MainStrategy", quorumCheck, 10);
 

@@ -37,7 +37,7 @@ namespace Tools
 
     bool canAllIn();
     
-    bool cantWIn();
+    bool cantWin();
 
 
 

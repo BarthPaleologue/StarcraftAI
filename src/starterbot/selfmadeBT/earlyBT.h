@@ -33,8 +33,8 @@ namespace BT_Builder
             BT_ACTION_BUILD* pActionBuildExtractor = new BT_ACTION_BUILD("ActionBuildExtractor", BWAPI::UnitTypes::Zerg_Extractor, NONE_POS, pCondBuildExtractor);
 
         BT_DECO_COND_GREATER_THAN<int>* pGasUsage = new BT_DECO_COND_GREATER_THAN<int>("EarlyTerranGasUsage", pBT, 90, _blackboard->currGas, false);
-        
-        //TODO: request upgrades "Metabolic Boost" (from spawning pool) then lair (see miro)
+        //TODO: request upgrades "Metabolic Boost" (from spawning pool)
+        BT_ACTION_BUILD* pUpgradeLair = new BT_ACTION_BUILD("UpgradeLair", BWAPI::UnitTypes::Zerg_Lair, NONE_POS, pGasUsage);
         
         return pBT;
     }
@@ -49,7 +49,6 @@ namespace BT_Builder
         BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("EarlyProtossBaseMacro", pRepeat, 3);
             
             BT_DECO_CONDITION_CANT_WIN* pCheckIfReallyCantWin = new BT_DECO_CONDITION_CANT_WIN("CheckIfReallyCantWin", pBaseProductionMacro);
-            
             // after that: station zerglings (check squad control) + request upgrade
 
             BT_NODE* pZerglings = ZerglingUtils::TrainingTreeEarly(pBaseProductionMacro);

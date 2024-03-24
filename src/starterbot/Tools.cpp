@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> aee124332309e10872289b853f53c55451f4b09a
 #include "targeting/ForceTools.h"
 #include "Tools.h"
 #include "Blackboard.h"
@@ -414,7 +418,11 @@ bool Tools::cantWin(){
     float myCount=0;
     float enemyCount=0;
 
+<<<<<<< HEAD
     myDPS=12*ForceTools::unitDPS(BWAPI::UnitTypes::Zerg_Zergling,me, enemyWorker,enemy);
+=======
+    myDPS=12*ForceTools::unitDPS(BWAPI::UnitTypes::Zerg_Zergling,me,enemyWorker,enemy);
+>>>>>>> aee124332309e10872289b853f53c55451f4b09a
     myHp=12*BWAPI::UnitTypes::Zerg_Zergling.maxHitPoints();
 
 	myDPS=myDPS/enemyWorker.maxHitPoints();
@@ -433,13 +441,17 @@ bool Tools::cantWin(){
 	}
 
 
+<<<<<<< HEAD
     enemyDPS =enemyDPS/myWorker.maxHitPoints();
+=======
+	enemyDPS=enemyDPS/myWorker.maxHitPoints();
+>>>>>>> aee124332309e10872289b853f53c55451f4b09a
 	float enemyScore = enemyDPS * pow(enemyHp, 1.5);
 	
 
 	return (enemyScore>myScore);
 
-}
+};
 
 bool Tools::canAllIn(){
     BWAPI::Player enemy = BWAPI::Broodwar->enemy();
@@ -481,12 +493,20 @@ bool Tools::canAllIn(){
 	}
 
 
+<<<<<<< HEAD
     enemyDPS =enemyDPS/myWorker.maxHitPoints();
+=======
+	enemyDPS=enemyDPS/myWorker.maxHitPoints();
+>>>>>>> aee124332309e10872289b853f53c55451f4b09a
 	float enemyScore = enemyDPS * pow(enemyHp, 1.5);
 	
 
 	if(enemyScore>myScore) return false;
+<<<<<<< HEAD
     float remainingPercent = pow(1 - (enemyScore / myScore), (1 / (1.5)));
+=======
+	float remainingPercent = pow(1 - (enemyScore / myScore), (1 / (1.5)));
+>>>>>>> aee124332309e10872289b853f53c55451f4b09a
 
     //check early game : 
     if(enemyCount<20 && myCount<20){
