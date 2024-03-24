@@ -13,5 +13,5 @@ bool BT_DECO_CONDITION_ALL_IN::IsAllIn(void* data)
 {
 	Blackboard* blackboard = (Blackboard*)data;
 
-	return blackboard->allIn;
+	return blackboard->canAllIn();
 }

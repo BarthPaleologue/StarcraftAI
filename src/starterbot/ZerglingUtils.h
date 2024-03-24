@@ -8,17 +8,38 @@ public:
 	static BT_NODE* CreateTree(BWAPI::Unit zergling) {
 		auto root = new BT_DECO_REPEATER("repeater", nullptr, 0, true, false, true);
 
-		auto attackPlan = new BT_SEQUENCER("Root", root, 10);
+		auto chooseStrategy = new BT_SELECTOR("ChooseStrategy", root, 10);
 
-		auto quorumCondition = new BT_DECO_CONDITION_UNIT_QUORUM("zerglingQuorum", BWAPI::UnitTypes::Zerg_Zergling, attackPlan, 4, true);
+		auto isAllIn = new BT_DECO_CONDITION_ALL_IN("isAllIn", chooseStrategy);
 
-		// go to enemy base
+			auto allInStrategy = AllInStrategy(zergling, isAllIn);
+
+		auto mainStrategy = MainStrategy(zergling, chooseStrategy);
+
+		return root;
+	}
+
+	static BT_NODE* AllInStrategy(BWAPI::Unit zergling, BT_NODE* parent) {
+		auto allInStrategy = new BT_SEQUENCER("AllInStrategy", parent, 10);
+
+		auto allInGoToEnemyBase = new BT_ACTION_GO_TO_ENEMY_BASE("GoToEnemyBase", zergling, allInStrategy);
+
+		auto allInSmartAttack = new BT_ACTION_SMART_ATTACK("SmartAttack", zergling, allInStrategy);
+
+		return allInStrategy;
+	}
+
+	static BT_NODE* MainStrategy(BWAPI::Unit zergling, BT_NODE* parent) {
+		auto mainStrategy = new BT_SEQUENCER("MainStrategy", parent, 10);
+
+		auto quorumCondition = new BT_DECO_CONDITION_UNIT_QUORUM("zerglingQuorum", BWAPI::UnitTypes::Zerg_Zergling, mainStrategy, 4, true);
+
 		auto goToEnemyBase = new BT_ACTION_GO_TO_ENEMY_BASE("GoToEnemyBase", zergling, quorumCondition);
 
 		// choose which unit to attack
-		auto smartAttack = new BT_ACTION_SMART_ATTACK("SmartAttack", zergling, attackPlan);
+		auto smartAttack = new BT_ACTION_SMART_ATTACK("SmartAttack", zergling, mainStrategy);
 
-		return root;
+		return mainStrategy;
 	}
 
 	static BT_NODE* CreateTrainingTree(BT_NODE* parent) {

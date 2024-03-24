@@ -9,8 +9,8 @@
 #include <map>
 #include <targeting/HarassmentManager.h>
 #include <set>
+#include "BaseManager.h"
 
-#define THRESHOLD1_UNUSED_SUPPLY 2
 
 int const DRONE_COUNT_WHILE_MUTA_HARASS = 20;
 int const ABSOLUTE_DRONE_LIMIT = 70;
@@ -102,10 +102,11 @@ public:
 	Blackboard(BuildOrderType _boType) : buildOrder(_boType) {}
 
 	BuildOrder buildOrder;
+	
+	BaseManager bases[2][6];
 
 	GameStage gameStage = GameStage::EARLY;
 
-	bool allIn = false;
 
 	// purpose: if the mineral count (with self()->minerals()) update is not instant after using minerals
 	// otherwise just remove this attribute
@@ -165,4 +166,10 @@ public:
 		return enemyTechBuildings.contains(building);
 	}
 
+	bool cantWin(){
+		return !Tools::canAllIn();
+	}
+	bool canAllIn(){
+		return Tools::canAllIn();
+	}
 };
