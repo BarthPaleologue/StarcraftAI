@@ -44,7 +44,7 @@ BT_NODE::State BT_ACTION_SMART_ATTACK::SmartAttack(void* data)
 	{
 		int score = HarassmentManager::LOWEST_PRIORITY;
 
-		score = blackboard->harassmentManager.getTargetPriority(enemyUnit, blackboard->enemyRace);
+		score = blackboard->harassmentManager.getTargetPriority(m_unit, enemyUnit, blackboard->enemyRace);
 
 		// the enemy unit is not a priority
 		if (score == HarassmentManager::LOWEST_PRIORITY) continue;
