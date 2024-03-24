@@ -8,6 +8,12 @@ Squad::~Squad()
 {
 }
 
+void Squad::attack(BWAPI::Unit target)
+{
+	m_unitSet.attack(target);
+	m_lastTarget = target;
+}
+
 void Squad::addUnit(BWAPI::Unit unit)
 {
 	m_unitSet.insert(unit);
@@ -35,6 +41,24 @@ BWAPI::Unitset Squad::getUnits()
 bool Squad::containsUnit(BWAPI::Unit unit)
 {
 	return m_unitSet.contains(unit);
+}
+
+BWAPI::Unit Squad::getLastTarget()
+{
+	return m_lastTarget;
+}
+
+BWAPI::Unitset Squad::getEnemyUnitsInRadius(int radius)
+{
+	BWAPI::Unitset unitsInRadius = m_unitSet.getUnitsInRadius(radius);
+	// Remove units that are not enemies
+	BWAPI::Unitset enemyUnitsInRadius;
+	for (auto unit : unitsInRadius) {
+		if (unit->getPlayer() != BWAPI::Broodwar->self()) {
+			enemyUnitsInRadius.insert(unit);
+		}
+	}
+	return enemyUnitsInRadius;
 }
 
 bool Squad::isEmpty()

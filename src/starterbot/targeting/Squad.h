@@ -9,6 +9,8 @@ public:
 
 	~Squad();
 
+	void attack(BWAPI::Unit target);
+
 	void addUnit(BWAPI::Unit unit);
 	
 	void removeUnit(BWAPI::Unit unit);
@@ -20,6 +22,10 @@ public:
 	BWAPI::Position getPosition();
 	
 	bool containsUnit(BWAPI::Unit unit);
+
+	BWAPI::Unit getLastTarget();
+
+	BWAPI::Unitset getEnemyUnitsInRadius(int radius);
 	
 	bool isEmpty();
 	
@@ -29,5 +35,7 @@ public:
 
 private:
 	BWAPI::Unitset m_unitSet{};
+
+	BWAPI::Unit m_lastTarget = nullptr;
 };
 
