@@ -11,7 +11,7 @@
 
 StarterBot::StarterBot()
 {
-    pData = new Blackboard(e_buildOrderType::NinePool);
+    pData = new Blackboard(BuildOrderType::NINE_POOL);
     pData->currMinerals = 0;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;

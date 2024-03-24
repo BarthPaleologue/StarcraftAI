@@ -7,17 +7,17 @@
 
 class Blackboard;
 
-enum class e_buildOrderType {
-	NinePool, // see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
-	FourPool, // https://liquipedia.net/starcraft/4/5_Pool
-	TwelveHatch, // see https://liquipedia.net/starcraft/12_Hatch_(vs._Protoss)
+enum class BuildOrderType {
+	NINE_POOL, // see https://liquipedia.net/starcraft/9_Pool_(vs._Terran)
+	FOUR_POOL, // https://liquipedia.net/starcraft/4/5_Pool
+	TWELVE_HATCH, // see https://liquipedia.net/starcraft/12_Hatch_(vs._Protoss)
 	DEBUG // debug purposes, when you need to place buildings asap for ex
 };
 
-enum class e_orderItemAction {
-	Build, // Build the unit type
-	Cancel, // Cancel the build process of the unit type
-	Train
+enum class OrderItemAction {
+	BUILD, // Build the unit type
+	CANCEL, // Cancel the build process of the unit type
+	TRAIN
 };
 
 struct OrderItem {
@@ -26,7 +26,7 @@ struct OrderItem {
 	BWAPI::UnitType unitType;
 
 	// The action to perform with the given unitType in the OrderItem struct
-	e_orderItemAction action;
+	OrderItemAction action;
 
 	// #rewrite
 	/*std::string toString() const{
@@ -43,7 +43,7 @@ struct OrderItem {
 class BuildOrder
 {
 public:
-	BuildOrder(e_buildOrderType _boType);
+	BuildOrder(BuildOrderType _boType);
 
 	void nextTask();
 	bool evaluate(Blackboard* pData);
@@ -62,7 +62,7 @@ public:
 	/// <returns></returns>
 	int getSize();
 
-	e_buildOrderType getBuildOrderType();
+	BuildOrderType getBuildOrderType();
 
 	// #rewrite
 	//void debug() const {
@@ -85,6 +85,6 @@ private:
 	// the current stage index of the build order
 	int m_currentOrderIndex = 0;
 	bool m_isCurrTaskStarted = false;
-	e_buildOrderType m_buildOrderType;
+	BuildOrderType m_buildOrderType;
 };
 

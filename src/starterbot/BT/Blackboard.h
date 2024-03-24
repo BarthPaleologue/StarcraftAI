@@ -99,7 +99,7 @@ enum class GameStage {
 
 class Blackboard {
 public:
-	Blackboard(e_buildOrderType _boType) : buildOrder(_boType) {}
+	Blackboard(BuildOrderType _boType) : buildOrder(_boType) {}
 
 	BuildOrder buildOrder;
 

@@ -5,54 +5,54 @@
 
 using namespace BuildOrderTools;
 
-BuildOrder::BuildOrder(e_buildOrderType _boType): m_buildOrderType(_boType) {
+BuildOrder::BuildOrder(BuildOrderType _boType): m_buildOrderType(_boType) {
 	switch (_boType) {
-	case(e_buildOrderType::NinePool):
+	case(BuildOrderType::NINE_POOL):
 		m_order = {
-			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Build},
-			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, e_orderItemAction::Cancel},
+			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, OrderItemAction::BUILD},
+			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Extractor, OrderItemAction::CANCEL},
 			// 8 zerglings
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Zergling, OrderItemAction::TRAIN},
 		};
 		break;
-	case(e_buildOrderType::TwelveHatch):
+	case(BuildOrderType::TWELVE_HATCH):
 		m_order = {
-			{ isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, e_orderItemAction::Train },
-			{ isSupplyTimingReached(12), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build },
-			{ isSupplyTimingReached(11), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build },
+			{ isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, OrderItemAction::TRAIN },
+			{ isSupplyTimingReached(12), BWAPI::UnitTypes::Zerg_Hatchery, OrderItemAction::BUILD },
+			{ isSupplyTimingReached(11), BWAPI::UnitTypes::Zerg_Spawning_Pool, OrderItemAction::BUILD },
 		};
 		break;
-	case(e_buildOrderType::FourPool):
+	case(BuildOrderType::FOUR_POOL):
 		m_order = {
-			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
-			{isSupplyTimingReached(3), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Spawning_Pool, OrderItemAction::BUILD},
+			{isSupplyTimingReached(3), BWAPI::UnitTypes::Zerg_Drone, OrderItemAction::TRAIN},
 			// fill the supply limit with zerglings
-			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
-			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, e_orderItemAction::Train},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(4), BWAPI::UnitTypes::Zerg_Zergling, OrderItemAction::TRAIN},
 		};
 		break;
 
 	default:
 		//case(e_buildOrderType::DEBUG):
 		m_order = {
-			{isSupplyTimingReached(2), BWAPI::UnitTypes::Zerg_Hatchery, e_orderItemAction::Build },
-			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, e_orderItemAction::Build},
-			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
-			{isSupplyTimingReached(99999), BWAPI::UnitTypes::Zerg_Drone, e_orderItemAction::Train},
+			{isSupplyTimingReached(2), BWAPI::UnitTypes::Zerg_Hatchery, OrderItemAction::BUILD },
+			{isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Spawning_Pool, OrderItemAction::BUILD},
+			{isSupplyTimingReached(8), BWAPI::UnitTypes::Zerg_Drone, OrderItemAction::TRAIN},
+			{isSupplyTimingReached(99999), BWAPI::UnitTypes::Zerg_Drone, OrderItemAction::TRAIN},
 		};
 		break;
 	}
 }
 
-e_buildOrderType BuildOrder::getBuildOrderType() {
+BuildOrderType BuildOrder::getBuildOrderType() {
 	return m_buildOrderType;
 }
 
@@ -89,7 +89,7 @@ bool BuildOrder::evaluate(Blackboard* _pData) {
 	//std::cout << "evaluation of build order: step " << m_currentOrderIndex << std::endl;
 	bool actionSuccess = false;
 	switch (currentItem.action) {
-	case e_orderItemAction::Build:
+	case OrderItemAction::BUILD:
 		if (!m_isCurrTaskStarted) {
 			m_isCurrTaskStarted = true;
 			unitsRequested.push(currentItem.unitType);
@@ -134,12 +134,12 @@ bool BuildOrder::evaluate(Blackboard* _pData) {
 			Tools::BuildBuilding(currentItem.unitType);
 		}
 		break;
-	case e_orderItemAction::Cancel:
+	case OrderItemAction::CANCEL:
 		if (cancelConstruction(currentItem.unitType)) {
 			actionSuccess = true;
 		}
 		break;
-	case e_orderItemAction::Train:
+	case OrderItemAction::TRAIN:
 		if (!m_isCurrTaskStarted) {
 			m_isCurrTaskStarted = true;
 			unitsRequested.push(currentItem.unitType);
