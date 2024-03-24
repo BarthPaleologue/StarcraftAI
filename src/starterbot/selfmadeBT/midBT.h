@@ -15,13 +15,12 @@ namespace BT_Builder
 
         BT_ACTION_TRAIN_UNIT* pTrainRecoUnit = new BT_ACTION_TRAIN_UNIT("TrainRecommendedUnit", _blackboard->focusedTrainingUnit, true, pBT);
 
-        //TODO: may be included in the BT of units instead (then transmitted through update of blackboard)
-        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
+        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION_ALL_IN("CheckIfAllIn", pBT); 
         BT_ACTION_UPDATE_BLACKBOARD<bool>* pToggleAllIn = new BT_ACTION_UPDATE_BLACKBOARD<bool>("ToggleAllIn", _blackboard->allIn, true, pCheckIfAllIn);
 
-        BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("MidTerranBaseMacro", pBT, 3);
+        //BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("MidTerranBaseMacro", pBT, 3);
 
-        BT_DECO_CONDITION* pCheckIfCantMuta = new BT_DECO_CONDITION("CheckIfCantMuta", pBaseProductionMacro, nullptr); //TODO
+        //BT_DECO_CONDITION* pCheckIfCantMuta = new BT_DECO_CONDITION("CheckIfCantMuta", pBaseProductionMacro, nullptr); //TODO
         // bc there are a lot of conditions it may be better to have a selector (-> repeater) and then conditions
         // if enemy has science facility
         // or too much anti-air (includes turrets)
@@ -41,13 +40,12 @@ namespace BT_Builder
 
         BT_ACTION_TRAIN_UNIT* pTrainRecoUnit = new BT_ACTION_TRAIN_UNIT("TrainRecommendedUnit", _blackboard->focusedTrainingUnit, true, pBT);
 
-        //TODO: may be included in the BT of units instead (then transmitted through update of blackboard)
-        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
+        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION_ALL_IN("CheckIfAllIn", pBT);
         BT_ACTION_UPDATE_BLACKBOARD<bool>* pToggleAllIn = new BT_ACTION_UPDATE_BLACKBOARD<bool>("ToggleAllIn", _blackboard->allIn, true, pCheckIfAllIn);
 
-        BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("MidProtossBaseMacro", pBT, 3);
+        //BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("MidProtossBaseMacro", pBT, 3);
 
-        BT_DECO_CONDITION* pCheckIfCantMuta = new BT_DECO_CONDITION("CheckIfCantMuta", pBaseProductionMacro, nullptr); //TODO
+        //BT_DECO_CONDITION* pCheckIfCantMuta = new BT_DECO_CONDITION("CheckIfCantMuta", pBaseProductionMacro, nullptr); //TODO
         // bc there are a lot of conditions it may be better to have a selector (-> repeater) and then conditions
         // if enemy has science facility
         // or too much anti-air (includes turrets)
