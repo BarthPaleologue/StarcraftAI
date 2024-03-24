@@ -1,6 +1,6 @@
 #include "BT_DECO_SQUAD_CONDITION.h"
 
-BT_DECO_SQUAD_CONDITION::BT_DECO_SQUAD_CONDITION(std::string name, BT_NODE* parent, Squad squad, CONDITION_CBK conditionCBK)
+BT_DECO_SQUAD_CONDITION::BT_DECO_SQUAD_CONDITION(std::string name, BT_NODE* parent, Squad* squad, CONDITION_CBK conditionCBK)
 	: BT_DECORATOR(name, parent), m_squad(squad), ConditionCBK(conditionCBK)
 {
 }

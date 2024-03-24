@@ -1,6 +1,6 @@
 #include "BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR.h"
 
-BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR::BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR(std::string name, Squad squad, BT_NODE* parent)
+BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR::BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR(std::string name, Squad* squad, BT_NODE* parent)
 	: BT_ACTION(name, parent), m_squad(squad)
 {
 }
@@ -18,7 +18,7 @@ std::string BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR::GetDescription()
 BT_NODE::State BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR::FleeAntiAir(void* data)
 {
 	// all enemy units nearby
-	BWAPI::Unitset nearbyEnemies = m_squad.getEnemyUnitsInRadius(100.0f);
+	BWAPI::Unitset nearbyEnemies = m_squad->getEnemyUnitsInRadius(100.0f);
 
 	// filter to only get anti-air units
 	BWAPI::Unitset antiAirEnemies;
@@ -41,9 +41,9 @@ BT_NODE::State BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR::FleeAntiAir(void* data)
 	double weightSum = 0.0;
 	for (auto& enemy : antiAirEnemies)
 	{
-		double distance = m_squad.getPosition().getDistance(enemy->getPosition());
+		double distance = m_squad->getPosition().getDistance(enemy->getPosition());
 		double weight = 1.0 / distance;
-		BWAPI::Position weightedFleeVector = (m_squad.getPosition() - enemy->getPosition()) * weight * weight;
+		BWAPI::Position weightedFleeVector = (m_squad->getPosition() - enemy->getPosition()) * weight * weight;
 		fleeVector += weightedFleeVector;
 		weightSum += weight;
 	}
@@ -52,7 +52,7 @@ BT_NODE::State BT_ACTION_MUTALISK_SQUAD_FLEE_ANTI_AIR::FleeAntiAir(void* data)
 	fleeVector = fleeVector / weightSum;
 
 	// move the squad
-	m_squad.moveTo(m_squad.getPosition() + fleeVector * 10);
+	m_squad->moveTo(m_squad->getPosition() + fleeVector * 10);
 
 	return BT_NODE::State::SUCCESS;
 }

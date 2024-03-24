@@ -6,12 +6,12 @@ class BT_ACTION_MUTALISK_SQUAD_CHASE :
     public BT_ACTION
 {
 public:
-	BT_ACTION_MUTALISK_SQUAD_CHASE(std::string name, Squad squad, BT_NODE* parent);
+	BT_ACTION_MUTALISK_SQUAD_CHASE(std::string name, Squad* squad, BT_NODE* parent);
 private:
 	BT_NODE::State Evaluate(void* data) override;
 	std::string GetDescription() override;
 	BT_NODE::State Chase(void* data);
 
-	Squad m_squad;
+	Squad* m_squad;
 };
 
