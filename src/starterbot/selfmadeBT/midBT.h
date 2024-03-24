@@ -13,8 +13,7 @@ namespace BT_Builder
         BT_DECO_CONDITION_NOT_ENOUGH_UNIT* pCheckIfSpire = new BT_DECO_CONDITION_NOT_ENOUGH_UNIT("CheckIfSpireBuilt", pBT, BWAPI::UnitTypes::Zerg_Spire);
         BT_ACTION_BUILD* pBuildSpire = new BT_ACTION_BUILD("BuildSpire", BWAPI::UnitTypes::Zerg_Spire, NONE_POS, pCheckIfSpire);
 
-        //TODO: train mass recommended unit (muta or hydra)
-        //BT_ACTION_TRAIN_UNIT* 
+        BT_ACTION_TRAIN_UNIT* pTrainRecoUnit = new BT_ACTION_TRAIN_UNIT("TrainRecommendedUnit", _blackboard->focusedTrainingUnit, true, pBT);
 
         //TODO: may be included in the BT of units instead (then transmitted through update of blackboard)
         BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
@@ -41,8 +40,7 @@ namespace BT_Builder
         BT_DECO_CONDITION_NOT_ENOUGH_UNIT* pCheckIfSpire = new BT_DECO_CONDITION_NOT_ENOUGH_UNIT("CheckIfSpireBuilt", pBT, BWAPI::UnitTypes::Zerg_Spire);
         BT_ACTION_BUILD* pBuildSpire = new BT_ACTION_BUILD("BuildSpire", BWAPI::UnitTypes::Zerg_Spire, NONE_POS, pCheckIfSpire);
 
-        //TODO: train mass recommended unit (muta or hydra)
-        //BT_ACTION_TRAIN_UNIT* 
+        BT_ACTION_TRAIN_UNIT* pTrainRecoUnit = new BT_ACTION_TRAIN_UNIT("TrainRecommendedUnit", _blackboard->focusedTrainingUnit, true, pBT);
 
         //TODO: may be included in the BT of units instead (then transmitted through update of blackboard)
         BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
