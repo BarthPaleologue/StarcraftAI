@@ -36,4 +36,7 @@ namespace Tools
     bool TrainBuilderAtBase(BWAPI::Unit base, int num);
 
     bool canAllIn();
+    
+    bool cantWIn();
+
 }

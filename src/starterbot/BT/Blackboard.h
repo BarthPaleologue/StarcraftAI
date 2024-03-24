@@ -160,7 +160,9 @@ public:
 	bool EnemyMayHasTech(BWAPI::TechType tech) {
 		return enemyTechBuildings.contains(tech.whatResearches());
 	};
-	
+	bool cantWin(){
+		return !Tools::canAllIn();
+	}
 	bool canAllIn(){
 		return Tools::canAllIn();
 	}
