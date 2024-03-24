@@ -39,4 +39,9 @@ namespace Tools
     
     bool cantWIn();
 
+
+
+    BWAPI::Position getClosestDefenceRegion(BWAPI::Position pos, int myIdx);
+    bool BuildCreepColony(BWAPI::Unit hatchery, int myIdx);
+    bool BuildSunkenColony(BWAPI::Unit hatchery);
 }

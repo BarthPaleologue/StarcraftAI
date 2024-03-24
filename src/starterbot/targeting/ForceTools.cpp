@@ -1,13 +1,5 @@
 
 #include "ForceTools.h"
-//implemented a fight predictor based on the following article :
-// https://www.researchgate.net/publication/313904776_Combat_Outcome_Prediction_for_RTS_Games
-//this article itself is based on the Lanchester Attrition's model. 
-
-// In a nutshell : we model the fights using paired differential equations. These
-// equations aren't linear in the general case, so we can't solve them explicitly. 
-// Thus, the article generalizes the results obtained when these equations are linear ! 
-
 
 float ForceTools::unitDPS(BWAPI::UnitType typeFrom, BWAPI::Player playerFrom, BWAPI::UnitType typeTo, BWAPI::Player playerTo) {
 	try {
