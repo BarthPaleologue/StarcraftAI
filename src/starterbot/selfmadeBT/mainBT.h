@@ -5,6 +5,7 @@
 #include "OverlordUtils.h"
 #include "MutaliskUtils.h"
 #include "UpgradeBT.h"
+#include "Blackboard.h"
 
 namespace BT_Builder
 {
