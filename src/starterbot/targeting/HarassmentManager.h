@@ -8,12 +8,12 @@ public:
 	HarassmentManager();
 	~HarassmentManager() = default;
 
-	int getTargetPriority(BWAPI::Unit unit, BWAPI::Race enemyRace);
+	int getTargetPriority(BWAPI::Unit attackingUnit, BWAPI::Unit enemyUnit, BWAPI::Race enemyRace);
 
 	static int LOWEST_PRIORITY;
 
 private:
-	typedef std::vector<std::function<bool(BWAPI::Unit)>> PriorityList;
+	typedef std::vector<std::function<bool(BWAPI::Unit attackingUnit, BWAPI::Unit enemyUnit)>> PriorityList;
 
 	PriorityList m_EarlyTerranNoBunker{};
 	PriorityList m_EarlyTerranWithBunker{};
@@ -24,11 +24,11 @@ private:
 
 	void computePriorityList(BWAPI::Race enemyRace);
 
-	int evaluatePriority(BWAPI::Unit unit, std::vector<std::function<bool(BWAPI::Unit)>> &priorityList);
+	int evaluatePriority(BWAPI::Unit attackingUnit, BWAPI::Unit enemyUnit, PriorityList &priorityList);
 
-	typedef std::vector<std::function<bool(Squad, BWAPI::Unit)>> PrioritySquadList;
+	typedef std::vector<std::function<bool(Squad squad, BWAPI::Unit enemyUnit)>> PrioritySquadList;
 
 	PrioritySquadList m_MutaliskSquadProtoss{};
 
-	int evaluateMutaliskSquadPriority(Squad squad, BWAPI::Unit unit);
+	int evaluateMutaliskSquadPriority(Squad squad, BWAPI::Unit enemyUnit);
 };
