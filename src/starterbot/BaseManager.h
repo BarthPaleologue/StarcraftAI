@@ -11,6 +11,8 @@ enum class BaseOwner
 	ENEMY,
 };
 
+int const NEED_SCOUT_AFTER = 5 * 60 * 24; // after 5 minutes
+
 class BaseManager {
 public:
 	int lastVisitedFrame = 0;

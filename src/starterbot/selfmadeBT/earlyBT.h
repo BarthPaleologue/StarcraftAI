@@ -14,8 +14,7 @@ namespace BT_Builder
 
         BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("EarlyTerranBaseMacro", pBT, 3);
             
-            //TODO!!!!
-            //BT_DECO_CONDITION* pCheckIfCantWin = new BT_DECO_CONDITION("CheckIfCantWin", pBaseProductionMacro, nullptr);
+            BT_DECO_CONDITION_CANT_WIN* pCheckIfCantWin = new BT_DECO_CONDITION_CANT_WIN("CheckIfCantWin", pBaseProductionMacro);
             // bc there are a lot of conditions it may be better to have a selector (-> repeater) and then conditions
             // if enemy has academy tech
             // or enemy has built bunker
@@ -27,7 +26,8 @@ namespace BT_Builder
         BT_DECO_CONDITION* pCondBuildExtractor = new BT_DECO_CONDITION("CondBuildExtractor",pBT, nullptr); //TODO: "if more than 8 zerglings"
             BT_ACTION_BUILD* pActionBuildExtractor = new BT_ACTION_BUILD("ActionBuildExtractor", BWAPI::UnitTypes::Zerg_Extractor, NONE_POS, pCondBuildExtractor);
 
-        BT_DECO_CONDITION* pGasUsage = new BT_DECO_CONDITION("EarlyTerranGasUsage", pBT, nullptr); //TODO
+        BT_DECO_COND_GREATER_THAN<int>* pGasUsage = new BT_DECO_COND_GREATER_THAN<int>("EarlyTerranGasUsage", pBT, 90, _blackboard->currGas, false);
+        
         //TODO: request upgrades "Metabolic Boost" (from spawning pool) then lair (see miro)
         
         return pBT;
@@ -55,7 +55,7 @@ namespace BT_Builder
             BT_ACTION_BUILD* pActionBuildExtractor = new BT_ACTION_BUILD("ActionBuildExtractor", BWAPI::UnitTypes::Zerg_Extractor, NONE_POS, pCondBuildExtractor);
 
         BT_DECO_COND_GREATER_THAN<int>* pGasUsage = new BT_DECO_COND_GREATER_THAN<int>("EarlyProtossGasUsage", pBT, 90, _blackboard->currGas, false);
-        //TODO: request lair
+        BT_ACTION_BUILD* pUpgradeLair = new BT_ACTION_BUILD("UpgradeLair", BWAPI::UnitTypes::Zerg_Lair, NONE_POS, pGasUsage);
 
         return pBT;
     }

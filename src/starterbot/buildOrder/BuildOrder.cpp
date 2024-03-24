@@ -25,6 +25,7 @@ BuildOrder::BuildOrder(BuildOrderType _boType): m_buildOrderType(_boType) {
 			{ isSupplyTimingReached(9), BWAPI::UnitTypes::Zerg_Overlord, OrderItemAction::TRAIN },
 			{ isSupplyTimingReached(12), BWAPI::UnitTypes::Zerg_Hatchery, OrderItemAction::BUILD },
 			{ isSupplyTimingReached(11), BWAPI::UnitTypes::Zerg_Spawning_Pool, OrderItemAction::BUILD },
+			{ isSupplyTimingReached(10), BWAPI::UnitTypes::Zerg_Extractor, OrderItemAction::BUILD}
 		};
 		break;
 	case(BuildOrderType::FOUR_POOL):
