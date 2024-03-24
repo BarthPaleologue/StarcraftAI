@@ -63,9 +63,6 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_SUPPLY_PROVIDER.cpp">
-      <Filter>BT\BT_STARCRAFT</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BT\BT_DECO_COND_GREATER_THAN.cpp">
       <Filter>BT</Filter>
     </ClCompile>
@@ -265,9 +262,6 @@
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_NOT_ENOUGH_WORKERS.h">
-      <Filter>BT\BT_STARCRAFT</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_SUPPLY_PROVIDER.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_DECO_COND_GREATER_THAN.h">

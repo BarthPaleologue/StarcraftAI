@@ -45,7 +45,6 @@
     <ClInclude Include="..\..\src\starterbot\BT\BT_SELECTOR.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_SEQUENCER.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD.h" />
-    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_SUPPLY_PROVIDER.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_ATTACK.h" />
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_CHASE.h" />
@@ -128,7 +127,6 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_SELECTOR.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_SEQUENCER.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD.cpp" />
-    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_BUILD_SUPPLY_PROVIDER.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MOVE_ALL_ZERGLINGS_TO_ENEMY_BASE.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_ATTACK.cpp" />
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_CHASE.cpp" />
