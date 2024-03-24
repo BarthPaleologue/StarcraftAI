@@ -36,7 +36,6 @@ namespace BT_Builder
     BT_NODE* protossMid(Blackboard* _blackboard) {
         BT_PARALLEL_SEQUENCER* pBT = new BT_PARALLEL_SEQUENCER("MidGameVSProtoss", nullptr, 10);
 
-        //TODO: put somewhere in starterbot that we want at least 1 spire once we are in the midgame
         BT_DECO_CONDITION_NOT_ENOUGH_UNIT* pCheckIfSpire = new BT_DECO_CONDITION_NOT_ENOUGH_UNIT("CheckIfSpireBuilt", pBT, BWAPI::UnitTypes::Zerg_Spire);
         BT_ACTION_BUILD* pBuildSpire = new BT_ACTION_BUILD("BuildSpire", BWAPI::UnitTypes::Zerg_Spire, NONE_POS, pCheckIfSpire);
 
