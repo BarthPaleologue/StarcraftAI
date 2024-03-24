@@ -372,3 +372,25 @@ void Tools::DrawHealthBar(BWAPI::Unit unit, double ratio, BWAPI::Color color, in
 bool Tools::IsMine(BWAPI::Unit unit) {
     return unit->getPlayer() == BWAPI::Broodwar->self();
 }
+
+bool Tools::TrainBuilderAtBase(BWAPI::Unit base, int num) {	
+    std::vector<BWAPI::Unit> larvas;
+    Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Larva, larvas);
+
+    // filtering to only get larvas that are not morphing
+    std::vector<BWAPI::Unit> lavasNearby;
+    for (auto larva : larvas) {
+        if (larva->isMorphing()) continue;
+        if (larva->getPosition().getDistance(base->getPosition()) < 200) {
+			lavasNearby.push_back(larva);
+		}
+    }
+    for (int i = 0; i < num; i++) {
+		if (lavasNearby.size() == 0) {
+			return false;
+		}
+		BWAPI::Unit larva = lavasNearby.back();
+		lavasNearby.pop_back();
+		larva->train(BWAPI::UnitTypes::Zerg_Drone);
+	}
+}
