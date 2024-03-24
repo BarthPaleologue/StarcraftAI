@@ -11,7 +11,7 @@
 
 StarterBot::StarterBot()
 {
-    pData = new Blackboard(BuildOrderType::TWELVE_HATCH);
+    pData = new Blackboard(BuildOrderType::NINE_POOL);
     pData->currMinerals = 0;
     pData->currSupply = 0;
     pData->thresholdSupply = 0;
@@ -131,6 +131,10 @@ void StarterBot::onFrame()
     std::vector<BWAPI::Unit> overlords;
     Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Overlord, overlords);
     pData->nbOverlords = overlords.size();
+
+    if (pData->buildOrder.isFinished() && pData->thresholdSupply == 0) {
+        pData->thresholdSupply = -1;
+    }
 
     // check transition to midgame
     if (Tools::CountUnitsOfType(BWAPI::UnitTypes::Zerg_Lair, BWAPI::Broodwar->self()->getUnits()) >= 1 && pData->gameStage == GameStage::EARLY) {

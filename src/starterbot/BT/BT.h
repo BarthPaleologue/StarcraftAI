@@ -1,5 +1,5 @@
 #pragma once
-//#define BT_DEBUG_VERBOSE
+#define BT_DEBUG_VERBOSE
  
 #include "BT_NODE.h"
 #include "BT_LEAF.h"
