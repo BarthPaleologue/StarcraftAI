@@ -32,4 +32,6 @@ namespace Tools
     void DrawHealthBar(BWAPI::Unit unit, double ratio, BWAPI::Color color, int yOffset);
  
     bool IsMine(BWAPI::Unit unit);
+
+    bool TrainBuilderAtBase(BWAPI::Unit base, int num);
 }
