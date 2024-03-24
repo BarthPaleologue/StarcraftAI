@@ -4,6 +4,7 @@
 #include "ZerglingUtils.h"
 #include "OverlordUtils.h"
 #include "MutaliskUtils.h"
+#include "UpgradeBT.h"
 
 namespace BT_Builder
 {
@@ -46,6 +47,8 @@ namespace BT_Builder
         }
 
         MutaliskUtils::TrainingTree(selectHQAction);
+
+        BT_Builder::buildUpgradeBT(selectHQAction);
 
         // ----------------------------------END OF TRANSFER EVERYTHING INTO EARLY / MID / LATE BT ---------------------------
 
