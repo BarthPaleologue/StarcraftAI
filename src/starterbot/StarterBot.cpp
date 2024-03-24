@@ -126,6 +126,7 @@ void StarterBot::onFrame()
     pData->buildOrder.evaluate(pData);
 
     pData->currMinerals = BWAPI::Broodwar->self()->minerals();
+    pData->currGas = BWAPI::Broodwar->self()->gas();
     pData->currSupply = Tools::GetUnusedSupply(true);
 
     std::vector<BWAPI::Unit> overlords;
@@ -145,6 +146,7 @@ void StarterBot::onFrame()
     }
     
     // AI BT
+    std::cout << "evaluating main" << std::endl;
     if (pMainBT != nullptr && pMainBT->Evaluate(pData) != BT_NODE::RUNNING)
     {
         std::cout << "end of MainBT execution" << std::endl;
