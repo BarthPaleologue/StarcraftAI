@@ -34,4 +34,40 @@ namespace Tools
     bool IsMine(BWAPI::Unit unit);
 
     bool TrainBuilderAtBase(BWAPI::Unit base, int num);
+
+
+    BWAPI::Position getClosestDefenceRegion(BWAPI::Position pos, int myIdx) {
+        int minDist = INT_MAX;
+        BWAPI::Position closestPos;
+        for (int i = 0; i < 7; i++) {
+            int dist = pos.getDistance(DEFENCE_POS[myIdx][i]);
+            if (dist < minDist) {
+                minDist = dist;
+                closestPos = DEFENCE_POS[myIdx][i];
+            }
+        }
+        return closestPos;
+    }
+
+    bool BuildCreepColony(BWAPI::Unit hatchery, int myIdx) {
+        BWAPI::UnitType type = BWAPI::UnitTypes::Zerg_Creep_Colony;
+        BWAPI::Position desiredPos = getClosestDefenceRegion(hatchery->getPosition(),myIdx);
+        BWAPI::TilePosition buildPos = BWAPI::Broodwar->getBuildLocation(type, hatchery->getTilePosition(), 500, true);
+        return hatchery->build(type, buildPos);
+    }
+
+    bool BuildSunkenColony(BWAPI::Unit hatchery) {
+        int minDist = INT_MAX;
+        BWAPI::Unit closestUnit;
+        for (auto& unit : BWAPI::Broodwar->self()->getUnits()) {
+            if (unit->getType() == BWAPI::UnitTypes::Zerg_Creep_Colony && unit->isCompleted()) {
+                int dist = unit->getPosition().getDistance(hatchery->getPosition());
+                if (dist < minDist) {
+					minDist = dist;
+					closestUnit = unit;
+				}
+            }
+        }
+        return closestUnit->morph(BWAPI::UnitTypes::Zerg_Sunken_Colony);
+	}
 }

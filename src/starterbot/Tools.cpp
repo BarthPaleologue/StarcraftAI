@@ -183,10 +183,10 @@ bool Tools::BuildBuildingAtPosition(BWAPI::UnitType type, BWAPI::TilePosition bu
         return false;
 	}
     // Ask BWAPI for a building location near the desired position for the type
-    int maxBuildRange = 64;
+    int maxBuildRange = 500;
     bool buildingOnCreep = type.requiresCreep();
-    //BWAPI::TilePosition buildPosHere = BWAPI::Broodwar->getBuildLocation(type, buildPos, maxBuildRange, buildingOnCreep);
-    return builder->build(type, buildPos);
+    BWAPI::TilePosition buildPosHere = BWAPI::Broodwar->getBuildLocation(type, buildPos, maxBuildRange, buildingOnCreep);
+    return builder->build(type, buildPosHere);
 }
 
 
@@ -394,3 +394,4 @@ bool Tools::TrainBuilderAtBase(BWAPI::Unit base, int num) {
 		larva->train(BWAPI::UnitTypes::Zerg_Drone);
 	}
 }
+

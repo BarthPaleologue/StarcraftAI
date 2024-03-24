@@ -164,4 +164,5 @@ public:
 	bool EnemyHasBuilding(BWAPI::UnitType building) {
 		return enemyTechBuildings.contains(building);
 	}
+
 };
