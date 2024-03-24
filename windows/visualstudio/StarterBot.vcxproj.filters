@@ -203,6 +203,9 @@
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_ALL_IN.cpp">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_SQUAD_QUORUM.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
@@ -441,6 +444,9 @@
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_SQUAD_GO_TO_ENEMY_BASE.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_DECO_CONDITION_SQUAD_QUORUM.h">
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClInclude>
   </ItemGroup>
