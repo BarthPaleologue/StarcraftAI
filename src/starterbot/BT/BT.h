@@ -44,6 +44,7 @@
 #include "BT_DECO_CONDITION_UNIT_QUORUM.h"
 #include "BT_DECO_SQUAD_CONDITION.h"
 #include "BT_DECO_CONDITION_SQUAD_COOLING_DOWN.h"
+#include "BT_DECO_CONDITION_ALL_IN.h"
 
 ///Actions
 #include "BT_ACTION_IDLE.h"
