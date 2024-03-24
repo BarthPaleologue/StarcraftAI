@@ -129,6 +129,10 @@ void StarterBot::onFrame()
     std::vector<BWAPI::Unit> overlords;
     Tools::GetAllUnitsOfType(BWAPI::UnitTypes::Zerg_Overlord, overlords);
     pData->nbOverlords = overlords.size();
+
+    if (pData->gameStage == GameStage::MID && pData->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Spire] == 0) {
+        pData->minRequiredUnitCount[BWAPI::UnitTypes::Zerg_Spire] = 1;
+    }
     
     // AI BT
     if (pMainBT != nullptr && pMainBT->Evaluate(pData) != BT_NODE::RUNNING)
