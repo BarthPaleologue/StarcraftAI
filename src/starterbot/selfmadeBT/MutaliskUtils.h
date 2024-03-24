@@ -16,6 +16,14 @@ public:
 	}
 
 	static BT_NODE* SquadTree(Squad* squad, BT_NODE* parent) {
-		return new BT_ACTION_IDLE("MutaliskSquadIdle", parent);
+		auto root = new BT_DECO_REPEATER("repeater", nullptr, 0, true, false, true);
+
+		auto actionSelector = new BT_SELECTOR("ActionSelector", root, 10);
+
+		auto isCoolingDown = new BT_DECO_CONDITION_SQUAD_COOLING_DOWN("CoolingDown", squad, actionSelector);
+
+		auto fleeAction = new BT_ACTION_MUTALISK_SQUAD_HOLD_POSITION("Flee", squad, isCoolingDown);
+
+		return root;
 	}
 };
