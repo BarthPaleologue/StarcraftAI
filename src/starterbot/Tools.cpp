@@ -434,7 +434,7 @@ bool Tools::cantWin(){
 	}
 
 
-	enemyDPSDPS=enemyDPS/myWorker.maxHitPoints();
+	enemyDPS=enemyDPS/myWorker.maxHitPoints();
 	float enemyScore = enemyDPS * pow(enemyHp, 1.5);
 	
 
@@ -482,7 +482,7 @@ bool Tools::canAllIn(){
 	}
 
 
-	enemyDPSDPS=enemyDPS/myWorker.maxHitPoints();
+	enemyDPS=enemyDPS/myWorker.maxHitPoints();
 	float enemyScore = enemyDPS * pow(enemyHp, 1.5);
 	
 
