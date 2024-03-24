@@ -172,4 +172,5 @@ public:
 	bool canAllIn(){
 		return Tools::canAllIn();
 	}
+	bool allIn = false;
 };

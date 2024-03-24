@@ -9,7 +9,7 @@ namespace BT_Builder
     BT_NODE* terranEarlyMacroBT(Blackboard* _blackboard) {
         BT_PARALLEL_SEQUENCER* pBT = new BT_PARALLEL_SEQUENCER("EarlyGameVSTerran", nullptr, 10);
         
-        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
+        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION_ALL_IN("CheckIfAllIn", pBT);
             BT_ACTION_UPDATE_BLACKBOARD<bool>* pToggleAllIn = new BT_ACTION_UPDATE_BLACKBOARD<bool>("ToggleAllIn", _blackboard->allIn, true, pCheckIfAllIn);
 
         BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("EarlyTerranBaseMacro", pBT, 3);
@@ -35,7 +35,7 @@ namespace BT_Builder
     BT_NODE* protossEarlyMacroBT(Blackboard* _blackboard) {
         BT_NODE* pBT = new BT_PARALLEL_SEQUENCER("EarlyGameVSProtoss", nullptr, 10);
 
-        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
+        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION_ALL_IN("CheckIfAllIn", pBT);
             BT_ACTION_UPDATE_BLACKBOARD<bool>* pToggleAllIn = new BT_ACTION_UPDATE_BLACKBOARD<bool>("ToggleAllIn", _blackboard->allIn, true, pCheckIfAllIn);
 
         BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("EarlyProtossBaseMacro", pBT, 3);
