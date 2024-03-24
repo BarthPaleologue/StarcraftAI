@@ -94,19 +94,19 @@ HarassmentManager::HarassmentManager()
 	});
 
 	// Mutalisk vs Protoss
-	m_MutaliskSquadProtoss.push_back([](Squad, BWAPI::Unit enemyUnit) {
+	m_MutaliskSquadProtoss.push_back([](Squad*, BWAPI::Unit enemyUnit) {
 		return enemyUnit->getType() == BWAPI::UnitTypes::Protoss_Photon_Cannon;
 	});
-	m_MutaliskSquadProtoss.push_back([](Squad, BWAPI::Unit enemyUnit) {
+	m_MutaliskSquadProtoss.push_back([](Squad*, BWAPI::Unit enemyUnit) {
 		return enemyUnit->getType() == BWAPI::UnitTypes::Protoss_Probe;
 	});
-	m_MutaliskSquadProtoss.push_back([](Squad, BWAPI::Unit enemyUnit) {
+	m_MutaliskSquadProtoss.push_back([](Squad*, BWAPI::Unit enemyUnit) {
 		// any anti-air unit
 		return enemyUnit->getType().airWeapon() != BWAPI::WeaponTypes::None;
 	});
-	m_MutaliskSquadProtoss.push_back([](Squad squad, BWAPI::Unit enemyUnit) {
+	m_MutaliskSquadProtoss.push_back([](Squad* squad, BWAPI::Unit enemyUnit) {
 		// units that can be one-shotted withtout taking too much damage
-		std::pair<float, float> prediction = ForceTools::fightPredictor(squad.getNbUnits(), BWAPI::UnitTypes::Zerg_Mutalisk, BWAPI::Broodwar->self(), 1, enemyUnit->getType(), BWAPI::Broodwar->enemy());
+		std::pair<float, float> prediction = ForceTools::fightPredictor(squad->getNbUnits(), BWAPI::UnitTypes::Zerg_Mutalisk, BWAPI::Broodwar->self(), 1, enemyUnit->getType(), BWAPI::Broodwar->enemy());
 		return prediction.second <= 0.01;
 	});
 }
@@ -160,7 +160,7 @@ int HarassmentManager::evaluatePriority(BWAPI::Unit attackingUnit, BWAPI::Unit e
 	return LOWEST_PRIORITY;
 }
 
-int HarassmentManager::evaluateMutaliskSquadPriority(Squad squad, BWAPI::Unit enemyUnit)
+int HarassmentManager::getSquadTargetPriority(Squad* squad, BWAPI::Unit enemyUnit)
 {
 	int score = 0;
 	for (auto& matchPredicate : m_MutaliskSquadProtoss)

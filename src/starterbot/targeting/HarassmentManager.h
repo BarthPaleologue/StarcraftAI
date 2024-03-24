@@ -2,6 +2,10 @@
 #include "BWAPI.h"
 #include "targeting/Squad.h"
 
+/// <summary>
+/// The goal of the harassment manager is to help units and squad to find suitable targets when harassing the enemy.
+/// The information is provided through a per-enemy priority. The squad or unit can then choose base on the provided priority scores.
+/// </summary>
 class HarassmentManager
 {
 public:
@@ -9,6 +13,8 @@ public:
 	~HarassmentManager() = default;
 
 	int getTargetPriority(BWAPI::Unit attackingUnit, BWAPI::Unit enemyUnit, BWAPI::Race enemyRace);
+
+	int getSquadTargetPriority(Squad* squad, BWAPI::Unit enemyUnit);
 
 	static int LOWEST_PRIORITY;
 
@@ -26,9 +32,7 @@ private:
 
 	int evaluatePriority(BWAPI::Unit attackingUnit, BWAPI::Unit enemyUnit, PriorityList &priorityList);
 
-	typedef std::vector<std::function<bool(Squad squad, BWAPI::Unit enemyUnit)>> PrioritySquadList;
+	typedef std::vector<std::function<bool(Squad* squad, BWAPI::Unit enemyUnit)>> PrioritySquadList;
 
 	PrioritySquadList m_MutaliskSquadProtoss{};
-
-	int evaluateMutaliskSquadPriority(Squad squad, BWAPI::Unit enemyUnit);
 };
