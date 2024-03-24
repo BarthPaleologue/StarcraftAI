@@ -18,19 +18,32 @@ public:
 	static BT_NODE* SquadTree(Squad* squad, BT_NODE* parent) {
 		auto root = new BT_DECO_REPEATER("repeater", nullptr, 0, true, false, true);
 
-		auto mainSequencer = new BT_PARALLEL_SEQUENCER("MainSequencer", root, 10);
+		auto chooseStrategy = new BT_SELECTOR("ChooseStrategy", root, 10);
 
-		auto isTargetInvalid = new BT_DECO_CONDITION_SQUAD_INVALID_TARGET("IsTargetInvalid", squad, mainSequencer);
+			auto isAllIn = new BT_DECO_CONDITION_ALL_IN("IsAllIn", chooseStrategy);
 
-		auto chooseTarget = new BT_ACTION_MUTALISK_SQUAD_CHOOSE_TARGET("ChooseTarget", squad, isTargetInvalid);
+			auto allInStrategy = new BT_SEQUENCER("AllInStrategy", isAllIn, 10);
 
-		auto actionSelector = new BT_SELECTOR("ActionSelector", mainSequencer, 10);
+				auto allInIsTargetInvalid = new BT_DECO_CONDITION_SQUAD_INVALID_TARGET("allInIsTargetInvalid", squad, allInStrategy);
 
-		auto isCoolingDown = new BT_DECO_CONDITION_SQUAD_COOLING_DOWN("IsCoolingDown", squad, actionSelector);
+					auto allInChooseTarget = new BT_ACTION_MUTALISK_SQUAD_CHOOSE_TARGET("allInChooseTarget", squad, allInIsTargetInvalid);
 
-		auto fleeAction = new BT_ACTION_MUTALISK_SQUAD_HOLD_POSITION("Flee", squad, isCoolingDown);
+				auto allInAttack = new BT_ACTION_MUTALISK_SQUAD_ATTACK("AllInAttack", squad, allInStrategy);
 
-		auto attackAction = new BT_ACTION_MUTALISK_SQUAD_ATTACK("Attack", squad, actionSelector);
+			
+			auto mainStrategy = new BT_PARALLEL_SEQUENCER("MainStrategy", chooseStrategy, 10);
+
+				auto isTargetInvalid = new BT_DECO_CONDITION_SQUAD_INVALID_TARGET("IsTargetInvalid", squad, mainStrategy);
+
+					auto chooseTarget = new BT_ACTION_MUTALISK_SQUAD_CHOOSE_TARGET("ChooseTarget", squad, isTargetInvalid);
+
+				auto attackActionSelector = new BT_SELECTOR("AttackActionSelector", mainStrategy, 10);
+
+					auto isCoolingDown = new BT_DECO_CONDITION_SQUAD_COOLING_DOWN("IsCoolingDown", squad, attackActionSelector);
+
+						auto fleeAction = new BT_ACTION_MUTALISK_SQUAD_HOLD_POSITION("Flee", squad, isCoolingDown);
+
+					auto attackAction = new BT_ACTION_MUTALISK_SQUAD_ATTACK("Attack", squad, attackActionSelector);
 			
 		return root;
 	}
