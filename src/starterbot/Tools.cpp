@@ -1,5 +1,5 @@
 
-#include "ForceTools.h"
+#include "targeting/ForceTools.h"
 #include "Tools.h"
 #include "Blackboard.h"
 
@@ -415,7 +415,7 @@ bool Tools::cantWin(){
     float myCount=0;
     float enemyCount=0;
 
-    myDPS=12*ForceTools::unitDPS(BWAPI::UnitTypes::Zerg_Zergling,me,enermyWorker,enemy);
+    myDPS=12*ForceTools::unitDPS(BWAPI::UnitTypes::Zerg_Zergling,me,enemyWorker,enemy);
     myHp=12*BWAPI::UnitTypes::Zerg_Zergling.maxHitPoints();
 
 	myDPS=myDPS/enemyWorker.maxHitPoints();
@@ -487,7 +487,7 @@ bool Tools::canAllIn(){
 	
 
 	if(enemyScore>myScore) return false;
-	float remainingPercent = pow(1 - (enemyScore / myScore), (1 / (1.5)))
+    float remainingPercent = pow(1 - (enemyScore / myScore), (1 / (1.5)));
 
     //check early game : 
     if(enemyCount<20 && myCount<20){
