@@ -18,5 +18,5 @@ template <class T> std::string BT_DECO_COND_GREATER_THAN<T>::GetDescription()
 }
 
 // Add your specialized template instantiations here
-template class BT_DECO_COND_GREATER_THAN<int>;
+//template class BT_DECO_COND_GREATER_THAN<int>;
 template class BT_DECO_COND_GREATER_THAN<float>;

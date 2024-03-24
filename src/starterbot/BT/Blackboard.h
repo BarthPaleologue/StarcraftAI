@@ -107,10 +107,10 @@ public:
 
 	GameStage gameStage = GameStage::EARLY;
 
-
 	// purpose: if the mineral count (with self()->minerals()) update is not instant after using minerals
 	// otherwise just remove this attribute
 	int currMinerals;
+	int currGas;
 
 	BWAPI::UnitType focusedTrainingUnit = BWAPI::UnitTypes::Zerg_Zergling;
 

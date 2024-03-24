@@ -9,12 +9,13 @@ namespace BT_Builder
     BT_NODE* terranEarlyMacroBT(Blackboard* _blackboard) {
         BT_PARALLEL_SEQUENCER* pBT = new BT_PARALLEL_SEQUENCER("EarlyGameVSTerran", nullptr, 10);
         
-        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
-            BT_ACTION_UPDATE_BLACKBOARD<bool>* pToggleAllIn = new BT_ACTION_UPDATE_BLACKBOARD<bool>("ToggleAllIn", _blackboard->allIn, true, pCheckIfAllIn);
+        //BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
+            //BT_ACTION_UPDATE_BLACKBOARD<bool>* pToggleAllIn = new BT_ACTION_UPDATE_BLACKBOARD<bool>("ToggleAllIn", _blackboard->allIn, true, pCheckIfAllIn);
 
         BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("EarlyTerranBaseMacro", pBT, 3);
-
-            BT_DECO_CONDITION* pCheckIfCantWin = new BT_DECO_CONDITION("CheckIfCantWin", pBaseProductionMacro, nullptr); //TODO
+            
+            //TODO!!!!
+            //BT_DECO_CONDITION* pCheckIfCantWin = new BT_DECO_CONDITION("CheckIfCantWin", pBaseProductionMacro, nullptr);
             // bc there are a lot of conditions it may be better to have a selector (-> repeater) and then conditions
             // if enemy has academy tech
             // or enemy has built bunker
@@ -35,8 +36,8 @@ namespace BT_Builder
     BT_NODE* protossEarlyMacroBT(Blackboard* _blackboard) {
         BT_NODE* pBT = new BT_PARALLEL_SEQUENCER("EarlyGameVSProtoss", nullptr, 10);
 
-        BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
-            BT_ACTION_UPDATE_BLACKBOARD<bool>* pToggleAllIn = new BT_ACTION_UPDATE_BLACKBOARD<bool>("ToggleAllIn", _blackboard->allIn, true, pCheckIfAllIn);
+        //BT_DECO_CONDITION* pCheckIfAllIn = new BT_DECO_CONDITION("CheckIfAllIn", pBT, nullptr); //TODO
+            //BT_ACTION_UPDATE_BLACKBOARD<bool>* pToggleAllIn = new BT_ACTION_UPDATE_BLACKBOARD<bool>("ToggleAllIn", _blackboard->allIn, true, pCheckIfAllIn);
 
         BT_SELECTOR* pBaseProductionMacro = new BT_SELECTOR("EarlyProtossBaseMacro", pBT, 3);
 
@@ -53,7 +54,7 @@ namespace BT_Builder
         BT_DECO_CONDITION* pCondBuildExtractor = new BT_DECO_CONDITION("CondBuildExtractor", pBT, nullptr); // TODO: after 2nd base is up and not done yet and 12 drones
             BT_ACTION_BUILD* pActionBuildExtractor = new BT_ACTION_BUILD("ActionBuildExtractor", BWAPI::UnitTypes::Zerg_Extractor, NONE_POS, pCondBuildExtractor);
 
-        BT_DECO_CONDITION* pGasUsage = new BT_DECO_CONDITION("EarlyProtossGasUsage", pBT, nullptr); //TODO
+        BT_DECO_COND_GREATER_THAN<int>* pGasUsage = new BT_DECO_COND_GREATER_THAN<int>("EarlyProtossGasUsage", pBT, 90, _blackboard->currGas, false);
         //TODO: request lair
 
         return pBT;
