@@ -171,6 +171,12 @@
       <Filter>BT\BT_STARCRAFT</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_CHASE.cpp" />
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_CHASE.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_HOLD_POSITION.cpp">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\starterbot\Grid.hpp" />
@@ -379,6 +385,12 @@
       <Filter>selfmadeBT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_CHASE.h" />
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_CHASE.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\starterbot\BT\BT_STARCRAFT\BT_ACTION_MUTALISK_SQUAD_HOLD_POSITION.h">
+      <Filter>BT\BT_STARCRAFT</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BT">

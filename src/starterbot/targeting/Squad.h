@@ -26,6 +26,18 @@ public:
 	BWAPI::Unit getLastTarget();
 
 	BWAPI::Unitset getEnemyUnitsInRadius(int radius);
+
+	void setTarget(BWAPI::Unit target);
+
+	BWAPI::Unit getTarget();
+
+	void holdPosition();
+
+	/// <summary>
+	/// Return the average of the facing angles of the units in the squad
+	/// </summary>
+	/// <returns>The facing angle of the squad in radians</returns>
+	double getFacingAngle();
 	
 	bool isEmpty();
 	
@@ -37,5 +49,6 @@ private:
 	BWAPI::Unitset m_unitSet{};
 
 	BWAPI::Unit m_lastTarget = nullptr;
+	BWAPI::Unit m_target = nullptr;
 };
 

@@ -61,6 +61,30 @@ BWAPI::Unitset Squad::getEnemyUnitsInRadius(int radius)
 	return enemyUnitsInRadius;
 }
 
+void Squad::setTarget(BWAPI::Unit target)
+{
+	m_target = target;
+}
+
+BWAPI::Unit Squad::getTarget()
+{
+	return m_target;
+}
+
+void Squad::holdPosition()
+{
+	m_unitSet.holdPosition();
+}
+
+double Squad::getFacingAngle()
+{
+	double sum = 0;
+	for (auto& unit : m_unitSet) {
+		sum += unit->getAngle();
+	}
+	return sum / m_unitSet.size();
+}
+
 bool Squad::isEmpty()
 {
 	return m_unitSet.empty();
