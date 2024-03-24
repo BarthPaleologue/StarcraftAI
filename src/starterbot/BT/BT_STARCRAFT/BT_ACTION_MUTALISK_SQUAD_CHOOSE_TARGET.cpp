@@ -2,7 +2,7 @@
 #include "Blackboard.h"
 
 BT_ACTION_MUTALISK_SQUAD_CHOOSE_TARGET::BT_ACTION_MUTALISK_SQUAD_CHOOSE_TARGET(std::string name, Squad* squad, BT_NODE* parent)
-	:BT_ACTION(name, parent)
+	:BT_ACTION(name, parent), m_squad(squad)
 {
 }
 
