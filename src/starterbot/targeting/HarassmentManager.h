@@ -1,5 +1,6 @@
 #pragma once
 #include "BWAPI.h"
+#include "targeting/Squad.h"
 
 class HarassmentManager
 {
@@ -12,7 +13,6 @@ public:
 	static int LOWEST_PRIORITY;
 
 private:
-
 	typedef std::vector<std::function<bool(BWAPI::Unit)>> PriorityList;
 
 	PriorityList m_EarlyTerranNoBunker{};
@@ -25,4 +25,10 @@ private:
 	void computePriorityList(BWAPI::Race enemyRace);
 
 	int evaluatePriority(BWAPI::Unit unit, std::vector<std::function<bool(BWAPI::Unit)>> &priorityList);
+
+	typedef std::vector<std::function<bool(Squad, BWAPI::Unit)>> PrioritySquadList;
+
+	PrioritySquadList m_MutaliskSquadProtoss{};
+
+	int evaluateMutaliskSquadPriority(Squad squad, BWAPI::Unit unit);
 };

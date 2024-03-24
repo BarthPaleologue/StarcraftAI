@@ -1,8 +1,9 @@
 #include "HarassmentManager.h"
+#include "ForceTools.h"
 
 HarassmentManager::HarassmentManager()
 {
-	// 4 Pool vs Protoss
+	// Early vs Protoss
 	m_EarlyProtoss.push_back([](BWAPI::Unit unit) {
 		return unit->getType() == BWAPI::UnitTypes::Protoss_Photon_Cannon;
 	});
@@ -19,7 +20,7 @@ HarassmentManager::HarassmentManager()
 		return unit->getType() == BWAPI::UnitTypes::Protoss_Gateway;
 	});
 
-	// 4 Pool vs Zerg
+	// Early vs Zerg
 	m_EarlyZerg.push_back([](BWAPI::Unit unit) {
 		return unit->getType() == BWAPI::UnitTypes::Zerg_Zergling;
 	});
@@ -36,7 +37,7 @@ HarassmentManager::HarassmentManager()
 		return unit->getType() == BWAPI::UnitTypes::Zerg_Drone;
 	});
 
-	// 4 Pool vs Terran (without Bunker)
+	// Early vs Terran (without Bunker)
 	m_EarlyTerranNoBunker.push_back([](BWAPI::Unit unit) {
 		return unit->getType() == BWAPI::UnitTypes::Terran_SCV && unit->isConstructing() && unit->getBuildType() == BWAPI::UnitTypes::Terran_Bunker;
 	});
@@ -62,7 +63,7 @@ HarassmentManager::HarassmentManager()
 		return unit->getType().isBuilding();
 	});
 
-	// 4 Pool vs Terran (with Bunker)
+	// Early vs Terran (with Bunker)
 	m_EarlyTerranWithBunker.push_back([](BWAPI::Unit unit) {
 		return unit->getType() == BWAPI::UnitTypes::Terran_Marine;
 	});
@@ -74,6 +75,23 @@ HarassmentManager::HarassmentManager()
 	});
 	m_EarlyTerranWithBunker.push_back([](BWAPI::Unit unit) {
 		return unit->getType() == BWAPI::UnitTypes::Terran_Bunker;
+	});
+
+	// Mutalisk vs Protoss
+	m_MutaliskSquadProtoss.push_back([](Squad, BWAPI::Unit unit) {
+		return unit->getType() == BWAPI::UnitTypes::Protoss_Photon_Cannon;
+	});
+	m_MutaliskSquadProtoss.push_back([](Squad, BWAPI::Unit unit) {
+		return unit->getType() == BWAPI::UnitTypes::Protoss_Probe;
+	});
+	m_MutaliskSquadProtoss.push_back([](Squad, BWAPI::Unit unit) {
+		// any anti-air unit
+		return unit->getType().airWeapon() != BWAPI::WeaponTypes::None;
+	});
+	m_MutaliskSquadProtoss.push_back([](Squad squad, BWAPI::Unit unit) {
+		// units that can be one-shotted withtout taking too much damage
+		std::pair<float, float> prediction = ForceTools::fightPredictor(squad.getNbUnits(), BWAPI::UnitTypes::Zerg_Mutalisk, BWAPI::Broodwar->self(), 1, unit->getType(), BWAPI::Broodwar->enemy());
+		return prediction.first > 0;
 	});
 }
 
@@ -123,5 +141,17 @@ int HarassmentManager::evaluatePriority(BWAPI::Unit unit, std::vector<std::funct
 		score--;
 	}
 
-	return -10000;
+	return LOWEST_PRIORITY;
+}
+
+int HarassmentManager::evaluateMutaliskSquadPriority(Squad squad, BWAPI::Unit unit)
+{
+	int score = 0;
+	for (auto& matchPredicate : m_MutaliskSquadProtoss)
+	{
+		if (matchPredicate(squad, unit)) return score;
+		score--;
+	}
+
+	return LOWEST_PRIORITY;
 }
